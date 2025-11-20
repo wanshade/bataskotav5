@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Activity, Award, Coffee, Moon, ShieldCheck, Wifi } from 'lucide-react';
 
 const features = [
@@ -35,6 +35,45 @@ const features = [
 ];
 
 const Features: React.FC = () => {
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = parseInt(entry.target.getAttribute('data-index') || '0');
+          if (entry.isIntersecting) {
+            // Card is entering viewport - add hover effects
+            setVisibleCards((prev) => new Set(prev).add(index));
+          } else {
+            // Card is leaving viewport - remove hover effects
+            setVisibleCards((prev) => {
+              const newSet = new Set(prev);
+              newSet.delete(index);
+              return newSet;
+            });
+          }
+        });
+      },
+      {
+        threshold: [0, 0.3], // Trigger when 0% and 30% of the card is visible
+        rootMargin: '-50px 0px -50px 0px' // Start animation slightly before fully visible
+      }
+    );
+
+    // Observe all cards
+    cardRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      cardRefs.current.forEach((ref) => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, []);
+
   return (
     <section id="features" className="py-24 bg-dark-surface relative overflow-hidden">
       {/* Section Header */}
@@ -47,32 +86,49 @@ const Features: React.FC = () => {
 
       {/* Grid */}
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-        {features.map((feature, index) => (
-          <div 
-            key={index}
-            className="group p-1 rounded-2xl bg-gradient-to-br from-zinc-800 to-zinc-900 hover:from-neon-green hover:to-neon-dark transition-all duration-500"
-          >
-            <div className="h-full bg-dark-card p-8 rounded-xl flex flex-col items-start gap-4 relative overflow-hidden">
-              {/* Icon Box */}
-              <div className="w-14 h-14 rounded-lg bg-neon-green flex items-center justify-center shadow-[0_0_15px_rgba(57,255,20,0.3)] group-hover:scale-110 transition-transform duration-300">
-                {feature.icon}
-              </div>
-              
-              <h3 className="font-display font-bold text-xl text-white mt-2 group-hover:text-neon-green transition-colors">
-                {feature.title}
-              </h3>
-              
-              <p className="font-sans text-gray-400 text-sm leading-relaxed">
-                {feature.description}
-              </p>
+        {features.map((feature, index) => {
+          const isVisible = visibleCards.has(index);
+          return (
+            <div
+              key={index}
+              ref={(el) => (cardRefs.current[index] = el)}
+              data-index={index}
+              className={`group p-1 rounded-2xl transition-all duration-1000 ${
+                isVisible
+                  ? 'bg-gradient-to-br from-neon-green to-neon-dark scale-105'
+                  : 'bg-gradient-to-br from-zinc-800 to-zinc-900 scale-100'
+              } hover:from-neon-green hover:to-neon-dark hover:scale-105`}
+            >
+              <div className="h-full bg-dark-card p-8 rounded-xl flex flex-col items-start gap-4 relative overflow-hidden">
+                {/* Icon Box */}
+                <div className={`w-14 h-14 rounded-lg bg-neon-green flex items-center justify-center transition-all duration-700 shadow-[0_0_15px_rgba(57,255,20,0.3)] ${
+                  isVisible ? 'scale-110 shadow-[0_0_25px_rgba(57,255,20,0.6)]' : 'scale-100'
+                } group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(57,255,20,0.6)]`}>
+                  {feature.icon}
+                </div>
 
-              {/* Decorative bg element */}
-              <div className="absolute -right-4 -bottom-4 text-zinc-800 opacity-20 group-hover:opacity-10 transition-opacity transform rotate-12 scale-150 pointer-events-none">
-                {feature.icon}
+                <h3 className={`font-display font-bold text-xl mt-2 transition-colors duration-700 ${
+                  isVisible ? 'text-neon-green' : 'text-white'
+                } group-hover:text-neon-green`}>
+                  {feature.title}
+                </h3>
+
+                <p className={`font-sans text-sm leading-relaxed transition-all duration-700 ${
+                  isVisible ? 'text-gray-300' : 'text-gray-400'
+                }`}>
+                  {feature.description}
+                </p>
+
+                {/* Decorative bg element */}
+                <div className={`absolute -right-4 -bottom-4 transition-all duration-700 transform rotate-12 scale-150 pointer-events-none ${
+                  isVisible ? 'text-zinc-700 opacity-30' : 'text-zinc-800 opacity-20'
+                } group-hover:text-zinc-700 group-hover:opacity-30`}>
+                  {feature.icon}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
