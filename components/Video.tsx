@@ -3,6 +3,7 @@ import { Play, Volume2, Maximize } from 'lucide-react';
 
 const Video: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,7 +34,12 @@ const Video: React.FC = () => {
 
   const getYouTubeEmbedUrl = (url: string) => {
     const videoId = url.split('youtu.be/')[1]?.split('?')[0] || url.split('v=')[1]?.split('&')[0];
-    return `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&autohide=1&showinfo=0&controls=1&autoplay=0`;
+    return `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&autohide=1&showinfo=0&controls=1&autoplay=0&fs=1&cc_load_policy=1&hl=en&enablejsapi=1`;
+  };
+
+  const getYouTubeWatchUrl = (url: string) => {
+    const videoId = url.split('youtu.be/')[1]?.split('?')[0] || url.split('v=')[1]?.split('&')[0];
+    return `https://www.youtube.com/watch?v=${videoId}`;
   };
 
   return (
@@ -77,14 +83,34 @@ const Video: React.FC = () => {
 
             {/* Video Wrapper */}
             <div className="relative aspect-video overflow-hidden">
-              <iframe
-                src={getYouTubeEmbedUrl('https://youtu.be/cz5sCPi4kr4')}
-                title="Batas Kota - The Town Space"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="w-full h-full"
-                loading="lazy"
-              />
+              {hasError ? (
+                // Fallback: Direct YouTube link
+                <div className="w-full h-full bg-dark-surface flex items-center justify-center">
+                  <a
+                    href={getYouTubeWatchUrl('https://youtu.be/cz5sCPi4kr4')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center gap-4 text-center p-8"
+                  >
+                    <div className="w-20 h-20 rounded-full bg-neon-green flex items-center justify-center hover:scale-110 transition-transform">
+                      <Play className="w-10 h-10 text-black ml-1" />
+                    </div>
+                    <span className="text-neon-green font-display text-lg">Watch on YouTube</span>
+                    <span className="text-gray-400 text-sm">Video couldn't be embedded. Click to watch directly.</span>
+                  </a>
+                </div>
+              ) : (
+                <iframe
+                  src={getYouTubeEmbedUrl('https://youtu.be/cz5sCPi4kr4')}
+                  title="Batas Kota - The Town Space"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+                  allowFullScreen
+                  className="w-full h-full border-0"
+                  loading="lazy"
+                  sandbox="allow-same-origin allow-scripts allow-popups allow-presentation allow-forms"
+                  onError={() => setHasError(true)}
+                />
+              )}
 
               {/* Decorative Corner Elements */}
               <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-neon-green opacity-60" />
