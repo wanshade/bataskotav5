@@ -106,7 +106,7 @@ const Gallery: React.FC = () => {
 
                 <div className={`absolute bottom-0 left-0 p-8 transition-all duration-700 ${
                   isVisible ? 'translate-y-0' : 'translate-y-4'
-                } md:group-hover:translate-y-0 md:translate-y-0`}>
+                } md:group-hover:translate-y-0`}>
                   <span className={`text-neon-green font-sans text-xs font-bold uppercase tracking-widest mb-1 block transition-all duration-700 delay-100 ${
                     isVisible ? 'opacity-100' : 'opacity-0'
                   } md:opacity-0 md:group-hover:opacity-100`}>

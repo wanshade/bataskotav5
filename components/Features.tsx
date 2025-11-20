@@ -103,13 +103,13 @@ const Features: React.FC = () => {
                 {/* Icon Box */}
                 <div className={`w-14 h-14 rounded-lg bg-neon-green flex items-center justify-center transition-all duration-700 shadow-[0_0_15px_rgba(57,255,20,0.3)] ${
                   isVisible ? 'scale-110 shadow-[0_0_25px_rgba(57,255,20,0.6)]' : 'scale-100'
-                } group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(57,255,20,0.6)]`}>
+                } hover:scale-110 hover:shadow-[0_0_25px_rgba(57,255,20,0.6)]`}>
                   {feature.icon}
                 </div>
 
                 <h3 className={`font-display font-bold text-xl mt-2 transition-colors duration-700 ${
                   isVisible ? 'text-neon-green' : 'text-white'
-                } group-hover:text-neon-green`}>
+                } hover:text-neon-green`}>
                   {feature.title}
                 </h3>
 
@@ -122,7 +122,7 @@ const Features: React.FC = () => {
                 {/* Decorative bg element */}
                 <div className={`absolute -right-4 -bottom-4 transition-all duration-700 transform rotate-12 scale-150 pointer-events-none ${
                   isVisible ? 'text-zinc-700 opacity-30' : 'text-zinc-800 opacity-20'
-                } group-hover:text-zinc-700 group-hover:opacity-30`}>
+                } hover:text-zinc-700 hover:opacity-30`}>
                   {feature.icon}
                 </div>
               </div>
