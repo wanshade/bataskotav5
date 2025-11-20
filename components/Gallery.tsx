@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const images = [
   {
@@ -24,6 +24,37 @@ const images = [
 ];
 
 const Gallery: React.FC = () => {
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = parseInt(entry.target.getAttribute('data-index') || '0');
+          if (entry.isIntersecting) {
+            setVisibleCards((prev) => new Set(prev).add(index));
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the card is visible
+        rootMargin: '-50px 0px -50px 0px' // Start animation slightly before fully visible
+      }
+    );
+
+    // Observe all cards
+    cardRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      cardRefs.current.forEach((ref) => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, []);
+
   return (
     <section id="gallery" className="py-24 bg-dark-bg">
       <div className="container mx-auto px-6">
@@ -38,31 +69,48 @@ const Gallery: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {images.map((img, idx) => (
-            <div 
-              key={idx} 
-              className={`group relative overflow-hidden rounded-xl h-64 md:h-80 ${idx === 0 || idx === 3 ? 'md:col-span-2' : ''}`}
-            >
-              <img
-                src={img.src}
-                alt={img.title}
-                className="w-full h-full object-cover transition-transform duration-700 grayscale md:group-hover:grayscale-0 md:group-hover:scale-110"
-              />
+          {images.map((img, idx) => {
+            const isVisible = visibleCards.has(idx);
+            return (
+              <div
+                key={idx}
+                ref={(el) => (cardRefs.current[idx] = el)}
+                data-index={idx}
+                className={`group relative overflow-hidden rounded-xl h-64 md:h-80 ${idx === 0 || idx === 3 ? 'md:col-span-2' : ''}`}
+              >
+                <img
+                  src={img.src}
+                  alt={img.title}
+                  className={`w-full h-full object-cover transition-all duration-1000 ${
+                    isVisible ? 'grayscale-0 scale-105' : 'grayscale scale-100'
+                  } md:group-hover:grayscale-0 md:group-hover:scale-110`}
+                />
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black/60 md:group-hover:bg-black/30 transition-colors duration-300" />
+                {/* Overlay */}
+                <div className={`absolute inset-0 transition-colors duration-700 ${
+                  isVisible ? 'bg-black/30' : 'bg-black/60'
+                } md:group-hover:bg-black/30`} />
 
-              {/* Border overlay */}
-              <div className="absolute inset-0 border-2 border-transparent md:group-hover:border-neon-green/50 transition-colors duration-300 m-4 rounded-lg" />
+                {/* Border overlay */}
+                <div className={`absolute inset-0 border-2 transition-colors duration-700 m-4 rounded-lg ${
+                  isVisible ? 'border-neon-green/50' : 'border-transparent'
+                } md:group-hover:border-neon-green/50`} />
 
-              <div className="absolute bottom-0 left-0 p-8 transform translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 md:translate-y-0">
-                <span className="text-neon-green font-sans text-xs font-bold uppercase tracking-widest mb-1 block opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity delay-100">
-                  {img.category}
-                </span>
-                <h3 className="font-display font-bold text-2xl text-white">{img.title}</h3>
+                <div className={`absolute bottom-0 left-0 p-8 transition-all duration-700 ${
+                  isVisible ? 'translate-y-0' : 'translate-y-4'
+                } md:group-hover:translate-y-0 md:translate-y-0`}>
+                  <span className={`text-neon-green font-sans text-xs font-bold uppercase tracking-widest mb-1 block transition-all duration-700 delay-100 ${
+                    isVisible ? 'opacity-100' : 'opacity-0'
+                  } md:opacity-0 md:group-hover:opacity-100`}>
+                    {img.category}
+                  </span>
+                  <h3 className="font-display font-bold text-2xl text-white transition-opacity duration-700">
+                    {img.title}
+                  </h3>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
