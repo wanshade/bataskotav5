@@ -33,7 +33,7 @@ const Gallery: React.FC = () => {
             <p className="text-gray-400">A glimpse into the Batas Kota experience.</p>
           </div>
           <button className="hidden md:block text-neon-green font-display text-sm uppercase tracking-widest hover:text-white transition-colors">
-            View All Photos ->
+            View All Photos &rarr;
           </button>
         </div>
 
