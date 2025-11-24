@@ -17,6 +17,8 @@ export const bookings = pgTable('bookings', {
   price: integer('price').notNull(), // Store in cents/smallest unit
   createdAt: timestamp('created_at').defaultNow().notNull(),
   status: text('status').default('pending').notNull(), // pending, confirmed, cancelled
+  approvedAt: timestamp('approved_at'), // When admin approved the booking
+  approvedBy: text('approved_by'), // Admin who approved it
 });
 
 export type Booking = typeof bookings.$inferSelect;

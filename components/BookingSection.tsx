@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import NeonButton from './ui/NeonButton';
-import { Calendar, Clock, User, Phone, ChevronRight, ChevronLeft, Trophy, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Calendar, Clock, User, Phone, ChevronRight, ChevronLeft, Trophy, CheckCircle2, AlertCircle, Lock } from 'lucide-react';
 
 // --- Schedule Configuration ---
 
@@ -14,6 +14,12 @@ type ScheduleItem = {
 
 type ScheduleData = {
   [key: string]: ScheduleItem[];
+};
+
+type Booking = {
+  bookingDate: string;
+  timeSlot: string;
+  status: string;
 };
 
 const RAW_SCHEDULE: ScheduleData = {
@@ -135,6 +141,26 @@ const BookingSection: React.FC = () => {
   const [phone, setPhone] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [bookings, setBookings] = useState<Booking[]>([]);
+
+  // Fetch bookings on mount
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        const response = await fetch('/api/bookings');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.bookings) {
+            setBookings(data.bookings);
+          }
+        }
+      } catch (err) {
+        console.error('Failed to fetch bookings:', err);
+      }
+    };
+
+    fetchBookings();
+  }, []);
 
   // Generate next 14 days
   const dates = useMemo(() => {
@@ -344,35 +370,65 @@ const BookingSection: React.FC = () => {
               </h3>
               
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {availableSlots.map((slot, idx) => {
-                  const isSelected = selectedSlot === slot.label;
-                  
-                  return (
-                    <button
-                      key={idx}
-                      onClick={() => setSelectedSlot(slot.label)}
-                      className={`
-                        relative overflow-hidden p-4 rounded-xl border text-left transition-all duration-300 group
-                        ${isSelected 
-                          ? 'bg-neon-green/10 border-neon-green shadow-[inset_0_0_20px_rgba(57,255,20,0.1)]' 
-                          : 'bg-zinc-900/30 border-zinc-800 hover:border-neon-green/50 hover:bg-zinc-900'}
-                      `}
-                    >
-                      <div className="flex justify-between items-start mb-2">
-                        <span className={`font-sans font-bold text-lg ${isSelected ? 'text-neon-green' : 'text-white'}`}>
-                          {slot.label}
-                        </span>
-                        {isSelected && <CheckCircle2 className="w-5 h-5 text-neon-green" />}
-                      </div>
-                      <div className={`text-sm font-sans ${isSelected ? 'text-white' : 'text-gray-500'}`}>
-                        {formatPrice(slot.price)}
-                      </div>
-                      
-                      {/* Hover Effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-neon-green/5 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
-                    </button>
-                  );
-                })}
+                {/* Format current date once for all slots */}
+                {(() => {
+                  const formattedDate = selectedDate.toLocaleDateString('id-ID', { 
+                    weekday: 'long', 
+                    day: 'numeric', 
+                    month: 'long',
+                    year: 'numeric'
+                  });
+
+                  return availableSlots.map((slot, idx) => {
+                    const isSelected = selectedSlot === slot.label;
+                    
+                    // Check if slot is booked (confirmed status)
+                    const isBooked = bookings.some(b => 
+                      b.bookingDate === formattedDate && 
+                      b.timeSlot === slot.label && 
+                      b.status === 'confirmed'
+                    );
+
+                    return (
+                      <button
+                        key={idx}
+                        disabled={isBooked}
+                        onClick={() => !isBooked && setSelectedSlot(slot.label)}
+                        className={`
+                          relative overflow-hidden p-4 rounded-xl border text-left transition-all duration-300 group
+                          ${isBooked 
+                            ? 'bg-red-900/20 border-red-900/50 cursor-not-allowed opacity-80'
+                            : isSelected 
+                              ? 'bg-neon-green/10 border-neon-green shadow-[inset_0_0_20px_rgba(57,255,20,0.1)]' 
+                              : 'bg-zinc-900/30 border-zinc-800 hover:border-neon-green/50 hover:bg-zinc-900'}
+                        `}
+                      >
+                        <div className="flex justify-between items-start mb-2">
+                          <span className={`font-sans font-bold text-lg ${
+                            isBooked ? 'text-red-500' : isSelected ? 'text-neon-green' : 'text-white'
+                          }`}>
+                            {slot.label}
+                          </span>
+                          {isBooked ? (
+                            <Lock className="w-5 h-5 text-red-500" />
+                          ) : isSelected ? (
+                            <CheckCircle2 className="w-5 h-5 text-neon-green" />
+                          ) : null}
+                        </div>
+                        <div className={`text-sm font-sans ${
+                          isBooked ? 'text-red-400 font-bold uppercase' : isSelected ? 'text-white' : 'text-gray-500'
+                        }`}>
+                          {isBooked ? 'BOOKED' : formatPrice(slot.price)}
+                        </div>
+                        
+                        {/* Hover Effect */}
+                        {!isBooked && (
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-neon-green/5 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
+                        )}
+                      </button>
+                    );
+                  });
+                })()}
               </div>
             </div>
           </div>

@@ -24,24 +24,31 @@ export async function POST(request: NextRequest) {
 
     if (hasDatabaseConfigured) {
       // Try to save to database
+      console.log('🗄️ Attempting to save to database...');
+      console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL);
+      
       try {
         // Dynamic import with error handling
         let db, bookings, generateBookingId;
         
         try {
+          console.log('📦 Importing database modules...');
           const dbModule = await import('@/lib/db');
           const schemaModule = await import('@/lib/schema');
           db = dbModule.db;
           bookings = schemaModule.bookings;
           generateBookingId = schemaModule.generateBookingId;
+          console.log('✅ Database modules imported successfully');
         } catch (importError) {
-          console.error('Failed to import database modules:', importError);
+          console.error('❌ Failed to import database modules:', importError);
           throw new Error('Database connection failed');
         }
 
         // Generate unique booking ID
         const bookingId = generateBookingId();
+        console.log('🎫 Generated booking ID:', bookingId);
 
+        console.log('💾 Inserting booking into database...');
         const [newBooking] = await db
           .insert(bookings)
           .values({
@@ -55,6 +62,8 @@ export async function POST(request: NextRequest) {
           })
           .returning();
 
+        console.log('✅ Booking saved to database:', newBooking);
+
         return NextResponse.json(
           { 
             success: true, 
@@ -66,8 +75,9 @@ export async function POST(request: NextRequest) {
         );
       } catch (dbError) {
         const errorMessage = dbError instanceof Error ? dbError.message : String(dbError);
-        console.error('Database error, falling back to temporary storage:', errorMessage);
-        console.log('Continuing with temporary storage...');
+        console.error('❌ Database error, falling back to temporary storage:', errorMessage);
+        console.error('❌ Full error details:', dbError);
+        console.log('📝 Continuing with temporary storage...');
         // Fall through to temporary storage
       }
     }
@@ -123,32 +133,40 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
+    console.log('📖 Fetching all bookings...');
     const hasDatabaseConfigured = !!process.env.DATABASE_URL;
+    console.log('🔗 Database configured:', hasDatabaseConfigured);
 
     if (hasDatabaseConfigured) {
       try {
+        console.log('📦 Importing database modules for GET...');
         const { db } = await import('@/lib/db');
         const { bookings } = await import('@/lib/schema');
 
+        console.log('🔍 Querying database for bookings...');
         const allBookings = await db.select().from(bookings);
+        console.log('✅ Found bookings in database:', allBookings.length);
+        
         return NextResponse.json({ 
           bookings: allBookings,
           usingDatabase: true 
         });
       } catch (dbError) {
-        console.error('Database error, returning temporary bookings:', dbError);
+        console.error('❌ Database error in GET, returning temporary bookings:', dbError);
+        console.error('❌ Full error details for GET:', dbError);
         // Fall through to temporary storage
       }
     }
 
     // Return temporary bookings
+    console.log('📝 Returning temporary bookings:', tempBookings.length);
     return NextResponse.json({ 
       bookings: tempBookings,
       usingDatabase: false,
       warning: 'Showing temporary bookings (not from database)'
     });
   } catch (error) {
-    console.error('Fetch bookings error:', error);
+    console.error('💥 Fetch bookings error:', error);
     
     return NextResponse.json(
       { 
