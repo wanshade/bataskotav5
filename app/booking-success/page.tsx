@@ -1,11 +1,11 @@
 'use client'
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { CheckCircle2, Calendar, Clock, CreditCard, AlertTriangle, ArrowLeft, Copy } from 'lucide-react';
 
-export default function BookingSuccessPage() {
+function BookingSuccessContent() {
   const searchParams = useSearchParams();
   const teamName = searchParams.get('team') || '-';
   const date = searchParams.get('date') || '-';
@@ -195,5 +195,19 @@ export default function BookingSuccessPage() {
 
       </div>
     </div>
+  );
+}
+
+export default function BookingSuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-dark-bg flex items-center justify-center">
+        <div className="text-neon-green text-2xl font-display animate-pulse">
+          Loading...
+        </div>
+      </div>
+    }>
+      <BookingSuccessContent />
+    </Suspense>
   );
 }
