@@ -1,4 +1,7 @@
+'use client'
+
 import React, { useState, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import NeonButton from './ui/NeonButton';
 import { Calendar, Clock, User, Phone, ChevronRight, ChevronLeft, Trophy, CheckCircle2, AlertCircle } from 'lucide-react';
 
@@ -124,9 +127,12 @@ const getExpandedSlots = (dayKey: string) => {
 // --- Main Component ---
 
 const BookingSection: React.FC = () => {
+  const router = useRouter();
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
   const [dateScrollIndex, setDateScrollIndex] = useState(0);
+  const [teamName, setTeamName] = useState('');
+  const [phone, setPhone] = useState('');
 
   // Generate next 14 days
   const dates = useMemo(() => {
@@ -156,6 +162,34 @@ const BookingSection: React.FC = () => {
   };
 
   const selectedSlotData = availableSlots.find(s => s.label === selectedSlot);
+
+  const handleBooking = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!selectedSlot || !teamName.trim() || !phone.trim()) {
+      return;
+    }
+
+    // Format date for display
+    const formattedDate = selectedDate.toLocaleDateString('id-ID', { 
+      weekday: 'long', 
+      day: 'numeric', 
+      month: 'long',
+      year: 'numeric'
+    });
+
+    // Create query params
+    const params = new URLSearchParams({
+      team: teamName,
+      date: formattedDate,
+      time: selectedSlot,
+      price: selectedSlotData ? formatPrice(selectedSlotData.price) : '-',
+      phone: phone
+    });
+
+    // Redirect to success page
+    router.push(`/booking-success?${params.toString()}`);
+  };
 
   return (
     <section id="booking" className="py-24 bg-black relative overflow-hidden">
@@ -305,7 +339,7 @@ const BookingSection: React.FC = () => {
                   </div>
 
                   {/* Form Inputs */}
-                  <div className="space-y-4">
+                  <form onSubmit={handleBooking} className="space-y-4">
                     <div className="space-y-2">
                       <label className="text-xs uppercase font-bold text-gray-500 tracking-wider">Nama Tim</label>
                       <div className="relative group">
@@ -313,6 +347,9 @@ const BookingSection: React.FC = () => {
                         <input 
                           type="text" 
                           placeholder="FC Batas Kota"
+                          value={teamName}
+                          onChange={(e) => setTeamName(e.target.value)}
+                          required
                           className="w-full bg-black border border-zinc-700 rounded-lg py-3 pl-10 pr-4 text-white text-sm focus:border-neon-green focus:ring-1 focus:ring-neon-green outline-none transition-all"
                         />
                       </div>
@@ -325,26 +362,33 @@ const BookingSection: React.FC = () => {
                         <input 
                           type="tel" 
                           placeholder="0812..."
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          required
                           className="w-full bg-black border border-zinc-700 rounded-lg py-3 pl-10 pr-4 text-white text-sm focus:border-neon-green focus:ring-1 focus:ring-neon-green outline-none transition-all"
                         />
                       </div>
                     </div>
-                  </div>
 
-                  {/* Action Button */}
-                  <NeonButton 
-                    className={`w-full flex justify-center ${!selectedSlot ? 'opacity-50 cursor-not-allowed grayscale' : ''}`}
-                    disabled={!selectedSlot}
-                  >
-                    Konfirmasi Pemesanan
-                  </NeonButton>
+                    {/* Action Button */}
+                    <NeonButton 
+                      type="submit"
+                      className={`w-full flex justify-center ${(!selectedSlot || !teamName.trim() || !phone.trim()) ? 'opacity-50 cursor-not-allowed grayscale' : ''}`}
+                      disabled={!selectedSlot || !teamName.trim() || !phone.trim()}
+                    >
+                      Konfirmasi Pemesanan
+                    </NeonButton>
 
-                  {!selectedSlot && (
-                    <div className="flex items-center justify-center gap-2 text-xs text-yellow-500/80 bg-yellow-500/10 p-2 rounded">
-                      <AlertCircle className="w-3 h-3" />
-                      <span>Silakan pilih waktu terlebih dahulu</span>
-                    </div>
-                  )}
+                    {(!selectedSlot || !teamName.trim() || !phone.trim()) && (
+                      <div className="flex items-center justify-center gap-2 text-xs text-yellow-500/80 bg-yellow-500/10 p-2 rounded">
+                        <AlertCircle className="w-3 h-3" />
+                        <span>
+                          {!selectedSlot && 'Silakan pilih waktu terlebih dahulu'}
+                          {selectedSlot && (!teamName.trim() || !phone.trim()) && 'Silakan lengkapi data pemesanan'}
+                        </span>
+                      </div>
+                    )}
+                  </form>
                 </div>
               </div>
             </div>
