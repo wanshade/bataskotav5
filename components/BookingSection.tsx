@@ -133,6 +133,8 @@ const BookingSection: React.FC = () => {
   const [dateScrollIndex, setDateScrollIndex] = useState(0);
   const [teamName, setTeamName] = useState('');
   const [phone, setPhone] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Generate next 14 days
   const dates = useMemo(() => {
@@ -163,44 +165,112 @@ const BookingSection: React.FC = () => {
 
   const selectedSlotData = availableSlots.find(s => s.label === selectedSlot);
 
-  const handleBooking = (e: React.FormEvent) => {
+  const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!selectedSlot || !teamName.trim() || !phone.trim()) {
+    if (!selectedSlot || !teamName.trim() || !phone.trim() || !selectedSlotData) {
       return;
     }
 
-    // Format date for display
-    const formattedDate = selectedDate.toLocaleDateString('id-ID', { 
-      weekday: 'long', 
-      day: 'numeric', 
-      month: 'long',
-      year: 'numeric'
-    });
+    setIsSubmitting(true);
+    setError(null);
 
-    // Create query params
-    const params = new URLSearchParams({
-      team: teamName,
-      date: formattedDate,
-      time: selectedSlot,
-      price: selectedSlotData ? formatPrice(selectedSlotData.price) : '-',
-      phone: phone
-    });
+    try {
+      // Format date for display
+      const formattedDate = selectedDate.toLocaleDateString('id-ID', { 
+        weekday: 'long', 
+        day: 'numeric', 
+        month: 'long',
+        year: 'numeric'
+      });
 
-    // Redirect to success page
-    router.push(`/booking-success?${params.toString()}`);
+      const priceFormatted = formatPrice(selectedSlotData.price);
+
+      // Save to database
+      const response = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          teamName,
+          phone,
+          bookingDate: formattedDate,
+          timeSlot: selectedSlot,
+          price: priceFormatted,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        // Show the detailed message from the API
+        const errorMessage = errorData.message || errorData.error || 'Gagal membuat pemesanan';
+        throw new Error(errorMessage);
+      }
+
+      const data = await response.json();
+      console.log('Booking created:', data);
+      
+      // Show warning if using temporary storage
+      if (data.warning) {
+        console.warn('⚠️', data.warning);
+      }
+      if (!data.usingDatabase) {
+        console.warn('💡 Tip: Set up database to persist bookings. See DATABASE_SETUP.md');
+      }
+
+      // Get booking ID from response
+      const bookingId = data.booking?.bookingId || 'N/A';
+
+      // Create query params for success page
+      const params = new URLSearchParams({
+        team: teamName,
+        date: formattedDate,
+        time: selectedSlot,
+        price: priceFormatted,
+        phone: phone,
+        bookingId: bookingId
+      });
+
+      // Redirect to success page
+      router.push(`/booking-success?${params.toString()}`);
+    } catch (err) {
+      console.error('Booking error:', err);
+      const errorMessage = err instanceof Error ? err.message : 'Terjadi kesalahan saat membuat pemesanan';
+      setError(errorMessage);
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <section id="booking" className="py-24 bg-black relative overflow-hidden">
       {/* Background Gradients */}
       <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-zinc-900/20 to-transparent pointer-events-none" />
+      
+      {/* Custom Background Shape - Abstract Field Diagram */}
+      <div className="absolute bottom-0 right-0 w-full h-full pointer-events-none opacity-10">
+        <svg width="100%" height="100%" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice">
+          {/* Abstract Play Tactics Circles */}
+          <circle cx="80%" cy="80%" r="300" fill="none" stroke="#39ff14" strokeWidth="2" strokeDasharray="20 20" />
+          <circle cx="80%" cy="80%" r="200" fill="none" stroke="#39ff14" strokeWidth="1" />
+          <circle cx="80%" cy="80%" r="50" fill="#39ff14" fillOpacity="0.2" />
+          
+          {/* Tactics Lines/Arrows */}
+          <path d="M 500 800 Q 600 600 800 500" fill="none" stroke="#39ff14" strokeWidth="2" strokeDasharray="10 10" />
+          <path d="M 400 900 Q 550 750 750 600" fill="none" stroke="#39ff14" strokeWidth="2" strokeOpacity="0.5" />
+          
+          {/* Crosshairs */}
+          <line x1="70%" y1="0" x2="70%" y2="100%" stroke="#39ff14" strokeWidth="1" strokeOpacity="0.1" />
+          <line x1="0" y1="30%" x2="100%" y2="30%" stroke="#39ff14" strokeWidth="1" strokeOpacity="0.1" />
+        </svg>
+      </div>
+
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-neon-green/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container mx-auto px-4 lg:px-6 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="font-display font-black text-4xl md:text-5xl uppercase mb-4">
-            Pesan <span className="text-neon-green">Lapangan</span>
+          <h2 className="font-display font-bold text-3xl md:text-5xl text-white uppercase mb-4">
+            Pesan <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500 drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">Lapangan</span>
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto">
             Pilih tanggal dan waktu di bawah. Harga bervariasi berdasarkan hari dan waktu.
@@ -373,13 +443,22 @@ const BookingSection: React.FC = () => {
                     {/* Action Button */}
                     <NeonButton 
                       type="submit"
-                      className={`w-full flex justify-center ${(!selectedSlot || !teamName.trim() || !phone.trim()) ? 'opacity-50 cursor-not-allowed grayscale' : ''}`}
-                      disabled={!selectedSlot || !teamName.trim() || !phone.trim()}
+                      className={`w-full flex justify-center ${(!selectedSlot || !teamName.trim() || !phone.trim() || isSubmitting) ? 'opacity-50 cursor-not-allowed grayscale' : ''}`}
+                      disabled={!selectedSlot || !teamName.trim() || !phone.trim() || isSubmitting}
                     >
-                      Konfirmasi Pemesanan
+                      {isSubmitting ? 'Memproses...' : 'Konfirmasi Pemesanan'}
                     </NeonButton>
 
-                    {(!selectedSlot || !teamName.trim() || !phone.trim()) && (
+                    {/* Error Message */}
+                    {error && (
+                      <div className="flex items-center justify-center gap-2 text-xs text-red-500/80 bg-red-500/10 p-2 rounded">
+                        <AlertCircle className="w-3 h-3" />
+                        <span>{error}</span>
+                      </div>
+                    )}
+
+                    {/* Validation Warning */}
+                    {!error && (!selectedSlot || !teamName.trim() || !phone.trim()) && (
                       <div className="flex items-center justify-center gap-2 text-xs text-yellow-500/80 bg-yellow-500/10 p-2 rounded">
                         <AlertCircle className="w-3 h-3" />
                         <span>

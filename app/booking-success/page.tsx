@@ -12,8 +12,14 @@ function BookingSuccessContent() {
   const time = searchParams.get('time') || '-';
   const price = searchParams.get('price') || '-';
   const phone = searchParams.get('phone') || '-';
+  const bookingId = searchParams.get('bookingId') || '-';
 
-  const bankAccount = "1610016475977";
+  // Load from environment variables
+  const bankName = process.env.NEXT_PUBLIC_BANK_NAME || 'Bank Mandiri';
+  const bankAccount = process.env.NEXT_PUBLIC_BANK_ACCOUNT_NUMBER || '1610016475977';
+  const bankAccountName = process.env.NEXT_PUBLIC_BANK_ACCOUNT_NAME || 'CV BATAS KOTA POINT';
+  const adminWhatsApp = process.env.NEXT_PUBLIC_ADMIN_WHATSAPP || '08123456789';
+  
   const [copied, setCopied] = React.useState(false);
 
   const copyToClipboard = () => {
@@ -48,6 +54,10 @@ function BookingSuccessContent() {
           </h2>
 
           <div className="space-y-4">
+            <div className="flex justify-between items-center border-b border-zinc-800 pb-3">
+              <span className="text-gray-400">Booking ID</span>
+              <span className="text-neon-green font-mono font-bold">{bookingId}</span>
+            </div>
             <div className="flex justify-between items-center border-b border-zinc-800 pb-3">
               <span className="text-gray-400">Nama Tim</span>
               <span className="text-white font-medium">{teamName}</span>
@@ -87,11 +97,11 @@ function BookingSuccessContent() {
                 <div className="space-y-3">
                   <div>
                     <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">Nama Penerima</p>
-                    <p className="text-white font-bold text-lg">CV BATAS KOTA POINT</p>
+                    <p className="text-white font-bold text-lg">{bankAccountName}</p>
                   </div>
                   <div>
                     <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">Bank</p>
-                    <p className="text-white font-bold text-lg">BANK MANDIRI</p>
+                    <p className="text-white font-bold text-lg">{bankName.toUpperCase()}</p>
                   </div>
                   <div>
                     <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">Nomor Rekening</p>
@@ -184,7 +194,7 @@ function BookingSuccessContent() {
             Kembali ke Beranda
           </Link>
           <a
-            href={`https://wa.me/${phone.replace(/^0/, '62').replace(/\D/g, '')}?text=Halo, saya ingin konfirmasi pembayaran untuk booking lapangan atas nama ${teamName}`}
+            href={`https://wa.me/${adminWhatsApp.replace(/^0/, '62').replace(/\D/g, '')}?text=${encodeURIComponent(`Halo, saya ingin konfirmasi pembayaran untuk booking lapangan atas nama ${teamName}, nomor HP: ${phone}, Booking ID: ${bookingId}`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 text-center px-6 py-4 bg-neon-green hover:bg-neon-green/90 text-black rounded-xl font-display font-bold uppercase transition-colors"

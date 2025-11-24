@@ -79,8 +79,8 @@ const Features: React.FC = () => {
     <section id="features" className="py-24 bg-dark-surface relative overflow-hidden">
       {/* Section Header */}
       <div className="container mx-auto px-6 mb-16 text-center">
-        <h2 className="font-display font-bold text-4xl md:text-5xl uppercase mb-4">
-          Spesifikasi <span className="text-neon-green">Utama</span>
+        <h2 className="font-display font-bold text-3xl md:text-5xl text-white uppercase mb-4">
+          Spesifikasi <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500 drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">Utama</span>
         </h2>
         <div className="h-1 w-24 bg-neon-green mx-auto rounded-full shadow-[0_0_10px_#39FF14]" />
       </div>

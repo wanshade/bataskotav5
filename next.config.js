@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // Outputs a Single-Page Application (SPA).
-  distDir: './dist', // Changes the build output directory to './dist/'.
+  // Removed 'output: export' to enable API routes for database functionality
+  // Note: This requires a Node.js server for deployment (Vercel, Railway, etc.)
+  // distDir: './dist', // Using default .next directory
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: true,
   },
   trailingSlash: true,
   // Handle environment variables from the Vite config

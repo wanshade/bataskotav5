@@ -69,7 +69,7 @@ const Gallery: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div>
-            <h2 className="font-display font-bold text-4xl uppercase mb-2">Arena <span className="text-neon-green">Kami</span></h2>
+            <h2 className="font-display font-bold text-3xl md:text-5xl text-white uppercase mb-2">Arena <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500 drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">Kami</span></h2>
             <p className="text-gray-400">Sekilas pengalaman di Batas Kota.</p>
           </div>
           <button className="hidden md:block text-neon-green font-display text-sm uppercase tracking-widest hover:text-white transition-colors">

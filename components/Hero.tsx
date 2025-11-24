@@ -1,15 +1,18 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import NeonButton from './ui/NeonButton';
 import { ChevronRight } from 'lucide-react';
+
+const Scene3D = dynamic(() => import('./Scene3D'), { ssr: false });
 
 const Hero: React.FC = () => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Overlay & Image */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-bg via-transparent to-dark-bg z-10 opacity-90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-dark-bg via-transparent to-dark-bg z-10 opacity-80" />
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=2093&auto=format&fit=crop')] bg-cover bg-center opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-bg via-transparent to-dark-bg z-10 opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark-bg via-transparent to-dark-bg z-10 opacity-40" />
+        <div className="absolute inset-0 bg-[url('/herobg.png')] bg-cover bg-center opacity-90" />
         
         {/* Grid Effect */}
         <div 
@@ -22,6 +25,11 @@ const Hero: React.FC = () => {
         />
       </div>
 
+      {/* 3D Scene Overlay */}
+      <div className="absolute inset-0 z-10 pointer-events-none opacity-80">
+        <Scene3D />
+      </div>
+
       <div className="container mx-auto px-6 relative z-20 flex flex-col items-center text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-green/10 border border-neon-green/30 mb-8 backdrop-blur-sm animate-fade-in-up">
           <span className="w-2 h-2 rounded-full bg-neon-green animate-pulse" />
@@ -30,15 +38,14 @@ const Hero: React.FC = () => {
           </span>
         </div>
 
-        <h1 className="font-display font-black text-5xl md:text-7xl lg:text-8xl leading-tight uppercase mb-6 text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-          Futsal <br />
-          <span className="text-neon-green drop-shadow-[0_0_20px_rgba(57,255,20,0.4)]">Modern</span>
+        <h1 className="font-display font-black text-5xl md:text-6xl lg:text-7xl leading-tight uppercase mb-6 text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+          Batas Kota <br />
+          <span className="text-neon-green drop-shadow-[0_0_20px_rgba(57,255,20,0.4)]">The Town Space</span>
         </h1>
 
         <p className="font-sans text-gray-400 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
-          Rasakan evolusi futsal di Selong. 
-          Rumput berkualitas pro, suasana malam yang memukau, dan atmosfer olahraga cyber. 
-          Selamat datang di Batas Kota.
+          Lapangan mini soccer terbaik di Lombok. 
+          Rumput pro, suasana malam keren, yang bikin main makin seru.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 items-center">

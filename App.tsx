@@ -6,6 +6,7 @@ import Gallery from './components/Gallery';
 import VideoShowcase from './components/VideoShowcase';
 import BookingSection from './components/BookingSection';
 import LocationSection from './components/LocationSection';
+import ClosingCTA from './components/ClosingCTA';
 import Footer from './components/Footer';
 
 const App: React.FC = () => {
@@ -14,11 +15,12 @@ const App: React.FC = () => {
       <Navbar />
       <main>
         <Hero />
+        <VideoShowcase />
         <Features />
         <Gallery />
-        <VideoShowcase />
         <BookingSection />
         <LocationSection />
+        <ClosingCTA />
       </main>
       <Footer />
     </div>
