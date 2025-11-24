@@ -166,10 +166,10 @@ const BookingSection: React.FC = () => {
       <div className="container mx-auto px-4 lg:px-6 relative z-10">
         <div className="text-center mb-12">
           <h2 className="font-display font-black text-4xl md:text-5xl uppercase mb-4">
-            Book Your <span className="text-neon-green">Match</span>
+            Pesan <span className="text-neon-green">Lapangan</span>
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto">
-            Select your date and time slot below. Prices vary based on day and time.
+            Pilih tanggal dan waktu di bawah. Harga bervariasi berdasarkan hari dan waktu.
           </p>
         </div>
 
@@ -181,7 +181,7 @@ const BookingSection: React.FC = () => {
             <div className="space-y-3">
               <div className="flex justify-between items-center px-1">
                 <h3 className="font-display text-sm uppercase tracking-widest text-gray-500 flex items-center gap-2">
-                  <Calendar className="w-4 h-4" /> Select Date
+                  <Calendar className="w-4 h-4" /> Pilih Tanggal
                 </h3>
                 <div className="flex gap-2">
                   <button 
@@ -236,7 +236,7 @@ const BookingSection: React.FC = () => {
             {/* Slot Selector */}
             <div className="space-y-3 animate-fade-in">
               <h3 className="font-display text-sm uppercase tracking-widest text-gray-500 flex items-center gap-2">
-                <Clock className="w-4 h-4" /> Select Time Slot
+                <Clock className="w-4 h-4" /> Pilih Waktu
               </h3>
               
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -255,12 +255,12 @@ const BookingSection: React.FC = () => {
                       `}
                     >
                       <div className="flex justify-between items-start mb-2">
-                        <span className={`font-display font-bold text-lg ${isSelected ? 'text-neon-green' : 'text-white'}`}>
+                        <span className={`font-sans font-bold text-lg ${isSelected ? 'text-neon-green' : 'text-white'}`}>
                           {slot.label}
                         </span>
                         {isSelected && <CheckCircle2 className="w-5 h-5 text-neon-green" />}
                       </div>
-                      <div className={`text-sm font-mono ${isSelected ? 'text-white' : 'text-gray-500'}`}>
+                      <div className={`text-sm font-sans ${isSelected ? 'text-white' : 'text-gray-500'}`}>
                         {formatPrice(slot.price)}
                       </div>
                       
@@ -279,21 +279,21 @@ const BookingSection: React.FC = () => {
               <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-neon-green to-transparent" />
                 
-                <h3 className="font-display font-bold text-xl mb-6 flex items-center gap-2">
-                  <Trophy className="text-neon-green w-5 h-5" /> Booking Summary
+                <h3 className="font-display font-bold text-xl mb-6 flex items-center gap-2 text-white">
+                  <Trophy className="text-neon-green w-5 h-5" /> Ringkasan Pemesanan
                 </h3>
 
                 <div className="space-y-6">
                   {/* Summary Card */}
                   <div className="bg-black/50 rounded-lg p-4 space-y-3 border border-zinc-800/50">
                     <div className="flex justify-between items-center border-b border-zinc-800 pb-2">
-                      <span className="text-gray-400 text-sm">Date</span>
+                      <span className="text-gray-400 text-sm">Tanggal</span>
                       <span className="text-white font-medium">{selectedDate.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
                     </div>
                     <div className="flex justify-between items-center border-b border-zinc-800 pb-2">
-                      <span className="text-gray-400 text-sm">Time</span>
+                      <span className="text-gray-400 text-sm">Waktu</span>
                       <span className={`font-medium ${selectedSlot ? 'text-white' : 'text-zinc-600 italic'}`}>
-                        {selectedSlot || 'Select slot'}
+                        {selectedSlot || 'Pilih waktu'}
                       </span>
                     </div>
                     <div className="flex justify-between items-center pt-1">
@@ -307,7 +307,7 @@ const BookingSection: React.FC = () => {
                   {/* Form Inputs */}
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <label className="text-xs uppercase font-bold text-gray-500 tracking-wider">Team Name</label>
+                      <label className="text-xs uppercase font-bold text-gray-500 tracking-wider">Nama Tim</label>
                       <div className="relative group">
                         <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-neon-green transition-colors" />
                         <input 
@@ -319,7 +319,7 @@ const BookingSection: React.FC = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs uppercase font-bold text-gray-500 tracking-wider">WhatsApp Number</label>
+                      <label className="text-xs uppercase font-bold text-gray-500 tracking-wider">Nomor WhatsApp</label>
                       <div className="relative group">
                         <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-neon-green transition-colors" />
                         <input 
@@ -336,13 +336,13 @@ const BookingSection: React.FC = () => {
                     className={`w-full flex justify-center ${!selectedSlot ? 'opacity-50 cursor-not-allowed grayscale' : ''}`}
                     disabled={!selectedSlot}
                   >
-                    Confirm Booking
+                    Konfirmasi Pemesanan
                   </NeonButton>
 
                   {!selectedSlot && (
                     <div className="flex items-center justify-center gap-2 text-xs text-yellow-500/80 bg-yellow-500/10 p-2 rounded">
                       <AlertCircle className="w-3 h-3" />
-                      <span>Please select a time slot first</span>
+                      <span>Silakan pilih waktu terlebih dahulu</span>
                     </div>
                   )}
                 </div>

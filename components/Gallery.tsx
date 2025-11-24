@@ -3,23 +3,23 @@ import React, { useEffect, useRef, useState } from 'react';
 const images = [
   {
     src: "https://images.unsplash.com/photo-1529900748604-07564a03e7a6?q=80&w=2070&auto=format&fit=crop",
-    title: "Night Matches",
-    category: "Atmosphere"
+    title: "Pertandingan Malam",
+    category: "Atmosfer"
   },
   {
     src: "https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=2070&auto=format&fit=crop",
-    title: "Pro Turf",
-    category: "Facilities"
+    title: "Rumput Pro",
+    category: "Fasilitas"
   },
   {
     src: "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?q=80&w=2071&auto=format&fit=crop",
-    title: "Team Locker",
-    category: "Amenities"
+    title: "Loker Tim",
+    category: "Amenitas"
   },
   {
     src: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?q=80&w=2070&auto=format&fit=crop",
-    title: "Strategic Play",
-    category: "Action"
+    title: "Permainan Strategis",
+    category: "Aksi"
   }
 ];
 
@@ -51,13 +51,14 @@ const Gallery: React.FC = () => {
       }
     );
 
+    const currentRefs = cardRefs.current;
     // Observe all cards
-    cardRefs.current.forEach((ref) => {
+    currentRefs.forEach((ref) => {
       if (ref) observer.observe(ref);
     });
 
     return () => {
-      cardRefs.current.forEach((ref) => {
+      currentRefs.forEach((ref) => {
         if (ref) observer.unobserve(ref);
       });
     };
@@ -68,11 +69,11 @@ const Gallery: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div>
-            <h2 className="font-display font-bold text-4xl uppercase mb-2">The <span className="text-neon-green">Arena</span></h2>
-            <p className="text-gray-400">A glimpse into the Batas Kota experience.</p>
+            <h2 className="font-display font-bold text-4xl uppercase mb-2">Arena <span className="text-neon-green">Kami</span></h2>
+            <p className="text-gray-400">Sekilas pengalaman di Batas Kota.</p>
           </div>
           <button className="hidden md:block text-neon-green font-display text-sm uppercase tracking-widest hover:text-white transition-colors">
-            View All Photos &rarr;
+            Lihat Semua Foto &rarr;
           </button>
         </div>
 
@@ -82,7 +83,9 @@ const Gallery: React.FC = () => {
             return (
               <div
                 key={idx}
-                ref={(el) => (cardRefs.current[idx] = el)}
+                ref={(el) => {
+                  cardRefs.current[idx] = el;
+                }}
                 data-index={idx}
                 className={`group relative overflow-hidden rounded-xl h-64 md:h-80 ${idx === 0 || idx === 3 ? 'md:col-span-2' : ''}`}
               >

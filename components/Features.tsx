@@ -4,33 +4,33 @@ import { Activity, Award, Coffee, Moon, ShieldCheck, Wifi } from 'lucide-react';
 const features = [
   {
     icon: <Award className="w-8 h-8 text-black" />,
-    title: "FIFA Standard Turf",
-    description: "High-performance synthetic grass designed for speed, control, and injury prevention."
+    title: "Rumput Standar FIFA",
+    description: "Rumput sintetis berkinerja tinggi dirancang untuk kecepatan, kontrol, dan pencegahan cedera."
   },
   {
     icon: <Moon className="w-8 h-8 text-black" />,
-    title: "Night Mode Lighting",
-    description: "Professional LED floodlights calibrated for zero-glare visibility during night matches."
+    title: "Pencahayaan Malam",
+    description: "Lampu sorot LED profesional dikalibrasi untuk visibilitas tanpa silau saat pertandingan malam."
   },
   {
     icon: <Activity className="w-8 h-8 text-black" />,
-    title: "Performance Tracking",
-    description: "Digital scoreboard integration and match recording capabilities available on request."
+    title: "Pelacakan Performa",
+    description: "Integrasi papan skor digital dan kemampuan rekaman pertandingan tersedia sesuai permintaan."
   },
   {
     icon: <Coffee className="w-8 h-8 text-black" />,
-    title: "The Dugout Lounge",
-    description: "Premium recovery zone with refreshments, AC, and tactical view of the pitch."
+    title: "Ruang Tunggu",
+    description: "Zona pemulihan premium dengan minuman segar, AC, dan pemandangan taktis lapangan."
   },
   {
     icon: <ShieldCheck className="w-8 h-8 text-black" />,
-    title: "Secure Facility",
-    description: "Private lockers, secure parking, and 24/7 CCTV surveillance for peace of mind."
+    title: "Fasilitas Aman",
+    description: "Loker pribadi, parkir aman, dan pengawasan CCTV 24/7 untuk ketenangan pikiran."
   },
   {
     icon: <Wifi className="w-8 h-8 text-black" />,
-    title: "High-Speed WiFi",
-    description: "Stay connected. Stream your match live or share highlights instantly."
+    title: "WiFi Berkecepatan Tinggi",
+    description: "Tetap terhubung. Streaming pertandingan Anda secara langsung atau bagikan highlight secara instan."
   }
 ];
 
@@ -62,13 +62,14 @@ const Features: React.FC = () => {
       }
     );
 
+    const currentRefs = cardRefs.current;
     // Observe all cards
-    cardRefs.current.forEach((ref) => {
+    currentRefs.forEach((ref) => {
       if (ref) observer.observe(ref);
     });
 
     return () => {
-      cardRefs.current.forEach((ref) => {
+      currentRefs.forEach((ref) => {
         if (ref) observer.unobserve(ref);
       });
     };
@@ -79,7 +80,7 @@ const Features: React.FC = () => {
       {/* Section Header */}
       <div className="container mx-auto px-6 mb-16 text-center">
         <h2 className="font-display font-bold text-4xl md:text-5xl uppercase mb-4">
-          Core <span className="text-neon-green">Specs</span>
+          Spesifikasi <span className="text-neon-green">Utama</span>
         </h2>
         <div className="h-1 w-24 bg-neon-green mx-auto rounded-full shadow-[0_0_10px_#39FF14]" />
       </div>
@@ -91,7 +92,9 @@ const Features: React.FC = () => {
           return (
             <div
               key={index}
-              ref={(el) => (cardRefs.current[index] = el)}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
               data-index={index}
               className={`group p-1 rounded-2xl transition-all duration-1000 ${
                 isVisible

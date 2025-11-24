@@ -1,0 +1,46 @@
+/* Additional styles that were previously in the App component */
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.selection\:bg-neon-green {
+  background-color: #39FF14;
+}
+
+.selection\:text-black {
+  color: #000000;
+}
+
+/* Additional utility classes for the neon theme */
+.bg-dark-bg {
+  background-color: #050505;
+}
+
+.bg-dark-surface {
+  background-color: #0a0a0a;
+}
+
+.bg-dark-card {
+  background-color: #121212;
+}
+
+.text-neon-green {
+  color: #39FF14;
+}
+
+.border-neon-green {
+  border-color: #39FF14;
+}
+
+.hover\:text-neon-green:hover {
+  color: #39FF14;
+}
+
+.hover\:border-neon-green:hover {
+  border-color: #39FF14;
+}

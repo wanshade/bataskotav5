@@ -41,7 +41,7 @@ const LocationSection: React.FC = () => {
           {/* Info Text */}
           <div className="order-1 md:order-2">
             <h2 className="font-display font-bold text-4xl uppercase mb-8">
-              Find Us In <br />
+              Temukan Kami Di <br />
               <span className="text-neon-green">Selong</span>
             </h2>
 
@@ -61,8 +61,8 @@ const LocationSection: React.FC = () => {
                   <Clock className="text-white w-5 h-5 group-hover:text-neon-green" />
                 </div>
                 <div>
-                  <h4 className="font-display font-bold text-lg text-white">Operating Hours</h4>
-                  <p className="text-gray-400">Daily: 08:00 - 23:00<br/><span className="text-neon-green text-sm">Night matches available</span></p>
+                  <h4 className="font-display font-bold text-lg text-white">Jam Operasional</h4>
+                  <p className="text-gray-400">Setiap Hari: 08:00 - 23:00<br/><span className="text-neon-green text-sm">Pertandingan malam tersedia</span></p>
                 </div>
               </div>
 
@@ -71,7 +71,7 @@ const LocationSection: React.FC = () => {
                   <Phone className="text-white w-5 h-5 group-hover:text-neon-green" />
                 </div>
                 <div>
-                  <h4 className="font-display font-bold text-lg text-white">Contact</h4>
+                  <h4 className="font-display font-bold text-lg text-white">Kontak</h4>
                   <p className="text-gray-400">+62 812-3456-7890</p>
                   <p className="text-gray-400 text-sm">booking@bataskota.com</p>
                 </div>
@@ -80,7 +80,7 @@ const LocationSection: React.FC = () => {
             
             <div className="mt-10">
                <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="inline-block border-b border-neon-green text-neon-green pb-1 font-display text-sm tracking-widest hover:text-white hover:border-white transition-colors">
-                 OPEN IN GOOGLE MAPS
+                 BUKA DI GOOGLE MAPS
                </a>
             </div>
           </div>

@@ -13,14 +13,14 @@ const VideoShowcase: React.FC = () => {
         <div className="mb-12 animate-fade-in">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Zap className="w-4 h-4 text-neon-green fill-neon-green animate-pulse" />
-            <span className="font-display text-neon-green tracking-[0.2em] text-xs uppercase font-bold">Official Showcase</span>
+            <span className="font-display text-neon-green tracking-[0.2em] text-xs uppercase font-bold">Showcase Resmi</span>
             <Zap className="w-4 h-4 text-neon-green fill-neon-green animate-pulse" />
           </div>
           <h2 className="font-display font-bold text-3xl md:text-5xl text-white uppercase mb-4">
-            Experience The <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500 drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">Action</span>
+            Rasakan <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500 drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">Aksinya</span>
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto">
-            Watch the highlights. Feel the atmosphere. This is where the game evolves.
+            Tonton highlightnya. Rasakan atmosfernya. Di sinilah permainan berevolusi.
           </p>
         </div>
 

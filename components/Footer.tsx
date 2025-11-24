@@ -1,5 +1,6 @@
 import React from 'react';
-import { Instagram, Facebook, Twitter, Zap } from 'lucide-react';
+import { Instagram, Facebook, Twitter } from 'lucide-react';
+import Image from 'next/image';
 
 const Footer: React.FC = () => {
   return (
@@ -9,11 +10,16 @@ const Footer: React.FC = () => {
           
           {/* Brand */}
           <div className="text-center md:text-left">
-            <div className="flex items-center gap-2 justify-center md:justify-start mb-2">
-              <Zap className="w-5 h-5 text-neon-green fill-neon-green" />
+            <div className="flex items-center gap-3 justify-center md:justify-start mb-2">
+              <Image 
+                src="/logo1.png" 
+                alt="Batas Kota Logo"
+                width={32}
+                height={32}
+              />
               <span className="font-display font-bold text-lg text-white">BATAS<span className="text-neon-green">KOTA</span></span>
             </div>
-            <p className="text-gray-600 text-sm">The Town Space Mini Soccer Field.</p>
+            <p className="text-gray-600 text-sm">Lapangan Futsal Mini The Town Space.</p>
           </div>
 
           {/* Links */}

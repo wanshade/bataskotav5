@@ -26,29 +26,29 @@ const Hero: React.FC = () => {
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-green/10 border border-neon-green/30 mb-8 backdrop-blur-sm animate-fade-in-up">
           <span className="w-2 h-2 rounded-full bg-neon-green animate-pulse" />
           <span className="text-neon-green font-sans text-xs font-bold uppercase tracking-widest">
-            New Premium Turf Installed
+            Rumput Premium Baru Terpasang
           </span>
         </div>
 
         <h1 className="font-display font-black text-5xl md:text-7xl lg:text-8xl leading-tight uppercase mb-6 text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-          Futbol <br />
-          <span className="text-neon-green drop-shadow-[0_0_20px_rgba(57,255,20,0.4)]">Redefined</span>
+          Futsal <br />
+          <span className="text-neon-green drop-shadow-[0_0_20px_rgba(57,255,20,0.4)]">Modern</span>
         </h1>
 
         <p className="font-sans text-gray-400 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
-          Experience the next evolution of mini soccer in Selong. 
-          Pro-grade turf, night-mode visuals, and a cyber-sport atmosphere. 
-          Welcome to Batas Kota.
+          Rasakan evolusi futsal di Selong. 
+          Rumput berkualitas pro, suasana malam yang memukau, dan atmosfer olahraga cyber. 
+          Selamat datang di Batas Kota.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 items-center">
           <a href="#booking">
             <NeonButton className="flex items-center gap-2">
-              Book A Match <ChevronRight className="w-5 h-5" />
+              Pesan Lapangan <ChevronRight className="w-5 h-5" />
             </NeonButton>
           </a>
           <a href="#features" className="text-white font-display text-sm uppercase tracking-widest hover:text-neon-green transition-colors border-b border-transparent hover:border-neon-green pb-1">
-            Explore Features
+            Jelajahi Fitur
           </a>
         </div>
       </div>

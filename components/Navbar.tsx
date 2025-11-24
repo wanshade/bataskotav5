@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Zap } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,10 +16,10 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: 'Arena', href: '#hero' },
-    { name: 'Features', href: '#features' },
-    { name: 'Gallery', href: '#gallery' },
+    { name: 'Fitur', href: '#features' },
+    { name: 'Galeri', href: '#gallery' },
     { name: 'Video', href: '#video' },
-    { name: 'Location', href: '#location' },
+    { name: 'Lokasi', href: '#location' },
   ];
 
   return (
@@ -29,9 +30,15 @@ const Navbar: React.FC = () => {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 group">
-          <div className="relative">
-            <Zap className="w-8 h-8 text-neon-green fill-neon-green transition-transform group-hover:scale-110 duration-300" />
+        <a href="#" className="flex items-center gap-3 group">
+          <div className="relative w-12 h-12">
+            <Image 
+              src="/logo1.png" 
+              alt="Batas Kota Logo"
+              width={48}
+              height={48}
+              className="transition-transform group-hover:scale-110 duration-300"
+            />
             <div className="absolute inset-0 blur-md bg-neon-green/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
           <div className="flex flex-col">
@@ -58,7 +65,7 @@ const Navbar: React.FC = () => {
             href="#booking"
             className="px-6 py-2 border border-neon-green text-neon-green font-display font-bold text-sm uppercase hover:bg-neon-green hover:text-black transition-all duration-300 skew-x-[-10deg]"
           >
-            <span className="block skew-x-[10deg]">Book Now</span>
+            <span className="block skew-x-[10deg]">Pesan Sekarang</span>
           </a>
         </nav>
 
@@ -90,7 +97,7 @@ const Navbar: React.FC = () => {
               onClick={() => setIsMobileMenuOpen(false)}
               className="mt-4 text-center w-full py-3 bg-neon-green text-black font-bold font-display uppercase"
             >
-              Book Now
+              Pesan Sekarang
             </a>
           </nav>
         </div>
