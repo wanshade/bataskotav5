@@ -98,58 +98,163 @@ export default function ReceiptGenerator({ booking, onGenerate }: ReceiptGenerat
           fontFamily: 'system-ui, -apple-system, sans-serif'
         }}
       >
+        {/* Cyberpunk Background with Grid */}
         <div style={{ 
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          background: '#050505',
           padding: '40px',
-          borderRadius: '0'
+          position: 'relative',
+          overflow: 'hidden'
         }}>
-          {/* White inner card */}
+          {/* Grid Pattern Background */}
+          <div style={{
+            position: 'absolute',
+            inset: '0',
+            backgroundImage: 'linear-gradient(rgba(57, 255, 20, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(57, 255, 20, 0.05) 1px, transparent 1px)',
+            backgroundSize: '30px 30px',
+            opacity: '0.3'
+          }} />
+          
+          {/* Neon Glow Circles */}
+          <div style={{
+            position: 'absolute',
+            top: '50px',
+            left: '-100px',
+            width: '250px',
+            height: '250px',
+            background: 'rgba(57, 255, 20, 0.1)',
+            borderRadius: '50%',
+            filter: 'blur(80px)'
+          }} />
+          <div style={{
+            position: 'absolute',
+            bottom: '50px',
+            right: '-100px',
+            width: '300px',
+            height: '300px',
+            background: 'rgba(57, 255, 20, 0.08)',
+            borderRadius: '50%',
+            filter: 'blur(100px)'
+          }} />
+
+          {/* Main Card */}
           <div style={{ 
-            backgroundColor: '#ffffff',
-            borderRadius: '20px',
+            backgroundColor: '#0a0a0a',
+            border: '2px solid #1a1a1a',
+            borderRadius: '12px',
             overflow: 'hidden',
-            boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
+            position: 'relative',
+            boxShadow: '0 0 40px rgba(57, 255, 20, 0.1), 0 20px 60px rgba(0,0,0,0.5)'
           }}>
-            {/* Header with gradient */}
+            {/* Neon Top Border */}
+            <div style={{
+              position: 'absolute',
+              top: '0',
+              left: '0',
+              right: '0',
+              height: '3px',
+              background: 'linear-gradient(90deg, transparent, #39FF14, transparent)',
+              boxShadow: '0 0 10px #39FF14'
+            }} />
+
+            {/* Corner Brackets */}
+            <div style={{
+              position: 'absolute',
+              top: '16px',
+              left: '16px',
+              width: '32px',
+              height: '32px',
+              borderTop: '3px solid #39FF14',
+              borderLeft: '3px solid #39FF14',
+              opacity: '0.6'
+            }} />
+            <div style={{
+              position: 'absolute',
+              top: '16px',
+              right: '16px',
+              width: '32px',
+              height: '32px',
+              borderTop: '3px solid #39FF14',
+              borderRight: '3px solid #39FF14',
+              opacity: '0.6'
+            }} />
+            
+            {/* Header */}
             <div style={{ 
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              background: 'linear-gradient(to bottom, #0f0f0f, #0a0a0a)',
               padding: '32px',
               textAlign: 'center',
-              color: '#ffffff'
+              position: 'relative',
+              borderBottom: '1px solid #1a1a1a'
             }}>
-              <h1 style={{ 
-                fontSize: '36px', 
-                fontWeight: 'bold', 
-                margin: '0 0 8px 0',
-                letterSpacing: '1px'
+              {/* Status Indicator */}
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                marginBottom: '16px'
               }}>
-                BATAS KOTA
+                <div style={{
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  background: '#39FF14',
+                  boxShadow: '0 0 10px #39FF14',
+                  animation: 'pulse 2s infinite'
+                }} />
+                <span style={{
+                  fontSize: '11px',
+                  color: '#39FF14',
+                  textTransform: 'uppercase',
+                  letterSpacing: '2px',
+                  fontWeight: 'bold'
+                }}>
+                  PAYMENT CONFIRMED
+                </span>
+              </div>
+
+              <h1 style={{ 
+                fontSize: '42px', 
+                fontWeight: '900', 
+                margin: '0 0 4px 0',
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                color: '#ffffff',
+                textShadow: '0 0 20px rgba(255,255,255,0.1)'
+              }}>
+                BATAS<span style={{ color: '#39FF14', textShadow: '0 0 20px rgba(57, 255, 20, 0.5)' }}>KOTA</span>
               </h1>
               <p style={{ 
-                fontSize: '16px', 
+                fontSize: '12px', 
                 margin: '0',
-                opacity: '0.95'
+                color: '#666',
+                letterSpacing: '3px',
+                textTransform: 'uppercase'
               }}>
                 The Town Space
               </p>
+              
               <div style={{ 
                 marginTop: '20px',
                 paddingTop: '20px',
-                borderTop: '2px solid rgba(255,255,255,0.3)'
+                borderTop: '1px solid rgba(57, 255, 20, 0.1)'
               }}>
                 <p style={{ 
-                  fontSize: '20px', 
+                  fontSize: '13px', 
                   fontWeight: '600',
-                  margin: '0',
+                  margin: '0 0 8px 0',
                   textTransform: 'uppercase',
-                  letterSpacing: '2px'
+                  letterSpacing: '2px',
+                  color: '#888'
                 }}>
                   KWITANSI
                 </p>
                 <p style={{ 
-                  fontSize: '14px', 
-                  margin: '8px 0 0 0',
-                  opacity: '0.9'
+                  fontSize: '20px', 
+                  margin: '0',
+                  color: '#39FF14',
+                  fontWeight: 'bold',
+                  fontFamily: 'monospace',
+                  textShadow: '0 0 10px rgba(57, 255, 20, 0.3)'
                 }}>
                   {booking.bookingId || `#${booking.id}`}
                 </p>
@@ -157,20 +262,22 @@ export default function ReceiptGenerator({ booking, onGenerate }: ReceiptGenerat
             </div>
 
             {/* Content */}
-            <div style={{ padding: '32px' }}>
+            <div style={{ padding: '32px', position: 'relative' }}>
               {/* Date Badge */}
               <div style={{ 
                 textAlign: 'center',
-                marginBottom: '24px'
+                marginBottom: '28px'
               }}>
                 <div style={{ 
                   display: 'inline-block',
-                  backgroundColor: '#f3f4f6',
-                  padding: '12px 24px',
-                  borderRadius: '50px',
-                  fontSize: '14px',
-                  fontWeight: '600',
-                  color: '#374151'
+                  backgroundColor: 'rgba(57, 255, 20, 0.1)',
+                  padding: '10px 20px',
+                  borderRadius: '6px',
+                  fontSize: '13px',
+                  fontWeight: '700',
+                  color: '#39FF14',
+                  border: '1px solid rgba(57, 255, 20, 0.2)',
+                  letterSpacing: '1px'
                 }}>
                   {formatDate(booking.approvedAt ? new Date(booking.approvedAt).toISOString() : new Date().toISOString())}
                 </div>
@@ -178,18 +285,28 @@ export default function ReceiptGenerator({ booking, onGenerate }: ReceiptGenerat
 
               {/* Booking Info */}
               <div style={{ 
-                backgroundColor: '#f9fafb',
+                backgroundColor: '#0f0f0f',
                 padding: '20px',
-                borderRadius: '12px',
-                marginBottom: '20px',
-                border: '2px solid #e5e7eb'
+                borderRadius: '8px',
+                marginBottom: '16px',
+                border: '1px solid rgba(57, 255, 20, 0.15)',
+                position: 'relative'
               }}>
+                <div style={{
+                  position: 'absolute',
+                  top: '0',
+                  left: '20px',
+                  width: '60px',
+                  height: '2px',
+                  background: '#39FF14',
+                  boxShadow: '0 0 10px #39FF14'
+                }} />
                 <h3 style={{ 
-                  fontSize: '14px',
+                  fontSize: '11px',
                   fontWeight: '700',
-                  color: '#6b7280',
+                  color: '#39FF14',
                   textTransform: 'uppercase',
-                  letterSpacing: '1px',
+                  letterSpacing: '2px',
                   margin: '0 0 16px 0'
                 }}>
                   Detail Booking
@@ -198,35 +315,35 @@ export default function ReceiptGenerator({ booking, onGenerate }: ReceiptGenerat
                   <tbody>
                     <tr>
                       <td style={{ 
-                        padding: '8px 0',
-                        fontSize: '15px',
-                        color: '#6b7280',
+                        padding: '10px 0',
+                        fontSize: '14px',
+                        color: '#666',
                         width: '40%'
                       }}>
                         Tanggal Main
                       </td>
                       <td style={{ 
-                        padding: '8px 0',
-                        fontSize: '15px',
-                        color: '#111827',
+                        padding: '10px 0',
+                        fontSize: '14px',
+                        color: '#ffffff',
                         fontWeight: '600',
                         textAlign: 'right'
                       }}>
                         {formatDate(booking.bookingDate)}
                       </td>
                     </tr>
-                    <tr>
+                    <tr style={{ borderTop: '1px solid #1a1a1a' }}>
                       <td style={{ 
-                        padding: '8px 0',
-                        fontSize: '15px',
-                        color: '#6b7280'
+                        padding: '10px 0',
+                        fontSize: '14px',
+                        color: '#666'
                       }}>
                         Waktu
                       </td>
                       <td style={{ 
-                        padding: '8px 0',
-                        fontSize: '15px',
-                        color: '#111827',
+                        padding: '10px 0',
+                        fontSize: '14px',
+                        color: '#ffffff',
                         fontWeight: '600',
                         textAlign: 'right'
                       }}>
@@ -239,18 +356,28 @@ export default function ReceiptGenerator({ booking, onGenerate }: ReceiptGenerat
 
               {/* Customer Info */}
               <div style={{ 
-                backgroundColor: '#f0f9ff',
+                backgroundColor: '#0f0f0f',
                 padding: '20px',
-                borderRadius: '12px',
-                marginBottom: '20px',
-                border: '2px solid #bae6fd'
+                borderRadius: '8px',
+                marginBottom: '16px',
+                border: '1px solid rgba(57, 255, 20, 0.15)',
+                position: 'relative'
               }}>
+                <div style={{
+                  position: 'absolute',
+                  top: '0',
+                  left: '20px',
+                  width: '60px',
+                  height: '2px',
+                  background: '#39FF14',
+                  boxShadow: '0 0 10px #39FF14'
+                }} />
                 <h3 style={{ 
-                  fontSize: '14px',
+                  fontSize: '11px',
                   fontWeight: '700',
-                  color: '#0369a1',
+                  color: '#39FF14',
                   textTransform: 'uppercase',
-                  letterSpacing: '1px',
+                  letterSpacing: '2px',
                   margin: '0 0 16px 0'
                 }}>
                   Informasi Pemesan
@@ -259,35 +386,35 @@ export default function ReceiptGenerator({ booking, onGenerate }: ReceiptGenerat
                   <tbody>
                     <tr>
                       <td style={{ 
-                        padding: '8px 0',
-                        fontSize: '15px',
-                        color: '#075985',
+                        padding: '10px 0',
+                        fontSize: '14px',
+                        color: '#666',
                         width: '40%'
                       }}>
                         Nama Tim
                       </td>
                       <td style={{ 
-                        padding: '8px 0',
-                        fontSize: '15px',
-                        color: '#0c4a6e',
+                        padding: '10px 0',
+                        fontSize: '14px',
+                        color: '#ffffff',
                         fontWeight: '600',
                         textAlign: 'right'
                       }}>
                         {booking.teamName}
                       </td>
                     </tr>
-                    <tr>
+                    <tr style={{ borderTop: '1px solid #1a1a1a' }}>
                       <td style={{ 
-                        padding: '8px 0',
-                        fontSize: '15px',
-                        color: '#075985'
+                        padding: '10px 0',
+                        fontSize: '14px',
+                        color: '#666'
                       }}>
                         Kontak
                       </td>
                       <td style={{ 
-                        padding: '8px 0',
-                        fontSize: '15px',
-                        color: '#0c4a6e',
+                        padding: '10px 0',
+                        fontSize: '14px',
+                        color: '#ffffff',
                         fontWeight: '600',
                         textAlign: 'right'
                       }}>
@@ -300,27 +427,45 @@ export default function ReceiptGenerator({ booking, onGenerate }: ReceiptGenerat
 
               {/* Price - Large Display */}
               <div style={{ 
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                padding: '24px',
-                borderRadius: '12px',
-                marginBottom: '20px',
-                textAlign: 'center'
+                background: 'linear-gradient(135deg, rgba(57, 255, 20, 0.15) 0%, rgba(57, 255, 20, 0.05) 100%)',
+                padding: '28px',
+                borderRadius: '8px',
+                marginBottom: '16px',
+                textAlign: 'center',
+                border: '2px solid rgba(57, 255, 20, 0.3)',
+                position: 'relative',
+                overflow: 'hidden'
               }}>
+                <div style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: '200px',
+                  height: '200px',
+                  background: 'rgba(57, 255, 20, 0.05)',
+                  borderRadius: '50%',
+                  filter: 'blur(40px)'
+                }} />
                 <p style={{ 
-                  fontSize: '14px',
-                  color: 'rgba(255,255,255,0.9)',
-                  margin: '0 0 8px 0',
+                  fontSize: '12px',
+                  color: '#666',
+                  margin: '0 0 12px 0',
                   textTransform: 'uppercase',
-                  letterSpacing: '1px'
+                  letterSpacing: '2px',
+                  fontWeight: '600',
+                  position: 'relative'
                 }}>
                   Total Pembayaran
                 </p>
                 <p style={{ 
-                  fontSize: '42px',
-                  fontWeight: 'bold',
-                  color: '#ffffff',
+                  fontSize: '48px',
+                  fontWeight: '900',
+                  color: '#39FF14',
                   margin: '0',
-                  letterSpacing: '-1px'
+                  letterSpacing: '-2px',
+                  textShadow: '0 0 30px rgba(57, 255, 20, 0.5)',
+                  position: 'relative'
                 }}>
                   Rp {booking.price.toLocaleString('id-ID')}
                 </p>
@@ -328,58 +473,101 @@ export default function ReceiptGenerator({ booking, onGenerate }: ReceiptGenerat
 
               {/* Payment Status */}
               <div style={{ 
-                backgroundColor: '#f0fdf4',
+                backgroundColor: '#0f0f0f',
                 padding: '20px',
-                borderRadius: '12px',
-                border: '2px solid #86efac',
-                textAlign: 'center'
+                borderRadius: '8px',
+                border: '1px solid rgba(57, 255, 20, 0.3)',
+                textAlign: 'center',
+                position: 'relative'
               }}>
                 <div style={{ 
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '8px',
-                  backgroundColor: '#22c55e',
-                  color: '#ffffff',
-                  padding: '10px 24px',
-                  borderRadius: '50px',
+                  gap: '10px',
+                  backgroundColor: '#39FF14',
+                  color: '#000000',
+                  padding: '12px 28px',
+                  borderRadius: '6px',
                   fontSize: '16px',
-                  fontWeight: 'bold',
-                  marginBottom: '12px'
+                  fontWeight: '900',
+                  marginBottom: '12px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                  boxShadow: '0 0 20px rgba(57, 255, 20, 0.4)'
                 }}>
-                  <span style={{ fontSize: '20px' }}>✓</span>
+                  <span style={{ fontSize: '18px', fontWeight: 'bold' }}>✓</span>
                   LUNAS
                 </div>
                 <p style={{ 
-                  fontSize: '13px',
-                  color: '#15803d',
-                  margin: '0'
+                  fontSize: '12px',
+                  color: '#666',
+                  margin: '0',
+                  fontFamily: 'monospace'
                 }}>
-                  Disetujui oleh Admin • {new Date(booking.approvedAt || new Date()).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}
+                  Approved by Admin • {new Date(booking.approvedAt || new Date()).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}
                 </p>
               </div>
             </div>
 
             {/* Footer */}
             <div style={{ 
-              backgroundColor: '#f9fafb',
+              backgroundColor: '#050505',
               padding: '24px',
               textAlign: 'center',
-              borderTop: '2px dashed #e5e7eb'
+              borderTop: '1px solid rgba(57, 255, 20, 0.1)',
+              position: 'relative'
             }}>
+              {/* Bottom Corner Brackets */}
+              <div style={{
+                position: 'absolute',
+                bottom: '16px',
+                left: '16px',
+                width: '32px',
+                height: '32px',
+                borderBottom: '3px solid #39FF14',
+                borderLeft: '3px solid #39FF14',
+                opacity: '0.6'
+              }} />
+              <div style={{
+                position: 'absolute',
+                bottom: '16px',
+                right: '16px',
+                width: '32px',
+                height: '32px',
+                borderBottom: '3px solid #39FF14',
+                borderRight: '3px solid #39FF14',
+                opacity: '0.6'
+              }} />
+              
               <p style={{ 
-                fontSize: '13px',
-                color: '#6b7280',
-                margin: '0 0 4px 0'
+                fontSize: '11px',
+                color: '#666',
+                margin: '0 0 8px 0',
+                textTransform: 'uppercase',
+                letterSpacing: '2px',
+                fontWeight: '600'
               }}>
                 Terima kasih telah mempercayai kami!
               </p>
               <p style={{ 
-                fontSize: '12px',
-                color: '#9ca3af',
-                margin: '0'
+                fontSize: '10px',
+                color: '#444',
+                margin: '0',
+                fontFamily: 'monospace'
               }}>
                 Simpan kwitansi ini sebagai bukti pembayaran
               </p>
+              
+              {/* Neon Line */}
+              <div style={{
+                marginTop: '16px',
+                width: '80px',
+                height: '2px',
+                background: '#39FF14',
+                margin: '16px auto 0',
+                boxShadow: '0 0 10px #39FF14',
+                borderRadius: '2px'
+              }} />
             </div>
           </div>
         </div>
@@ -392,26 +580,28 @@ export default function ReceiptGenerator({ booking, onGenerate }: ReceiptGenerat
           disabled={isGenerating}
           className={`${
             isGenerating 
-              ? 'bg-gray-400 cursor-not-allowed' 
-              : 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700'
-          } text-white px-6 py-3 rounded-lg font-medium flex items-center gap-2 transition-all shadow-lg`}
+              ? 'bg-gray-800 cursor-not-allowed border-gray-700' 
+              : 'bg-black border-neon-green hover:bg-neon-green hover:text-black shadow-[0_0_20px_rgba(57,255,20,0.3)] hover:shadow-[0_0_30px_rgba(57,255,20,0.5)]'
+          } text-neon-green border-2 px-6 py-3 font-display font-bold text-sm uppercase tracking-widest flex items-center gap-2 transition-all duration-300 skew-x-[-5deg]`}
         >
-          {isGenerating ? (
-            <>
-              <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              Membuat Kwitansi...
-            </>
-          ) : (
-            <>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              Unduh Kwitansi (Gambar)
-            </>
-          )}
+          <span className="block skew-x-[5deg]">
+            {isGenerating ? (
+              <>
+                <svg className="animate-spin h-5 w-5 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span className="ml-2">Generating...</span>
+              </>
+            ) : (
+              <>
+                <svg className="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span className="ml-2">Download Receipt</span>
+              </>
+            )}
+          </span>
         </button>
       </div>
     </>
