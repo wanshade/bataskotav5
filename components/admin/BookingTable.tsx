@@ -201,15 +201,19 @@ export default function BookingTable({
                       </div>
                     ) : (
                       <div className="flex justify-end gap-2">
-                        <button
-                          onClick={() => setReceiptBooking(booking)}
-                          className="p-1 text-blue-600 hover:bg-blue-50 rounded"
-                          title="Download Receipt"
-                        >
-                          <FileText className="w-5 h-5" />
-                        </button>
-                        <span className="text-slate-400 inline-flex items-center gap-1">
-                          <Lock className="w-4 h-4" /> Processed
+                        {booking.status === 'confirmed' && (
+                          <button
+                            onClick={() => setReceiptBooking(booking)}
+                            className="p-1 text-blue-600 hover:bg-blue-50 rounded"
+                            title="Download Receipt"
+                          >
+                            <FileText className="w-5 h-5" />
+                          </button>
+                        )}
+                        <span className={`inline-flex items-center gap-1 ${
+                          booking.status === 'cancelled' ? 'text-red-400' : 'text-slate-400'
+                        }`}>
+                          <Lock className="w-4 h-4" /> {booking.status === 'cancelled' ? 'Cancelled' : 'Processed'}
                         </span>
                       </div>
                     )}

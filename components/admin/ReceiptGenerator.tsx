@@ -11,6 +11,15 @@ interface ReceiptGeneratorProps {
 export default function ReceiptGenerator({ booking, onGenerate }: ReceiptGeneratorProps) {
   const [isGenerating, setIsGenerating] = useState(false);
 
+  // Prevent receipt generation for cancelled bookings
+  if (booking.status === 'cancelled') {
+    return (
+      <div className="text-center p-4">
+        <p className="text-red-600 font-medium">Receipt cannot be generated for cancelled bookings.</p>
+      </div>
+    );
+  }
+
   const generateImage = async () => {
     const element = document.getElementById('receipt-content');
     if (!element) return;
