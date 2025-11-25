@@ -8,7 +8,8 @@ import {
   Phone, 
   Lock,
   AlertCircle,
-  FileText
+  FileText,
+  MessageCircle
 } from 'lucide-react';
 import { Booking } from '@/lib/schema';
 import { useState, useMemo } from 'react';
@@ -39,6 +40,78 @@ export default function BookingTable({
   const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'confirmed' | 'cancelled'>('all');
   const [showDebug, setShowDebug] = useState(false);
   const [receiptBooking, setReceiptBooking] = useState<AdminBooking | null>(null);
+
+  // Generate WhatsApp confirmation message
+  const generateWhatsAppMessage = (booking: AdminBooking) => {
+    const formatDate = (dateString: string) => {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('id-ID', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+    };
+
+    const statusText = booking.status === 'confirmed' 
+      ? '✅ *DIKONFIRMASI*' 
+      : booking.status === 'cancelled' 
+      ? '❌ *DIBATALKAN*'
+      : '⏳ *MENUNGGU KONFIRMASI*';
+
+    const message = `
+🏟️ *BATAS KOTA - THE TOWN SPACE*
+━━━━━━━━━━━━━━━━━━━━
+
+Halo *${booking.teamName}*! 👋
+
+Terima kasih telah mempercayai kami untuk kebutuhan futsal Anda.
+
+📋 *DETAIL PEMESANAN*
+━━━━━━━━━━━━━━━━━━━━
+🆔 ID Booking: *${booking.bookingId}*
+📅 Tanggal: *${formatDate(booking.bookingDate)}*
+⏰ Waktu: *${booking.timeSlot}*
+💰 Total: *Rp ${booking.price.toLocaleString('id-ID')}*
+
+📊 *STATUS PEMESANAN*
+${statusText}
+
+${booking.status === 'confirmed' ? `
+✨ *Booking Anda telah dikonfirmasi!*
+
+Silakan datang 15 menit sebelum waktu bermain untuk persiapan. Tim kami siap menyambut Anda di lapangan.
+
+📍 Lokasi: Selong, Lombok Timur
+📞 Info: 08xx-xxxx-xxxx
+
+_Jangan lupa bawa air minum dan semangat juara!_ ⚽🔥
+` : booking.status === 'cancelled' ? `
+❌ *Pemesanan dibatalkan*
+
+Maaf, pemesanan Anda tidak dapat diproses. Silakan hubungi kami untuk informasi lebih lanjut atau booking ulang.
+
+📞 Hubungi: 08xx-xxxx-xxxx
+` : `
+⏳ *Menunggu Konfirmasi*
+
+Pemesanan Anda sedang kami proses. Kami akan segera menghubungi Anda untuk konfirmasi.
+`}
+
+━━━━━━━━━━━━━━━━━━━━
+_Terima kasih telah memilih Batas Kota!_
+_Setiap permainan punya cerita._ ⚽✨
+    `.trim();
+
+    return encodeURIComponent(message);
+  };
+
+  // Send WhatsApp message
+  const sendWhatsAppMessage = (booking: AdminBooking) => {
+    const message = generateWhatsAppMessage(booking);
+    const whatsappUrl = `https://wa.me/${booking.phone.replace(/\D/g, '')}?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+  };
 
   const filteredBookings = useMemo(() => {
     return bookings.filter(booking => {
@@ -202,13 +275,22 @@ export default function BookingTable({
                     ) : (
                       <div className="flex justify-end gap-2">
                         {booking.status === 'confirmed' && (
-                          <button
-                            onClick={() => setReceiptBooking(booking)}
-                            className="p-1 text-blue-600 hover:bg-blue-50 rounded"
-                            title="Download Receipt"
-                          >
-                            <FileText className="w-5 h-5" />
-                          </button>
+                          <>
+                            <button
+                              onClick={() => sendWhatsAppMessage(booking)}
+                              className="p-1 text-green-600 hover:bg-green-50 rounded"
+                              title="Send WhatsApp Confirmation"
+                            >
+                              <MessageCircle className="w-5 h-5" />
+                            </button>
+                            <button
+                              onClick={() => setReceiptBooking(booking)}
+                              className="p-1 text-blue-600 hover:bg-blue-50 rounded"
+                              title="Download Receipt"
+                            >
+                              <FileText className="w-5 h-5" />
+                            </button>
+                          </>
                         )}
                         <span className={`inline-flex items-center gap-1 ${
                           booking.status === 'cancelled' ? 'text-red-400' : 'text-slate-400'
