@@ -28,6 +28,15 @@ const nextConfig = {
     }
     return config
   },
+  async redirects() {
+    return [
+      {
+        source: '/login',
+        destination: '/admin/login',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 export default nextConfig
