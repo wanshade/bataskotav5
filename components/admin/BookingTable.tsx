@@ -40,6 +40,10 @@ export default function BookingTable({
   const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'confirmed' | 'cancelled'>('all');
   const [showDebug, setShowDebug] = useState(false);
   const [receiptBooking, setReceiptBooking] = useState<AdminBooking | null>(null);
+  const [confirmAction, setConfirmAction] = useState<{
+    type: 'approve' | 'reject' | null;
+    booking: AdminBooking | null;
+  }>({ type: null, booking: null });
 
   // Generate WhatsApp confirmation message
   const generateWhatsAppMessage = (booking: AdminBooking) => {
@@ -277,7 +281,7 @@ _Setiap permainan punya cerita._ ⚽✨
                     {booking.status === 'pending' ? (
                       <div className="flex justify-end gap-2">
                         <button
-                          onClick={() => onApprove(booking.bookingId)}
+                          onClick={() => setConfirmAction({ type: 'approve', booking })}
                           disabled={actionLoading === booking.bookingId}
                           className="p-1 text-green-600 hover:bg-green-50 rounded"
                           title="Approve"
@@ -285,7 +289,7 @@ _Setiap permainan punya cerita._ ⚽✨
                           <CheckCircle className="w-5 h-5" />
                         </button>
                         <button
-                          onClick={() => onReject(booking.bookingId)}
+                          onClick={() => setConfirmAction({ type: 'reject', booking })}
                           disabled={actionLoading === booking.bookingId}
                           className="p-1 text-red-600 hover:bg-red-50 rounded"
                           title="Reject"
@@ -334,6 +338,61 @@ _Setiap permainan punya cerita._ ⚽✨
           </table>
         </div>
       </div>
+
+      {/* Confirmation Modal */}
+      {confirmAction.type && confirmAction.booking && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 max-w-md w-full mx-4">
+            <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-full bg-yellow-100">
+              <AlertCircle className="w-6 h-6 text-yellow-600" />
+            </div>
+            <h3 className="text-lg font-semibold text-center text-gray-800 mb-2">
+              Confirm {confirmAction.type === 'approve' ? 'Approval' : 'Rejection'}
+            </h3>
+            <p className="text-center text-gray-600 mb-6">
+              Are you sure you want to {confirmAction.type} this booking?
+              <br />
+              <span className="font-medium text-gray-800">
+                {confirmAction.booking.teamName} - {confirmAction.booking.bookingId}
+              </span>
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  if (confirmAction.type === 'approve') {
+                    onApprove(confirmAction.booking!.bookingId);
+                  } else {
+                    onReject(confirmAction.booking!.bookingId);
+                  }
+                  setConfirmAction({ type: null, booking: null });
+                }}
+                disabled={actionLoading === confirmAction.booking.bookingId}
+                className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+                  confirmAction.type === 'approve'
+                    ? 'bg-green-600 hover:bg-green-700 text-white disabled:bg-green-400'
+                    : 'bg-red-600 hover:bg-red-700 text-white disabled:bg-red-400'
+                }`}
+              >
+                {actionLoading === confirmAction.booking.bookingId ? (
+                  <div className="flex items-center justify-center gap-2">
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Processing...</span>
+                  </div>
+                ) : (
+                  `Yes, ${confirmAction.type === 'approve' ? 'Approve' : 'Reject'}`
+                )}
+              </button>
+              <button
+                onClick={() => setConfirmAction({ type: null, booking: null })}
+                disabled={actionLoading === confirmAction.booking.bookingId}
+                className="flex-1 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg font-medium transition-colors disabled:bg-gray-100 disabled:text-gray-400"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Receipt Generator Modal */}
       {receiptBooking && (
