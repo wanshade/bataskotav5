@@ -85,6 +85,21 @@ Silakan datang 15 menit sebelum waktu bermain untuk persiapan. Tim kami siap men
 📍 Lokasi: Selong, Lombok Timur
 📞 Info: 08xx-xxxx-xxxx
 
+⚠️ *PERATURAN BOOKING*
+━━━━━━━━━━━━━━━━━━━━
+
+1️⃣ *Maksimal Telat 10 Menit*
+   Tidak bisa refund jika terlambat
+
+2️⃣ *Sesi Hangus Jika Tidak Hadir*
+   Pembayaran tidak dapat dikembalikan
+
+3️⃣ *Reschedule Harus H-1*
+   Perubahan jadwal harus dilakukan sehari sebelumnya
+
+4️⃣ *Sesi Tidak Bisa Dipindah*
+   Tidak dapat dipindah ke orang lain (kecuali antar anggota tim)
+
 _Jangan lupa bawa air minum dan semangat juara!_ ⚽🔥
 ` : booking.status === 'cancelled' ? `
 ❌ *Pemesanan dibatalkan*
