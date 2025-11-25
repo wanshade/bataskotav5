@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
+import { useSession, signOut } from 'next-auth/react';
 
 const Navbar: React.FC = () => {
+  const { data: session } = useSession();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -61,6 +63,23 @@ const Navbar: React.FC = () => {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-neon-green transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
+          {/* Show admin options when logged in */}
+          {session?.user?.role === 'admin' && (
+            <>
+              <a 
+                href="/admin/dashboard"
+                className="px-4 py-2 border border-cyan-400 text-cyan-400 font-display font-bold text-sm uppercase hover:bg-cyan-400 hover:text-black transition-all duration-300"
+              >
+                Admin
+              </a>
+              <button
+                onClick={() => signOut()}
+                className="px-4 py-2 border border-red-400 text-red-400 font-display font-bold text-sm uppercase hover:bg-red-400 hover:text-black transition-all duration-300"
+              >
+                Logout
+              </button>
+            </>
+          )}
           <a 
             href="#booking"
             className="px-6 py-2 border border-neon-green text-neon-green font-display font-bold text-sm uppercase hover:bg-neon-green hover:text-black transition-all duration-300 skew-x-[-10deg]"
@@ -92,6 +111,27 @@ const Navbar: React.FC = () => {
                 {link.name}
               </a>
             ))}
+            {/* Show admin options in mobile menu when logged in */}
+            {session?.user?.role === 'admin' && (
+              <>
+                <a 
+                  href="/admin/dashboard"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="font-display text-lg text-cyan-400 hover:text-cyan-300"
+                >
+                  Admin Dashboard
+                </a>
+                <button
+                  onClick={() => {
+                    signOut();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="text-left font-display text-lg text-red-400 hover:text-red-300"
+                >
+                  Logout
+                </button>
+              </>
+            )}
             <a 
               href="#booking"
               onClick={() => setIsMobileMenuOpen(false)}
