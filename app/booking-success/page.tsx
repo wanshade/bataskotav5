@@ -1,25 +1,35 @@
-'use client'
+"use client";
 
-import React, { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
-import { CheckCircle2, Calendar, Clock, CreditCard, AlertTriangle, ArrowLeft, Copy } from 'lucide-react';
+import React, { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import {
+  CheckCircle2,
+  Calendar,
+  Clock,
+  CreditCard,
+  AlertTriangle,
+  ArrowLeft,
+  Copy,
+} from "lucide-react";
 
 function BookingSuccessContent() {
   const searchParams = useSearchParams();
-  const teamName = searchParams.get('team') || '-';
-  const date = searchParams.get('date') || '-';
-  const time = searchParams.get('time') || '-';
-  const price = searchParams.get('price') || '-';
-  const phone = searchParams.get('phone') || '-';
-  const bookingId = searchParams.get('bookingId') || '-';
+  const teamName = searchParams.get("team") || "-";
+  const date = searchParams.get("date") || "-";
+  const time = searchParams.get("time") || "-";
+  const price = searchParams.get("price") || "-";
+  const phone = searchParams.get("phone") || "-";
+  const bookingId = searchParams.get("bookingId") || "-";
 
   // Load from environment variables
-  const bankName = process.env.NEXT_PUBLIC_BANK_NAME || 'Bank Mandiri';
-  const bankAccount = process.env.NEXT_PUBLIC_BANK_ACCOUNT_NUMBER || '1610016475977';
-  const bankAccountName = process.env.NEXT_PUBLIC_BANK_ACCOUNT_NAME || 'CV BATAS KOTA POINT';
-  const adminWhatsApp = process.env.NEXT_PUBLIC_ADMIN_WHATSAPP || '08123456789';
-  
+  const bankName = process.env.NEXT_PUBLIC_BANK_NAME || "Bank Mandiri";
+  const bankAccount =
+    process.env.NEXT_PUBLIC_BANK_ACCOUNT_NUMBER || "1610016475977";
+  const bankAccountName =
+    process.env.NEXT_PUBLIC_BANK_ACCOUNT_NAME || "CV BATAS KOTA POINT";
+  const adminWhatsApp = process.env.NEXT_PUBLIC_ADMIN_WHATSAPP || "08123456789";
+
   const [copied, setCopied] = React.useState(false);
 
   const copyToClipboard = () => {
@@ -31,7 +41,6 @@ function BookingSuccessContent() {
   return (
     <div className="min-h-screen bg-dark-bg text-white pt-24 pb-16">
       <div className="container mx-auto px-4 md:px-6 max-w-4xl">
-        
         {/* Success Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-neon-green/10 border-2 border-neon-green mb-6 animate-pulse">
@@ -48,7 +57,7 @@ function BookingSuccessContent() {
         {/* Booking Details Card */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 mb-8 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-neon-green to-transparent" />
-          
+
           <h2 className="font-display font-bold text-xl mb-6 flex items-center gap-2 text-white">
             <Calendar className="text-neon-green w-5 h-5" /> Detail Pemesanan
           </h2>
@@ -56,7 +65,9 @@ function BookingSuccessContent() {
           <div className="space-y-4">
             <div className="flex justify-between items-center border-b border-zinc-800 pb-3">
               <span className="text-gray-400">Booking ID</span>
-              <span className="text-neon-green font-mono font-bold">{bookingId}</span>
+              <span className="text-neon-green font-mono font-bold">
+                {bookingId}
+              </span>
             </div>
             <div className="flex justify-between items-center border-b border-zinc-800 pb-3">
               <span className="text-gray-400">Nama Tim</span>
@@ -76,7 +87,9 @@ function BookingSuccessContent() {
             </div>
             <div className="flex justify-between items-center pt-2">
               <span className="text-gray-400 text-lg">Total Pembayaran</span>
-              <span className="text-neon-green font-display font-bold text-2xl">{price}</span>
+              <span className="text-neon-green font-display font-bold text-2xl">
+                {price}
+              </span>
             </div>
           </div>
         </div>
@@ -84,29 +97,44 @@ function BookingSuccessContent() {
         {/* Payment Instructions Card */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 mb-8 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-neon-green to-transparent" />
-          
+
           <h2 className="font-display font-bold text-xl mb-6 flex items-center gap-2 text-white">
-            <CreditCard className="text-neon-green w-5 h-5" /> Instruksi Pembayaran
+            <CreditCard className="text-neon-green w-5 h-5" /> Instruksi
+            Pembayaran
           </h2>
 
           <div className="space-y-6">
             <div>
-              <p className="text-gray-400 text-sm mb-4">Silakan transfer ke rekening berikut:</p>
-              
+              <p className="text-gray-400 text-sm mb-4">
+                Silakan transfer ke rekening berikut:
+              </p>
+
               <div className="bg-black/50 rounded-lg p-5 border border-zinc-700">
                 <div className="space-y-3">
                   <div>
-                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">Nama Penerima</p>
-                    <p className="text-white font-bold text-lg">{bankAccountName}</p>
+                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">
+                      Nama Penerima
+                    </p>
+                    <p className="text-white font-bold text-lg">
+                      {bankAccountName}
+                    </p>
                   </div>
                   <div>
-                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">Bank</p>
-                    <p className="text-white font-bold text-lg">{bankName.toUpperCase()}</p>
+                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">
+                      Bank
+                    </p>
+                    <p className="text-white font-bold text-lg">
+                      {bankName.toUpperCase()}
+                    </p>
                   </div>
                   <div>
-                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">Nomor Rekening</p>
+                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">
+                      Nomor Rekening
+                    </p>
                     <div className="flex items-center gap-3">
-                      <p className="text-neon-green font-mono font-bold text-2xl">{bankAccount}</p>
+                      <p className="text-neon-green font-mono font-bold text-2xl">
+                        {bankAccount}
+                      </p>
                       <button
                         onClick={copyToClipboard}
                         className="p-2 hover:bg-zinc-800 rounded-lg transition-colors group"
@@ -128,7 +156,9 @@ function BookingSuccessContent() {
               <p className="text-yellow-500 text-sm flex items-start gap-2">
                 <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5" />
                 <span>
-                  <strong>Penting:</strong> Setelah melakukan pembayaran, harap konfirmasi melalui WhatsApp ke <strong>{phone}</strong> dengan melampirkan bukti transfer.
+                  <strong>Penting:</strong> Setelah melakukan pembayaran, harap
+                  konfirmasi melalui WhatsApp ke <strong>{phone}</strong> dengan
+                  melampirkan bukti transfer.
                 </span>
               </p>
             </div>
@@ -147,8 +177,12 @@ function BookingSuccessContent() {
                 <span className="text-neon-green font-bold">1</span>
               </div>
               <div>
-                <p className="text-white font-medium mb-1">Maksimal Telat 10 Menit</p>
-                <p className="text-gray-400 text-sm">Tidak bisa refund jika terlambat</p>
+                <p className="text-white font-medium mb-1">
+                  Maksimal Telat 10 Menit
+                </p>
+                <p className="text-gray-400 text-sm">
+                  Tidak bisa refund jika terlambat
+                </p>
               </div>
             </div>
 
@@ -157,8 +191,12 @@ function BookingSuccessContent() {
                 <span className="text-neon-green font-bold">2</span>
               </div>
               <div>
-                <p className="text-white font-medium mb-1">Sesi Hangus Jika Tidak Hadir</p>
-                <p className="text-gray-400 text-sm">Pembayaran tidak dapat dikembalikan</p>
+                <p className="text-white font-medium mb-1">
+                  Sesi Hangus Jika Tidak Hadir
+                </p>
+                <p className="text-gray-400 text-sm">
+                  Pembayaran tidak dapat dikembalikan
+                </p>
               </div>
             </div>
 
@@ -167,8 +205,12 @@ function BookingSuccessContent() {
                 <span className="text-neon-green font-bold">3</span>
               </div>
               <div>
-                <p className="text-white font-medium mb-1">Reschedule Harus H-1</p>
-                <p className="text-gray-400 text-sm">Perubahan jadwal harus dilakukan sehari sebelumnya</p>
+                <p className="text-white font-medium mb-1">
+                  Reschedule Harus H-1
+                </p>
+                <p className="text-gray-400 text-sm">
+                  Perubahan jadwal harus dilakukan sehari sebelumnya
+                </p>
               </div>
             </div>
 
@@ -177,8 +219,23 @@ function BookingSuccessContent() {
                 <span className="text-neon-green font-bold">4</span>
               </div>
               <div>
-                <p className="text-white font-medium mb-1">Sesi Tidak Bisa Dipindah</p>
-                <p className="text-gray-400 text-sm">Tidak dapat dipindah ke orang lain (kecuali antar anggota tim)</p>
+                <p className="text-white font-medium mb-1">
+                  Sesi Tidak Bisa Dipindah
+                </p>
+                <p className="text-gray-400 text-sm">
+                  Tidak dapat dipindah ke orang lain (kecuali antar anggota tim)
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
+                <span className="text-neon-green font-bold">5</span>
+              </div>
+              <div>
+                <p className="text-white font-medium mb-1">Pembayaran</p>
+                <p className="text-gray-400 text-sm">
+                  DP 50%, dan untuk pelunasannya H-1
+                </p>
               </div>
             </div>
           </div>
@@ -186,7 +243,7 @@ function BookingSuccessContent() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4">
-          <Link 
+          <Link
             href="/#booking"
             className="flex-1 text-center px-6 py-4 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl font-display font-bold uppercase transition-colors flex items-center justify-center gap-2"
           >
@@ -194,7 +251,11 @@ function BookingSuccessContent() {
             Kembali ke Beranda
           </Link>
           <a
-            href={`https://wa.me/${adminWhatsApp.replace(/^0/, '62').replace(/\D/g, '')}?text=${encodeURIComponent(`Halo, saya ingin konfirmasi pembayaran untuk booking lapangan atas nama ${teamName}, nomor HP: ${phone}, Booking ID: ${bookingId}`)}`}
+            href={`https://wa.me/${adminWhatsApp
+              .replace(/^0/, "62")
+              .replace(/\D/g, "")}?text=${encodeURIComponent(
+              `Halo, saya ingin konfirmasi pembayaran untuk booking lapangan atas nama ${teamName}, nomor HP: ${phone}, Booking ID: ${bookingId}`
+            )}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 text-center px-6 py-4 bg-neon-green hover:bg-neon-green/90 text-black rounded-xl font-display font-bold uppercase transition-colors"
@@ -202,7 +263,6 @@ function BookingSuccessContent() {
             Konfirmasi via WhatsApp
           </a>
         </div>
-
       </div>
     </div>
   );
@@ -210,13 +270,15 @@ function BookingSuccessContent() {
 
 export default function BookingSuccessPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-dark-bg flex items-center justify-center">
-        <div className="text-neon-green text-2xl font-display animate-pulse">
-          Loading...
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-dark-bg flex items-center justify-center">
+          <div className="text-neon-green text-2xl font-display animate-pulse">
+            Loading...
+          </div>
         </div>
-      </div>
-    }>
+      }
+    >
       <BookingSuccessContent />
     </Suspense>
   );
