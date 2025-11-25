@@ -129,7 +129,7 @@ _Setiap permainan punya cerita._ ⚽✨
   };
 
   const filteredBookings = useMemo(() => {
-    return bookings.filter(booking => {
+    const filtered = bookings.filter(booking => {
       const matchesSearch = 
         booking.teamName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         booking.bookingId.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -138,6 +138,12 @@ _Setiap permainan punya cerita._ ⚽✨
       const matchesStatus = statusFilter === 'all' || booking.status === statusFilter;
       
       return matchesSearch && matchesStatus;
+    });
+
+    // Sort bookings: pending first, then confirmed, then cancelled
+    return filtered.sort((a, b) => {
+      const statusOrder = { pending: 0, confirmed: 1, cancelled: 2 };
+      return statusOrder[a.status as keyof typeof statusOrder] - statusOrder[b.status as keyof typeof statusOrder];
     });
   }, [bookings, searchQuery, statusFilter]);
 
