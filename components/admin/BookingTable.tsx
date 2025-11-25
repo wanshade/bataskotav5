@@ -65,7 +65,7 @@ export default function BookingTable({
 
 Halo *${booking.teamName}*! 👋
 
-Terima kasih telah mempercayai kami untuk kebutuhan futsal Anda.
+Terima kasih telah mempercayai kami untuk kebutuhan minisoccer Anda.
 
 📋 *DETAIL PEMESANAN*
 ━━━━━━━━━━━━━━━━━━━━
@@ -99,9 +99,6 @@ Silakan datang 15 menit sebelum waktu bermain untuk persiapan. Tim kami siap men
 
 4️⃣ *Sesi Tidak Bisa Dipindah*
    Tidak dapat dipindah ke orang lain (kecuali antar anggota tim)
-
-5️⃣ *Pembayaran*
-   DP 50%, dan untuk pelunasannya H-1
 
 _Jangan lupa bawa air minum dan semangat juara!_ ⚽🔥
 ` : booking.status === 'cancelled' ? `
