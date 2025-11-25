@@ -7,10 +7,12 @@ import {
   Calendar, 
   Phone, 
   Lock,
-  AlertCircle
+  AlertCircle,
+  FileText
 } from 'lucide-react';
 import { Booking } from '@/lib/schema';
 import { useState, useMemo } from 'react';
+import ReceiptGenerator from './ReceiptGenerator';
 
 interface AdminBooking extends Booking {
   id: number;
@@ -36,6 +38,7 @@ export default function BookingTable({
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'confirmed' | 'cancelled'>('all');
   const [showDebug, setShowDebug] = useState(false);
+  const [receiptBooking, setReceiptBooking] = useState<AdminBooking | null>(null);
 
   const filteredBookings = useMemo(() => {
     return bookings.filter(booking => {
@@ -197,9 +200,18 @@ export default function BookingTable({
                         </button>
                       </div>
                     ) : (
-                      <span className="text-slate-400 inline-flex items-center gap-1">
-                        <Lock className="w-4 h-4" /> Processed
-                      </span>
+                      <div className="flex justify-end gap-2">
+                        <button
+                          onClick={() => setReceiptBooking(booking)}
+                          className="p-1 text-blue-600 hover:bg-blue-50 rounded"
+                          title="Download Receipt"
+                        >
+                          <FileText className="w-5 h-5" />
+                        </button>
+                        <span className="text-slate-400 inline-flex items-center gap-1">
+                          <Lock className="w-4 h-4" /> Processed
+                        </span>
+                      </div>
                     )}
                   </td>
                 </tr>
@@ -215,6 +227,35 @@ export default function BookingTable({
           </table>
         </div>
       </div>
+
+      {/* Receipt Generator Modal */}
+      {receiptBooking && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 max-w-lg w-full mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-800">Generate Receipt</h3>
+              <button
+                onClick={() => setReceiptBooking(null)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <XCircle className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="mb-4">
+              <p className="text-sm text-gray-600">
+                Generate receipt for {receiptBooking.teamName}
+              </p>
+              <p className="text-sm text-gray-500 mt-1">
+                Booking ID: {receiptBooking.bookingId}
+              </p>
+            </div>
+            <ReceiptGenerator 
+              booking={receiptBooking} 
+              onGenerate={() => setReceiptBooking(null)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
