@@ -8,6 +8,7 @@ import BookingSection from './components/BookingSection';
 import LocationSection from './components/LocationSection';
 import ClosingCTA from './components/ClosingCTA';
 import Footer from './components/Footer';
+import FloatingBookingButton from './components/FloatingBookingButton';
 
 const App: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
         <ClosingCTA />
       </main>
       <Footer />
+      <FloatingBookingButton />
     </div>
   );
 };

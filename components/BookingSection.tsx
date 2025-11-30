@@ -134,7 +134,12 @@ const getExpandedSlots = (dayKey: string) => {
 
 const BookingSection: React.FC = () => {
   const router = useRouter();
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  // Initialize with tomorrow's date (H+1 booking policy)
+  const [selectedDate, setSelectedDate] = useState<Date>(() => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow;
+  });
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
   const [dateScrollIndex, setDateScrollIndex] = useState(0);
   const [teamName, setTeamName] = useState('');
@@ -162,11 +167,11 @@ const BookingSection: React.FC = () => {
     fetchBookings();
   }, []);
 
-  // Generate next 14 days
+  // Generate next 14 days starting from tomorrow (H+1 booking policy)
   const dates = useMemo(() => {
     const result = [];
     const today = new Date();
-    for (let i = 0; i < 14; i++) {
+    for (let i = 1; i <= 14; i++) {
       const d = new Date(today);
       d.setDate(today.getDate() + i);
       result.push(d);
