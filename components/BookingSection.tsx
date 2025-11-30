@@ -248,6 +248,77 @@ const BookingSection: React.FC = () => {
       // Get booking ID from response
       const bookingId = data.booking?.bookingId || 'N/A';
 
+      // Send WhatsApp confirmation message
+      try {
+        // Format phone number: remove leading 0 and add 62 country code
+        let formattedPhone = phone.trim();
+        if (formattedPhone.startsWith('0')) {
+          formattedPhone = '62' + formattedPhone.slice(1);
+        } else if (!formattedPhone.startsWith('62')) {
+          formattedPhone = '62' + formattedPhone;
+        }
+        const chatId = `${formattedPhone}@c.us`;
+
+        // Bank details from environment variables
+        const bankName = process.env.NEXT_PUBLIC_BANK_NAME || 'Bank Mandiri';
+        const bankAccount = process.env.NEXT_PUBLIC_BANK_ACCOUNT_NUMBER || '1610016475977';
+        const bankAccountName = process.env.NEXT_PUBLIC_BANK_ACCOUNT_NAME || 'CV BATAS KOTA POINT';
+
+        const bookingText = `✅ *PEMESANAN BERHASIL!*
+Terima kasih telah memesan lapangan di Batas Kota
+
+📋 *Detail Pemesanan:*
+• Booking ID: ${bookingId}
+• Nama Tim: ${teamName}
+• Tanggal: ${formattedDate}
+• Waktu: ${selectedSlot}
+• Nomor WhatsApp: ${phone}
+• Total Pembayaran: ${priceFormatted}
+
+💳 *Instruksi Pembayaran:*
+Silakan transfer ke rekening berikut:
+• Nama Penerima: ${bankAccountName}
+• Bank: ${bankName.toUpperCase()}
+• Nomor Rekening: ${bankAccount}
+
+⚠️ *Penting:* Setelah melakukan pembayaran, harap konfirmasi melalui WhatsApp dengan melampirkan bukti transfer.
+
+📌 *Peraturan Booking:*
+1. Maksimal Telat 10 Menit - Tidak bisa refund jika terlambat
+2. Sesi Hangus Jika Tidak Hadir - Pembayaran tidak dapat dikembalikan
+3. Reschedule Harus H-1 - Perubahan jadwal harus dilakukan sehari sebelumnya
+4. Sesi Tidak Bisa Dipindah - Tidak dapat dipindah ke orang lain (kecuali antar anggota tim)
+5. Pembayaran - DP 50%, dan untuk pelunasannya H-1
+
+_Batas Kota - The Town Space_`;
+
+        const waApiEndpoint = process.env.NEXT_PUBLIC_WHATSAPP_API_ENDPOINT || '';
+        if (!waApiEndpoint) {
+          console.warn('WhatsApp API endpoint not configured');
+          throw new Error('WhatsApp API endpoint not configured');
+        }
+
+        await fetch(waApiEndpoint, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chatId: chatId,
+            reply_to: null,
+            text: bookingText,
+            linkPreview: true,
+            linkPreviewHighQuality: false,
+            session: 'default'
+          }),
+        });
+        console.log('WhatsApp confirmation sent to:', chatId);
+      } catch (waError) {
+        console.error('Failed to send WhatsApp confirmation:', waError);
+        // Don't block booking flow if WhatsApp fails
+      }
+
       // Create query params for success page
       const params = new URLSearchParams({
         team: teamName,
