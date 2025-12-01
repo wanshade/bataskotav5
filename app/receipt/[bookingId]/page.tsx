@@ -112,21 +112,21 @@ export default function ReceiptPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black py-8 px-4">
+    <div className="min-h-screen bg-black py-6 px-3 sm:py-8 sm:px-4">
       {/* Action Buttons */}
-      <div className="max-w-lg mx-auto mb-6 flex justify-between items-center">
+      <div className="max-w-lg mx-auto mb-4 sm:mb-6 flex justify-between items-center">
         <Link
           href="/"
           className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
-          <span>Kembali</span>
+          <span className="text-sm sm:text-base">Kembali</span>
         </Link>
         <button
           onClick={handleDownload}
-          className="flex items-center gap-2 px-6 py-3 bg-neon-green text-black font-bold rounded-lg hover:shadow-[0_0_30px_rgba(57,255,20,0.5)] transition-all"
+          className="flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-neon-green text-black font-bold rounded-lg hover:shadow-[0_0_30px_rgba(57,255,20,0.5)] transition-all text-sm sm:text-base"
         >
-          <Download className="w-5 h-5" />
+          <Download className="w-4 h-4 sm:w-5 sm:h-5" />
           <span>Download</span>
         </button>
       </div>
@@ -151,17 +151,17 @@ export default function ReceiptPage() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-neon-green/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-neon-green/5 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="relative p-8">
+          <div className="relative p-4 sm:p-8">
             {/* Header */}
-            <div className="text-center mb-8 pb-6 border-b border-zinc-800">
-              <h1 className="text-3xl font-black text-white tracking-wider mb-1">
+            <div className="text-center mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-zinc-800">
+              <h1 className="text-2xl sm:text-3xl font-black text-white tracking-wider mb-1">
                 BATAS KOTA
               </h1>
-              <p className="text-neon-green text-sm font-semibold tracking-[0.3em] uppercase">
+              <p className="text-neon-green text-xs sm:text-sm font-semibold tracking-[0.2em] sm:tracking-[0.3em] uppercase">
                 The Town Space
               </p>
-              <div className="mt-4 inline-block px-4 py-1 bg-neon-green/10 border border-neon-green/30 rounded-full">
-                <span className="text-neon-green text-xs font-bold tracking-widest">
+              <div className="mt-3 sm:mt-4 inline-block px-3 sm:px-4 py-1 bg-neon-green/10 border border-neon-green/30 rounded-full">
+                <span className="text-neon-green text-[10px] sm:text-xs font-bold tracking-wider sm:tracking-widest">
                   KWITANSI PEMBAYARAN
                 </span>
               </div>
@@ -169,10 +169,10 @@ export default function ReceiptPage() {
 
             {/* Status Badge */}
             {booking.status === 'confirmed' && (
-              <div className="flex justify-center mb-8">
-                <div className="flex items-center gap-2 px-6 py-3 bg-green-500/10 border-2 border-green-500 rounded-lg">
-                  <CheckCircle className="w-6 h-6 text-green-500" />
-                  <span className="text-green-500 font-black text-lg tracking-widest uppercase">
+              <div className="flex justify-center mb-6 sm:mb-8">
+                <div className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-green-500/10 border-2 border-green-500 rounded-lg">
+                  <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-500" />
+                  <span className="text-green-500 font-black text-base sm:text-lg tracking-wider sm:tracking-widest uppercase">
                     LUNAS
                   </span>
                 </div>
@@ -180,97 +180,97 @@ export default function ReceiptPage() {
             )}
 
             {/* Booking ID */}
-            <div className="bg-zinc-900/50 rounded-xl p-4 mb-6 border border-zinc-800">
-              <div className="flex items-center justify-between">
+            <div className="bg-zinc-900/50 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 border border-zinc-800">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2">
                 <div className="flex items-center gap-2 text-gray-500">
-                  <Hash className="w-4 h-4" />
+                  <Hash className="w-4 h-4 flex-shrink-0" />
                   <span className="text-xs uppercase tracking-wider">Booking ID</span>
                 </div>
-                <span className="font-mono text-neon-green font-bold text-lg">
+                <span className="font-mono text-neon-green font-bold text-sm sm:text-lg break-all">
                   {booking.bookingId}
                 </span>
               </div>
             </div>
 
             {/* Customer Info */}
-            <div className="space-y-4 mb-8">
-              <div className="flex items-center gap-4 p-4 bg-zinc-900/30 rounded-xl border border-zinc-800/50">
-                <div className="w-10 h-10 bg-neon-green/10 rounded-lg flex items-center justify-center">
-                  <User className="w-5 h-5 text-neon-green" />
+            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+              <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-zinc-900/30 rounded-xl border border-zinc-800/50">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-neon-green/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <User className="w-4 h-4 sm:w-5 sm:h-5 text-neon-green" />
                 </div>
-                <div>
-                  <p className="text-xs text-gray-500 uppercase tracking-wider">Nama Tim</p>
-                  <p className="text-white font-bold text-lg">{booking.teamName}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-wider">Nama Tim</p>
+                  <p className="text-white font-bold text-base sm:text-lg truncate">{booking.teamName}</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 p-4 bg-zinc-900/30 rounded-xl border border-zinc-800/50">
-                <div className="w-10 h-10 bg-neon-green/10 rounded-lg flex items-center justify-center">
-                  <Phone className="w-5 h-5 text-neon-green" />
+              <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-zinc-900/30 rounded-xl border border-zinc-800/50">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-neon-green/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-neon-green" />
                 </div>
-                <div>
-                  <p className="text-xs text-gray-500 uppercase tracking-wider">No. WhatsApp</p>
-                  <p className="text-white font-bold text-lg">{booking.phone}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-wider">No. WhatsApp</p>
+                  <p className="text-white font-bold text-base sm:text-lg">{booking.phone}</p>
                 </div>
               </div>
             </div>
 
             {/* Booking Details */}
-            <div className="bg-zinc-900 rounded-xl p-6 mb-8 border border-neon-green/20 relative overflow-hidden">
+            <div className="bg-zinc-900 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 border border-neon-green/20 relative overflow-hidden">
               {/* Corner Accents */}
-              <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-neon-green" />
-              <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-neon-green" />
-              <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-neon-green" />
-              <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-neon-green" />
+              <div className="absolute top-0 left-0 w-3 h-3 sm:w-4 sm:h-4 border-t-2 border-l-2 border-neon-green" />
+              <div className="absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 border-t-2 border-r-2 border-neon-green" />
+              <div className="absolute bottom-0 left-0 w-3 h-3 sm:w-4 sm:h-4 border-b-2 border-l-2 border-neon-green" />
+              <div className="absolute bottom-0 right-0 w-3 h-3 sm:w-4 sm:h-4 border-b-2 border-r-2 border-neon-green" />
 
-              <h3 className="text-white font-bold mb-4 text-center uppercase tracking-wider text-sm">
+              <h3 className="text-white font-bold mb-3 sm:mb-4 text-center uppercase tracking-wider text-xs sm:text-sm">
                 Detail Pemesanan
               </h3>
 
-              <div className="space-y-4">
-                <div className="flex justify-between items-center py-2 border-b border-zinc-800">
+              <div className="space-y-3 sm:space-y-4">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 border-b border-zinc-800 gap-1">
                   <div className="flex items-center gap-2 text-gray-400">
-                    <Calendar className="w-4 h-4" />
-                    <span className="text-sm">Tanggal</span>
+                    <Calendar className="w-4 h-4 flex-shrink-0" />
+                    <span className="text-xs sm:text-sm">Tanggal</span>
                   </div>
-                  <span className="text-white font-medium">{booking.bookingDate}</span>
+                  <span className="text-white font-medium text-sm sm:text-base">{booking.bookingDate}</span>
                 </div>
 
                 <div className="flex justify-between items-center py-2 border-b border-zinc-800">
                   <div className="flex items-center gap-2 text-gray-400">
-                    <Clock className="w-4 h-4" />
-                    <span className="text-sm">Waktu</span>
+                    <Clock className="w-4 h-4 flex-shrink-0" />
+                    <span className="text-xs sm:text-sm">Waktu</span>
                   </div>
-                  <span className="text-neon-green font-bold">{booking.timeSlot}</span>
+                  <span className="text-neon-green font-bold text-sm sm:text-base">{booking.timeSlot}</span>
                 </div>
 
-                <div className="flex justify-between items-center py-2">
-                  <span className="text-gray-400 text-sm">Layanan</span>
-                  <span className="text-white font-medium">Sewa Lapangan Mini Soccer</span>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 gap-1">
+                  <span className="text-gray-400 text-xs sm:text-sm">Layanan</span>
+                  <span className="text-white font-medium text-sm sm:text-base">Sewa Lapangan Mini Soccer</span>
                 </div>
               </div>
             </div>
 
             {/* Total Price */}
-            <div className="bg-gradient-to-r from-neon-green/10 to-transparent rounded-xl p-6 border border-neon-green/30 mb-8">
-              <div className="flex justify-between items-center">
-                <span className="text-gray-400 uppercase tracking-wider text-sm">Total Pembayaran</span>
-                <span className="text-3xl font-black text-neon-green drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">
+            <div className="bg-gradient-to-r from-neon-green/10 to-transparent rounded-xl p-4 sm:p-6 border border-neon-green/30 mb-6 sm:mb-8">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                <span className="text-gray-400 uppercase tracking-wider text-xs sm:text-sm">Total Pembayaran</span>
+                <span className="text-2xl sm:text-3xl font-black text-neon-green drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">
                   {formatPrice(booking.price)}
                 </span>
               </div>
             </div>
 
             {/* Footer */}
-            <div className="text-center pt-6 border-t border-zinc-800">
-              <p className="text-gray-500 text-sm mb-2">
+            <div className="text-center pt-4 sm:pt-6 border-t border-zinc-800">
+              <p className="text-gray-500 text-xs sm:text-sm mb-2">
                 Terima kasih atas kepercayaan Anda!
               </p>
-              <p className="text-gray-600 text-xs font-mono">
+              <p className="text-gray-600 text-[10px] sm:text-xs font-mono">
                 bataskotapoint.com
               </p>
               {booking.approvedAt && (
-                <p className="text-gray-600 text-xs mt-4">
+                <p className="text-gray-600 text-[10px] sm:text-xs mt-3 sm:mt-4">
                   Dikonfirmasi pada: {formatDate(booking.approvedAt)}
                 </p>
               )}
