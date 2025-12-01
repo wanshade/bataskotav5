@@ -72,7 +72,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const updateBookingStatus = async (bookingId: string, action: 'approve' | 'reject') => {
+  const updateBookingStatus = async (bookingId: string, action: 'approve' | 'reject'): Promise<boolean> => {
     setActionLoading(bookingId);
     try {
       const response = await fetch(`/api/admin/bookings/${bookingId}/${action}`, {
@@ -81,9 +81,12 @@ export default function AdminDashboard() {
       
       if (response.ok) {
         await fetchBookings();
+        return true;
       }
+      return false;
     } catch (error) {
       console.error(`Failed to ${action} booking:`, error);
+      return false;
     } finally {
       setActionLoading(null);
     }

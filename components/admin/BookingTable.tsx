@@ -23,7 +23,7 @@ interface BookingTableProps {
   bookings: AdminBooking[];
   loading: boolean;
   actionLoading: string | null;
-  onApprove: (id: string) => void;
+  onApprove: (id: string) => Promise<boolean | void> | void;
   onReject: (id: string) => void;
   onCreateTest: () => void;
 }
@@ -309,9 +309,9 @@ _Setiap permainan punya cerita._ ⚽✨
                               <MessageCircle className="w-5 h-5" />
                             </button>
                             <button
-                              onClick={() => setReceiptBooking(booking)}
+                              onClick={() => window.open(`/receipt/${booking.bookingId}`, '_blank')}
                               className="p-1 text-blue-600 hover:bg-blue-50 rounded"
-                              title="Download Receipt"
+                              title="View Receipt"
                             >
                               <FileText className="w-5 h-5" />
                             </button>
@@ -358,11 +358,13 @@ _Setiap permainan punya cerita._ ⚽✨
             </p>
             <div className="flex gap-3">
               <button
-                onClick={() => {
+                onClick={async () => {
+                  const bookingIdToProcess = confirmAction.booking!.bookingId;
                   if (confirmAction.type === 'approve') {
-                    onApprove(confirmAction.booking!.bookingId);
+                    await onApprove(bookingIdToProcess);
+                    window.open(`/receipt/${bookingIdToProcess}`, '_blank');
                   } else {
-                    onReject(confirmAction.booking!.bookingId);
+                    onReject(bookingIdToProcess);
                   }
                   setConfirmAction({ type: null, booking: null });
                 }}
