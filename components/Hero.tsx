@@ -37,6 +37,12 @@ const Hero: React.FC = () => {
             Rumput Premium Baru Terpasang
           </span>
         </div>
+         {/* Logo for mobile version */}
+        <img
+          src="/logo1.png"
+          alt="Batas Kota Logo"
+          className="md:hidden w-48 h-auto mb-6 drop-shadow-[0_0_20px_rgba(57,255,20,0.3)]"
+        />
 
         <h1 className="font-display font-black text-5xl md:text-6xl lg:text-7xl leading-tight uppercase mb-6 text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
           Batas Kota <br />
