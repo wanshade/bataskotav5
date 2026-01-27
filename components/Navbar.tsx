@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
             <span className="font-display font-bold text-xl tracking-wider leading-none text-white">
               BATAS<span className="text-neon-green">KOTA</span>
             </span>
-            <span className="font-sans text-[10px] tracking-[0.2em] text-gray-400">THE TOWN SPACE</span>
+            <span className="font-sans text-[10px] tracking-[0.2em] text-gray-400">ARENA</span>
           </div>
         </a>
 
