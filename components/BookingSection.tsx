@@ -319,6 +319,7 @@ _Batas Kota - The Town Space_`;
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_WHATSAPP_API_KEY}`,
           },
           body: JSON.stringify({
             chatId: chatId,
