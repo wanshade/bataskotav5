@@ -1,11 +1,11 @@
-import { 
-  Search, 
-  Filter, 
-  CheckCircle, 
-  XCircle, 
-  Clock, 
-  Calendar, 
-  Phone, 
+import {
+  Search,
+  Filter,
+  CheckCircle,
+  XCircle,
+  Clock,
+  Calendar,
+  Phone,
   Lock,
   AlertCircle,
   FileText,
@@ -28,11 +28,11 @@ interface BookingTableProps {
   onCreateTest: () => void;
 }
 
-export default function BookingTable({ 
-  bookings, 
-  loading, 
-  actionLoading, 
-  onApprove, 
+export default function BookingTable({
+  bookings,
+  loading,
+  actionLoading,
+  onApprove,
   onReject,
   onCreateTest
 }: BookingTableProps) {
@@ -49,19 +49,19 @@ export default function BookingTable({
   const generateWhatsAppMessage = (booking: AdminBooking) => {
     const formatDate = (dateString: string) => {
       const date = new Date(dateString);
-      return date.toLocaleDateString('id-ID', { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
+      return date.toLocaleDateString('id-ID', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
       });
     };
 
-    const statusText = booking.status === 'confirmed' 
-      ? '✅ *DIKONFIRMASI*' 
-      : booking.status === 'cancelled' 
-      ? '❌ *DIBATALKAN*'
-      : '⏳ *MENUNGGU KONFIRMASI*';
+    const statusText = booking.status === 'confirmed'
+      ? '✅ *DIKONFIRMASI*'
+      : booking.status === 'cancelled'
+        ? '❌ *DIBATALKAN*'
+        : '⏳ *MENUNGGU KONFIRMASI*';
 
     const message = `
 🏟️ *BATAS KOTA - THE TOWN SPACE*
@@ -89,20 +89,32 @@ Silakan datang 15 menit sebelum waktu bermain untuk persiapan. Tim kami siap men
 📍 Lokasi: Selong, Lombok Timur
 📞 Info: 08xx-xxxx-xxxx
 
-⚠️ *PERATURAN BOOKING*
+🚫 *PERATURAN CANCEL*
 ━━━━━━━━━━━━━━━━━━━━
 
-1️⃣ *Maksimal Telat 10 Menit*
-   Tidak bisa refund jika terlambat
+1️⃣ Jika melakukan pembatalan pemesanan maka sejumlah uang yang telah masuk dianggap *HANGUS* dan tidak bisa untuk merubah jadwal
 
-2️⃣ *Sesi Hangus Jika Tidak Hadir*
-   Pembayaran tidak dapat dikembalikan
+2️⃣ Jika melakukan pembatalan atau perubahan jadwal saat hari yang sudah ditentukan maka pembayaran yang telah dilakukan akan dianggap *HANGUS*
 
-3️⃣ *Reschedule Harus H-1*
-   Perubahan jadwal harus dilakukan sehari sebelumnya
+3️⃣ Jika pergantian jadwal dari jam premium ke jam reguler maka kelebihan uang *tidak bisa di refund* untuk kelebihan biayanya
 
-4️⃣ *Sesi Tidak Bisa Dipindah*
-   Tidak dapat dipindah ke orang lain (kecuali antar anggota tim)
+4️⃣ Jika pergantian jadwal dari jam reguler ke jam premium maka customer dikenakan *biaya tambahan*
+
+📋 *BOOKING ORDER*
+━━━━━━━━━━━━━━━━━━━━
+
+1️⃣ Booking bisa melalui website atau via whatsapp admin
+2️⃣ Tanda putih pada jadwal berarti available (jam kosong)
+3️⃣ Jam kosong yang telah dibooking akan berubah menjadi kuning, berarti sudah dibooking dan customer diberikan kesempatan *15 menit* untuk melakukan pelunasan
+4️⃣ Jika dalam 15 menit belum melakukan pelunasan maka secara otomatis tanda booking order pada website kembali menjadi putih (available) dan bisa kembali dibooking oleh siapa saja
+5️⃣ Tanda merah pada booking order berarti customer sudah melakukan pembayaran dan siap untuk bermain pada jadwal tersebut
+
+⏰ *PERIODE BOOKING ORDER*
+━━━━━━━━━━━━━━━━━━━━
+
+1️⃣ Minimum order *2 jam sebelumnya*. 2 jam sebelum jam bermain pada jadwal booking hanya bisa dibooking via whatsapp melalui admin
+2️⃣ Silahkan menghubungi admin
+3️⃣ Untuk booking *wajib melakukan pelunasan*
 
 _Jangan lupa bawa air minum dan semangat juara!_ ⚽🔥
 ` : booking.status === 'cancelled' ? `
@@ -134,13 +146,13 @@ _Setiap permainan punya cerita._ ⚽✨
 
   const filteredBookings = useMemo(() => {
     const filtered = bookings.filter(booking => {
-      const matchesSearch = 
+      const matchesSearch =
         booking.teamName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         booking.bookingId.toLowerCase().includes(searchQuery.toLowerCase()) ||
         booking.phone.includes(searchQuery);
-      
+
       const matchesStatus = statusFilter === 'all' || booking.status === statusFilter;
-      
+
       return matchesSearch && matchesStatus;
     });
 
@@ -215,7 +227,7 @@ _Setiap permainan punya cerita._ ⚽✨
             <option value="confirmed">Confirmed</option>
             <option value="cancelled">Cancelled</option>
           </select>
-          <button 
+          <button
             onClick={() => setShowDebug(!showDebug)}
             className="px-4 py-2 border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-700 bg-white"
           >
@@ -271,9 +283,9 @@ _Setiap permainan punya cerita._ ⚽✨
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize
-                      ${booking.status === 'confirmed' ? 'bg-green-100 text-green-800' : 
-                        booking.status === 'cancelled' ? 'bg-red-100 text-red-800' : 
-                        'bg-yellow-100 text-yellow-800'}`}>
+                      ${booking.status === 'confirmed' ? 'bg-green-100 text-green-800' :
+                        booking.status === 'cancelled' ? 'bg-red-100 text-red-800' :
+                          'bg-yellow-100 text-yellow-800'}`}>
                       {booking.status}
                     </span>
                   </td>
@@ -317,9 +329,8 @@ _Setiap permainan punya cerita._ ⚽✨
                             </button>
                           </>
                         )}
-                        <span className={`inline-flex items-center gap-1 ${
-                          booking.status === 'cancelled' ? 'text-red-400' : 'text-slate-400'
-                        }`}>
+                        <span className={`inline-flex items-center gap-1 ${booking.status === 'cancelled' ? 'text-red-400' : 'text-slate-400'
+                          }`}>
                           <Lock className="w-4 h-4" /> {booking.status === 'cancelled' ? 'Cancelled' : 'Processed'}
                         </span>
                       </div>
@@ -369,11 +380,10 @@ _Setiap permainan punya cerita._ ⚽✨
                   setConfirmAction({ type: null, booking: null });
                 }}
                 disabled={actionLoading === confirmAction.booking.bookingId}
-                className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
-                  confirmAction.type === 'approve'
+                className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${confirmAction.type === 'approve'
                     ? 'bg-green-600 hover:bg-green-700 text-white disabled:bg-green-400'
                     : 'bg-red-600 hover:bg-red-700 text-white disabled:bg-red-400'
-                }`}
+                  }`}
               >
                 {actionLoading === confirmAction.booking.bookingId ? (
                   <div className="flex items-center justify-center gap-2">
@@ -417,8 +427,8 @@ _Setiap permainan punya cerita._ ⚽✨
                 Booking ID: {receiptBooking.bookingId}
               </p>
             </div>
-            <ReceiptGenerator 
-              booking={receiptBooking} 
+            <ReceiptGenerator
+              booking={receiptBooking}
               onGenerate={() => setReceiptBooking(null)}
             />
           </div>
