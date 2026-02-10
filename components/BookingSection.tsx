@@ -97,13 +97,13 @@ const getExpandedSlots = (dayKey: string) => {
 
     // If duration is significantly larger than 2 hours, assume it's a range definition 
     // that needs to be broken into 2-hour slots.
-    if (duration > 2.05) { 
+    if (duration > 2.05) {
       let current = start;
       while (current < end - 0.1) { // small buffer
         const slotEnd = current + 2;
         // Ensure we don't go past the defined end
-        if (slotEnd > end + 0.1) break; 
-        
+        if (slotEnd > end + 0.1) break;
+
         const label = `${current.toString().padStart(2, '0')}.00 - ${slotEnd.toString().padStart(2, '0')}.00`;
         slots.push({
           start: current,
@@ -126,7 +126,7 @@ const getExpandedSlots = (dayKey: string) => {
   // Dedup based on label (in case of overlaps in source data like Minggu)
   const uniqueMap = new Map();
   slots.forEach(slot => uniqueMap.set(slot.label, slot));
-  
+
   return Array.from(uniqueMap.values()).sort((a, b) => a.start - b.start);
 };
 
@@ -198,7 +198,7 @@ const BookingSection: React.FC = () => {
 
   const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!selectedSlot || !teamName.trim() || !phone.trim() || !selectedSlotData) {
       return;
     }
@@ -208,9 +208,9 @@ const BookingSection: React.FC = () => {
 
     try {
       // Format date for display
-      const formattedDate = selectedDate.toLocaleDateString('id-ID', { 
-        weekday: 'long', 
-        day: 'numeric', 
+      const formattedDate = selectedDate.toLocaleDateString('id-ID', {
+        weekday: 'long',
+        day: 'numeric',
         month: 'long',
         year: 'numeric'
       });
@@ -241,7 +241,7 @@ const BookingSection: React.FC = () => {
 
       const data = await response.json();
       console.log('Booking created:', data);
-      
+
       // Show warning if using temporary storage
       if (data.warning) {
         console.warn('⚠️', data.warning);
@@ -288,12 +288,23 @@ Silakan transfer ke rekening berikut:
 
 ⚠️ *Penting:* Setelah melakukan pembayaran, harap konfirmasi melalui WhatsApp dengan melampirkan bukti transfer.
 
-📌 *Peraturan Booking:*
-1. Maksimal Telat 10 Menit - Tidak bisa refund jika terlambat
-2. Sesi Hangus Jika Tidak Hadir - Pembayaran tidak dapat dikembalikan
-3. Reschedule Harus H-1 - Perubahan jadwal harus dilakukan sehari sebelumnya
-4. Sesi Tidak Bisa Dipindah - Tidak dapat dipindah ke orang lain (kecuali antar anggota tim)
-5. Pembayaran - DP 50%, dan untuk pelunasannya H-1
+🚫 *PERATURAN CANCEL:*
+1. Jika melakukan pembatalan pemesanan maka sejumlah uang yang telah masuk dianggap HANGUS dan tidak bisa untuk merubah jadwal
+2. Jika melakukan pembatalan atau perubahan jadwal saat hari yang sudah ditentukan maka pembayaran yang telah dilakukan akan dianggap HANGUS
+3. Jika pergantian jadwal dari jam premium ke jam reguler maka kelebihan uang tidak bisa di refund untuk kelebihan biayanya
+4. Jika pergantian jadwal dari jam reguler ke jam premium maka customer dikenakan biaya tambahan
+
+📋 *BOOKING ORDER:*
+1. Booking bisa melalui website atau via whatsapp admin
+2. Tanda putih pada jadwal berarti available (jam kosong)
+3. Jam kosong yang telah dibooking akan berubah menjadi kuning, berarti sudah dibooking dan customer diberikan kesempatan 15 menit untuk melakukan pelunasan
+4. Jika dalam 15 menit belum melakukan pelunasan maka secara otomatis tanda booking order pada website kembali menjadi putih (available) dan bisa kembali dibooking oleh siapa saja
+5. Tanda merah pada booking order berarti customer sudah melakukan pembayaran dan siap untuk bermain pada jadwal tersebut
+
+⏰ *PERIODE BOOKING ORDER:*
+1. Minimum order 2 jam sebelumnya. 2 jam sebelum jam bermain pada jadwal booking hanya bisa dibooking via whatsapp melalui admin
+2. Silahkan menghubungi admin
+3. Untuk booking wajib melakukan pelunasan
 
 _Batas Kota - The Town Space_`;
 
@@ -348,7 +359,7 @@ _Batas Kota - The Town Space_`;
     <section id="booking" className="py-24 bg-black relative overflow-hidden">
       {/* Background Gradients */}
       <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-zinc-900/20 to-transparent pointer-events-none" />
-      
+
       {/* Custom Background Shape - Abstract Field Diagram */}
       <div className="absolute bottom-0 right-0 w-full h-full pointer-events-none opacity-10">
         <svg width="100%" height="100%" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice">
@@ -356,11 +367,11 @@ _Batas Kota - The Town Space_`;
           <circle cx="80%" cy="80%" r="300" fill="none" stroke="#39ff14" strokeWidth="2" strokeDasharray="20 20" />
           <circle cx="80%" cy="80%" r="200" fill="none" stroke="#39ff14" strokeWidth="1" />
           <circle cx="80%" cy="80%" r="50" fill="#39ff14" fillOpacity="0.2" />
-          
+
           {/* Tactics Lines/Arrows */}
           <path d="M 500 800 Q 600 600 800 500" fill="none" stroke="#39ff14" strokeWidth="2" strokeDasharray="10 10" />
           <path d="M 400 900 Q 550 750 750 600" fill="none" stroke="#39ff14" strokeWidth="2" strokeOpacity="0.5" />
-          
+
           {/* Crosshairs */}
           <line x1="70%" y1="0" x2="70%" y2="100%" stroke="#39ff14" strokeWidth="1" strokeOpacity="0.1" />
           <line x1="0" y1="30%" x2="100%" y2="30%" stroke="#39ff14" strokeWidth="1" strokeOpacity="0.1" />
@@ -382,7 +393,7 @@ _Batas Kota - The Town Space_`;
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* LEFT COLUMN: Selection Grid */}
           <div className="lg:col-span-8 space-y-8">
-            
+
             {/* Date Selector */}
             <div className="space-y-3">
               <div className="flex justify-between items-center px-1">
@@ -390,15 +401,15 @@ _Batas Kota - The Town Space_`;
                   <Calendar className="w-4 h-4" /> Pilih Tanggal
                 </h3>
                 <div className="flex gap-2">
-                  <button 
-                    onClick={handlePrevDates} 
+                  <button
+                    onClick={handlePrevDates}
                     disabled={dateScrollIndex === 0}
                     className="p-2 rounded-full hover:bg-zinc-800 disabled:opacity-30 transition-colors text-neon-green"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
-                  <button 
-                    onClick={handleNextDates} 
+                  <button
+                    onClick={handleNextDates}
                     disabled={dateScrollIndex + 5 >= dates.length}
                     className="p-2 rounded-full hover:bg-zinc-800 disabled:opacity-30 transition-colors text-neon-green"
                   >
@@ -412,15 +423,15 @@ _Batas Kota - The Town Space_`;
                   const isSelected = date.toDateString() === selectedDate.toDateString();
                   const dayName = date.toLocaleDateString('id-ID', { weekday: 'short' });
                   const dayNum = date.getDate();
-                  
+
                   return (
                     <button
                       key={idx}
                       onClick={() => { setSelectedDate(date); setSelectedSlot(null); }}
                       className={`
                         relative p-4 rounded-xl border transition-all duration-300 flex flex-col items-center justify-center gap-1 group
-                        ${isSelected 
-                          ? 'bg-neon-green border-neon-green text-black shadow-[0_0_15px_rgba(57,255,20,0.4)] scale-105 z-10' 
+                        ${isSelected
+                          ? 'bg-neon-green border-neon-green text-black shadow-[0_0_15px_rgba(57,255,20,0.4)] scale-105 z-10'
                           : 'bg-zinc-900/50 border-zinc-800 text-gray-400 hover:border-neon-green/50 hover:text-white'}
                       `}
                     >
@@ -444,24 +455,24 @@ _Batas Kota - The Town Space_`;
               <h3 className="font-display text-sm uppercase tracking-widest text-gray-500 flex items-center gap-2">
                 <Clock className="w-4 h-4" /> Pilih Waktu
               </h3>
-              
+
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {/* Format current date once for all slots */}
                 {(() => {
-                  const formattedDate = selectedDate.toLocaleDateString('id-ID', { 
-                    weekday: 'long', 
-                    day: 'numeric', 
+                  const formattedDate = selectedDate.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    day: 'numeric',
                     month: 'long',
                     year: 'numeric'
                   });
 
                   return availableSlots.map((slot, idx) => {
                     const isSelected = selectedSlot === slot.label;
-                    
+
                     // Check if slot is booked (confirmed status)
-                    const isBooked = bookings.some(b => 
-                      b.bookingDate === formattedDate && 
-                      b.timeSlot === slot.label && 
+                    const isBooked = bookings.some(b =>
+                      b.bookingDate === formattedDate &&
+                      b.timeSlot === slot.label &&
                       b.status === 'confirmed'
                     );
 
@@ -472,17 +483,16 @@ _Batas Kota - The Town Space_`;
                         onClick={() => !isBooked && setSelectedSlot(slot.label)}
                         className={`
                           relative overflow-hidden p-4 rounded-xl border text-left transition-all duration-300 group
-                          ${isBooked 
+                          ${isBooked
                             ? 'bg-red-900/20 border-red-900/50 cursor-not-allowed opacity-80'
-                            : isSelected 
-                              ? 'bg-neon-green/10 border-neon-green shadow-[inset_0_0_20px_rgba(57,255,20,0.1)]' 
+                            : isSelected
+                              ? 'bg-neon-green/10 border-neon-green shadow-[inset_0_0_20px_rgba(57,255,20,0.1)]'
                               : 'bg-zinc-900/30 border-zinc-800 hover:border-neon-green/50 hover:bg-zinc-900'}
                         `}
                       >
                         <div className="flex justify-between items-start mb-2">
-                          <span className={`font-sans font-bold text-lg ${
-                            isBooked ? 'text-red-500' : isSelected ? 'text-neon-green' : 'text-white'
-                          }`}>
+                          <span className={`font-sans font-bold text-lg ${isBooked ? 'text-red-500' : isSelected ? 'text-neon-green' : 'text-white'
+                            }`}>
                             {slot.label}
                           </span>
                           {isBooked ? (
@@ -491,12 +501,11 @@ _Batas Kota - The Town Space_`;
                             <CheckCircle2 className="w-5 h-5 text-neon-green" />
                           ) : null}
                         </div>
-                        <div className={`text-sm font-sans ${
-                          isBooked ? 'text-red-400 font-bold uppercase' : isSelected ? 'text-white' : 'text-gray-500'
-                        }`}>
+                        <div className={`text-sm font-sans ${isBooked ? 'text-red-400 font-bold uppercase' : isSelected ? 'text-white' : 'text-gray-500'
+                          }`}>
                           {isBooked ? 'BOOKED' : formatPrice(slot.price)}
                         </div>
-                        
+
                         {/* Hover Effect */}
                         {!isBooked && (
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-neon-green/5 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
@@ -514,7 +523,7 @@ _Batas Kota - The Town Space_`;
             <div className="sticky top-24">
               <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-neon-green to-transparent" />
-                
+
                 <h3 className="font-display font-bold text-xl mb-6 flex items-center gap-2 text-white">
                   <Trophy className="text-neon-green w-5 h-5" /> Ringkasan Pemesanan
                 </h3>
@@ -546,8 +555,8 @@ _Batas Kota - The Town Space_`;
                       <label className="text-xs uppercase font-bold text-gray-500 tracking-wider">Nama Tim</label>
                       <div className="relative group">
                         <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-neon-green transition-colors" />
-                        <input 
-                          type="text" 
+                        <input
+                          type="text"
                           placeholder="FC Batas Kota"
                           value={teamName}
                           onChange={(e) => setTeamName(e.target.value)}
@@ -561,8 +570,8 @@ _Batas Kota - The Town Space_`;
                       <label className="text-xs uppercase font-bold text-gray-500 tracking-wider">Nomor WhatsApp</label>
                       <div className="relative group">
                         <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-neon-green transition-colors" />
-                        <input 
-                          type="tel" 
+                        <input
+                          type="tel"
                           placeholder="0812..."
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
@@ -573,7 +582,7 @@ _Batas Kota - The Town Space_`;
                     </div>
 
                     {/* Action Button */}
-                    <NeonButton 
+                    <NeonButton
                       type="submit"
                       className={`w-full flex justify-center ${(!selectedSlot || !teamName.trim() || !phone.trim() || isSubmitting) ? 'opacity-50 cursor-not-allowed grayscale' : ''}`}
                       disabled={!selectedSlot || !teamName.trim() || !phone.trim() || isSubmitting}
