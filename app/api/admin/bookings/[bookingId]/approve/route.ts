@@ -10,7 +10,7 @@ export async function POST(
   try {
     // Check if user is authenticated and is admin
     const session = await getServerSession(authOptions);
-    
+
     if (!session || session.user?.role !== 'admin') {
       return NextResponse.json(
         { error: 'Unauthorized' },
@@ -18,7 +18,7 @@ export async function POST(
       );
     }
 
-    
+
 
     // Check if DATABASE_URL is configured
     const hasDatabaseConfigured = !!process.env.DATABASE_URL;
@@ -96,6 +96,7 @@ _Batas Kota - The Town Space_`;
               headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'X-Api-Key': process.env.NEXT_PUBLIC_WHATSAPP_API_KEY || '',
               },
               body: JSON.stringify({
                 chatId: chatId,
@@ -133,9 +134,9 @@ _Batas Kota - The Town Space_`;
     }
   } catch (error) {
     console.error('Approve booking error:', error);
-    
+
     return NextResponse.json(
-      { 
+      {
         error: 'Failed to approve booking',
         message: error instanceof Error ? error.message : 'Unknown error'
       },
