@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import NeonButton from './ui/NeonButton';
-import { Calendar, Clock, User, Phone, ChevronRight, ChevronLeft, Trophy, CheckCircle2, AlertCircle, Lock } from 'lucide-react';
+import { Calendar, Clock, User, Phone, ChevronRight, ChevronLeft, Trophy, CheckCircle2, AlertCircle, Lock, AlertTriangle } from 'lucide-react';
 
 // --- Schedule Configuration ---
 
@@ -615,6 +615,147 @@ _Batas Kota - The Town Space_`;
             </div>
           </div>
 
+        </div>
+
+        {/* Peraturan Cancel */}
+        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 mb-8 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-transparent" />
+
+          <h2 className="font-display font-bold text-xl mb-6 flex items-center gap-2 text-white">
+            <AlertTriangle className="text-red-500 w-5 h-5" /> Peraturan Cancel
+          </h2>
+
+          <div className="space-y-4">
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-500/10 border border-red-500 flex items-center justify-center">
+                <span className="text-red-500 font-bold">1</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
+                Jika melakukan pembatalan pemesanan maka sejumlah uang yang telah masuk dianggap <strong className="text-red-400">HANGUS</strong> dan tidak bisa untuk merubah jadwal
+              </p>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-500/10 border border-red-500 flex items-center justify-center">
+                <span className="text-red-500 font-bold">2</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
+                Jika melakukan pembatalan atau perubahan jadwal saat hari yang sudah ditentukan maka pembayaran yang telah dilakukan akan dianggap <strong className="text-red-400">HANGUS</strong>
+              </p>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-500/10 border border-red-500 flex items-center justify-center">
+                <span className="text-red-500 font-bold">3</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
+                Jika pergantian jadwal dari jam premium ke jam reguler maka kelebihan uang <strong className="text-red-400">tidak bisa di refund</strong> untuk kelebihan biayanya
+              </p>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-500/10 border border-red-500 flex items-center justify-center">
+                <span className="text-red-500 font-bold">4</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
+                Jika pergantian jadwal dari jam reguler ke jam premium maka customer dikenakan <strong className="text-yellow-400">biaya tambahan</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Booking Order */}
+        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 mb-8 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-neon-green to-transparent" />
+
+          <h2 className="font-display font-bold text-xl mb-6 flex items-center gap-2 text-white">
+            <Calendar className="text-neon-green w-5 h-5" /> Booking Order
+          </h2>
+
+          <div className="space-y-4">
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
+                <span className="text-neon-green font-bold">1</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
+                Booking bisa melalui <strong className="text-white">website</strong> atau via <strong className="text-white">WhatsApp admin</strong>
+              </p>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
+                <span className="text-neon-green font-bold">2</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
+                Tanda <strong className="text-white">putih</strong> pada jadwal berarti <strong className="text-white">available</strong> (jam kosong)
+              </p>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
+                <span className="text-neon-green font-bold">3</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
+                Jam kosong yang telah dibooking akan berubah menjadi <strong className="text-yellow-400">kuning</strong>, berarti sudah dibooking dan customer diberikan kesempatan <strong className="text-white">15 menit</strong> untuk melakukan pelunasan
+              </p>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
+                <span className="text-neon-green font-bold">4</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
+                Jika dalam <strong className="text-white">15 menit</strong> belum melakukan pelunasan maka secara otomatis tanda booking order pada website kembali menjadi <strong className="text-white">putih</strong> (available) dan bisa kembali dibooking oleh siapa saja
+              </p>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
+                <span className="text-neon-green font-bold">5</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
+                Tanda <strong className="text-red-400">merah</strong> pada booking order berarti customer sudah melakukan pembayaran dan siap untuk bermain pada jadwal tersebut
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Periode Booking Order */}
+        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 mb-8 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 to-transparent" />
+
+          <h2 className="font-display font-bold text-xl mb-6 flex items-center gap-2 text-white">
+            <Clock className="text-yellow-500 w-5 h-5" /> Periode Booking Order
+          </h2>
+
+          <div className="space-y-4">
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-yellow-500/10 border border-yellow-500 flex items-center justify-center">
+                <span className="text-yellow-500 font-bold">1</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
+                Minimum order <strong className="text-white">2 jam sebelumnya</strong>. 2 jam sebelum jam bermain pada jadwal booking hanya bisa dibooking via <strong className="text-white">WhatsApp</strong> melalui admin
+              </p>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-yellow-500/10 border border-yellow-500 flex items-center justify-center">
+                <span className="text-yellow-500 font-bold">2</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
+                Silahkan menghubungi <strong className="text-white">admin</strong>
+              </p>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-yellow-500/10 border border-yellow-500 flex items-center justify-center">
+                <span className="text-yellow-500 font-bold">3</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
+                Untuk booking <strong className="text-white">wajib melakukan pelunasan</strong>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
