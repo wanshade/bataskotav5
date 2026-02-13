@@ -124,7 +124,7 @@ export default function ReceiptPage() {
         </Link>
         <button
           onClick={handleDownload}
-          className="flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-neon-green text-black font-bold rounded-lg hover:shadow-[0_0_30px_rgba(57,255,20,0.5)] transition-all text-sm sm:text-base"
+          className="flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-neon-green text-black font-bold rounded-lg hover:shadow-[0_0_30px_rgba(20,124,96,0.5)] transition-all text-sm sm:text-base"
         >
           <Download className="w-4 h-4 sm:w-5 sm:h-5" />
           <span>Download</span>
@@ -142,7 +142,7 @@ export default function ReceiptPage() {
             className="absolute inset-0 pointer-events-none"
             style={{
               backgroundImage:
-                'linear-gradient(rgba(57, 255, 20, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(57, 255, 20, 0.05) 1px, transparent 1px)',
+                'linear-gradient(rgba(20, 124, 96, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(20, 124, 96, 0.05) 1px, transparent 1px)',
               backgroundSize: '20px 20px',
             }}
           />
@@ -255,7 +255,7 @@ export default function ReceiptPage() {
             <div className="bg-gradient-to-r from-neon-green/10 to-transparent rounded-xl p-4 sm:p-6 border border-neon-green/30 mb-6 sm:mb-8">
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
                 <span className="text-gray-400 uppercase tracking-wider text-xs sm:text-sm">Total Pembayaran</span>
-                <span className="text-2xl sm:text-3xl font-black text-neon-green drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">
+                <span className="text-2xl sm:text-3xl font-black text-neon-green drop-shadow-[0_0_10px_rgba(20,124,96,0.5)]">
                   {formatPrice(booking.price)}
                 </span>
               </div>

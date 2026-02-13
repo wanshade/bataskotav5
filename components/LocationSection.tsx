@@ -27,7 +27,7 @@ const LocationSection: React.FC = () => {
                 <div className="absolute bottom-4 right-4 border-r-2 border-b-2 border-neon-green w-8 h-8" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                    <div className="w-4 h-4 bg-neon-green rounded-full animate-ping absolute" />
-                   <div className="w-4 h-4 bg-neon-green rounded-full relative shadow-[0_0_20px_#39FF14]" />
+                   <div className="w-4 h-4 bg-neon-green rounded-full relative shadow-[0_0_20px_#147c60]" />
                 </div>
               </div>
 
@@ -42,7 +42,7 @@ const LocationSection: React.FC = () => {
           <div className="order-1 md:order-2">
             <h2 className="font-display font-bold text-3xl md:text-5xl text-white uppercase mb-8">
               Temukan Kami Di <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500 drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">Selong</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500 drop-shadow-[0_0_10px_rgba(20,124,96,0.5)]">Selong</span>
             </h2>
 
             <div className="space-y-8">

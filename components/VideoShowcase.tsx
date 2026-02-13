@@ -17,7 +17,7 @@ const VideoShowcase: React.FC = () => {
             <Zap className="w-4 h-4 text-neon-green fill-neon-green animate-pulse" />
           </div>
           <h2 className="font-display font-bold text-3xl md:text-5xl text-white uppercase mb-4">
-            Rasakan <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500 drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">Aksinya</span>
+            Rasakan <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500 drop-shadow-[0_0_10px_rgba(20,124,96,0.5)]">Aksinya</span>
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto">
             Tonton highlightnya. Rasakan atmosfernya. Di sinilah permainan berevolusi.

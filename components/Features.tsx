@@ -80,9 +80,9 @@ const Features: React.FC = () => {
       {/* Section Header */}
       <div className="container mx-auto px-6 mb-16 text-center">
         <h2 className="font-display font-bold text-3xl md:text-5xl text-white uppercase mb-4">
-          Spesifikasi <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500 drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">Utama</span>
+          Spesifikasi <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500 drop-shadow-[0_0_10px_rgba(20,124,96,0.5)]">Utama</span>
         </h2>
-        <div className="h-1 w-24 bg-neon-green mx-auto rounded-full shadow-[0_0_10px_#39FF14]" />
+        <div className="h-1 w-24 bg-neon-green mx-auto rounded-full shadow-[0_0_10px_#147c60]" />
       </div>
 
       {/* Grid */}
@@ -104,9 +104,9 @@ const Features: React.FC = () => {
             >
               <div className="h-full bg-dark-card p-8 rounded-xl flex flex-col items-start gap-4 relative overflow-hidden">
                 {/* Icon Box */}
-                <div className={`w-14 h-14 rounded-lg bg-neon-green flex items-center justify-center transition-all duration-700 shadow-[0_0_15px_rgba(57,255,20,0.3)] ${
-                  isVisible ? 'scale-110 shadow-[0_0_25px_rgba(57,255,20,0.6)]' : 'scale-100'
-                } hover:scale-110 hover:shadow-[0_0_25px_rgba(57,255,20,0.6)]`}>
+                <div className={`w-14 h-14 rounded-lg bg-neon-green flex items-center justify-center transition-all duration-700 shadow-[0_0_15px_rgba(20,124,96,0.3)] ${
+                  isVisible ? 'scale-110 shadow-[0_0_25px_rgba(20,124,96,0.6)]' : 'scale-100'
+                } hover:scale-110 hover:shadow-[0_0_25px_rgba(20,124,96,0.6)]`}>
                   {feature.icon}
                 </div>
 

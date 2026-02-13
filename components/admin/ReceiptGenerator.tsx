@@ -128,7 +128,7 @@ export default function ReceiptGenerator({
               position: "absolute",
               inset: 0,
               backgroundImage:
-                "linear-gradient(rgba(57, 255, 20, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(57, 255, 20, 0.08) 1px, transparent 1px)",
+                "linear-gradient(rgba(20, 124, 96, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(20, 124, 96, 0.08) 1px, transparent 1px)",
               backgroundSize: "30px 30px",
               pointerEvents: "none",
             }}
@@ -143,7 +143,7 @@ export default function ReceiptGenerator({
               width: "200px",
               height: "200px",
               background:
-                "radial-gradient(circle, rgba(57, 255, 20, 0.15) 0%, transparent 70%)",
+                "radial-gradient(circle, rgba(20, 124, 96, 0.15) 0%, transparent 70%)",
               borderRadius: "50%",
               pointerEvents: "none",
             }}
@@ -155,7 +155,7 @@ export default function ReceiptGenerator({
               position: "relative",
               marginBottom: "40px",
               paddingBottom: "30px",
-              borderBottom: "1px solid rgba(57, 255, 20, 0.3)",
+              borderBottom: "1px solid rgba(20, 124, 96, 0.3)",
             }}
           >
             <div
@@ -181,12 +181,12 @@ export default function ReceiptGenerator({
                 <p
                   style={{
                     fontSize: "14px",
-                    color: "#39FF14",
+                    color: "#147c60",
                     margin: "0",
                     fontWeight: "600",
                     letterSpacing: "3px",
                     textTransform: "uppercase",
-                    textShadow: "0 0 10px rgba(57, 255, 20, 0.5)",
+                    textShadow: "0 0 10px rgba(20, 124, 96, 0.5)",
                   }}
                 >
                   The Town Space
@@ -197,10 +197,10 @@ export default function ReceiptGenerator({
                   style={{
                     fontSize: "12px",
                     fontWeight: "700",
-                    color: "#39FF14",
+                    color: "#147c60",
                     textTransform: "uppercase",
                     letterSpacing: "2px",
-                    textShadow: "0 0 8px rgba(57, 255, 20, 0.5)",
+                    textShadow: "0 0 8px rgba(20, 124, 96, 0.5)",
                   }}
                 >
                   KWITANSI
@@ -296,7 +296,7 @@ export default function ReceiptGenerator({
           <div
             style={{
               background: "#0a0a0a",
-              border: "1px solid rgba(57, 255, 20, 0.2)",
+              border: "1px solid rgba(20, 124, 96, 0.2)",
               borderRadius: "8px",
               padding: "25px",
               marginBottom: "25px",
@@ -311,8 +311,8 @@ export default function ReceiptGenerator({
                 left: "-1px",
                 width: "20px",
                 height: "20px",
-                borderTop: "2px solid #39FF14",
-                borderLeft: "2px solid #39FF14",
+                borderTop: "2px solid #147c60",
+                borderLeft: "2px solid #147c60",
               }}
             />
             <div
@@ -322,8 +322,8 @@ export default function ReceiptGenerator({
                 right: "-1px",
                 width: "20px",
                 height: "20px",
-                borderTop: "2px solid #39FF14",
-                borderRight: "2px solid #39FF14",
+                borderTop: "2px solid #147c60",
+                borderRight: "2px solid #147c60",
               }}
             />
             <div
@@ -333,8 +333,8 @@ export default function ReceiptGenerator({
                 left: "-1px",
                 width: "20px",
                 height: "20px",
-                borderBottom: "2px solid #39FF14",
-                borderLeft: "2px solid #39FF14",
+                borderBottom: "2px solid #147c60",
+                borderLeft: "2px solid #147c60",
               }}
             />
             <div
@@ -344,8 +344,8 @@ export default function ReceiptGenerator({
                 right: "-1px",
                 width: "20px",
                 height: "20px",
-                borderBottom: "2px solid #39FF14",
-                borderRight: "2px solid #39FF14",
+                borderBottom: "2px solid #147c60",
+                borderRight: "2px solid #147c60",
               }}
             />
 
@@ -379,7 +379,7 @@ export default function ReceiptGenerator({
                 <p
                   style={{
                     fontSize: "14px",
-                    color: "#39FF14",
+                    color: "#147c60",
                     margin: "0",
                     fontWeight: "600",
                   }}
@@ -392,9 +392,9 @@ export default function ReceiptGenerator({
                   style={{
                     fontSize: "22px",
                     fontWeight: "800",
-                    color: "#39FF14",
+                    color: "#147c60",
                     margin: "0",
-                    textShadow: "0 0 15px rgba(57, 255, 20, 0.4)",
+                    textShadow: "0 0 15px rgba(20, 124, 96, 0.4)",
                   }}
                 >
                   Rp {booking.price.toLocaleString("id-ID")}
@@ -410,7 +410,7 @@ export default function ReceiptGenerator({
               justifyContent: "space-between",
               alignItems: "center",
               padding: "20px 0",
-              borderTop: "1px solid rgba(57, 255, 20, 0.2)",
+              borderTop: "1px solid rgba(20, 124, 96, 0.2)",
               marginBottom: "30px",
             }}
           >
@@ -429,8 +429,8 @@ export default function ReceiptGenerator({
               style={{
                 fontSize: "26px",
                 fontWeight: "900",
-                color: "#39FF14",
-                textShadow: "0 0 20px rgba(57, 255, 20, 0.5)",
+                color: "#147c60",
+                textShadow: "0 0 20px rgba(20, 124, 96, 0.5)",
               }}
             >
               Rp {booking.price.toLocaleString("id-ID")}
@@ -447,11 +447,11 @@ export default function ReceiptGenerator({
             <div
               style={{
                 display: "inline-block",
-                background: "rgba(57, 255, 20, 0.15)",
-                border: "2px solid #39FF14",
+                background: "rgba(20, 124, 96, 0.15)",
+                border: "2px solid #147c60",
                 padding: "12px 40px",
                 borderRadius: "4px",
-                boxShadow: "0 0 20px rgba(57, 255, 20, 0.3)",
+                boxShadow: "0 0 20px rgba(20, 124, 96, 0.3)",
                 transform: "skewX(-15deg)",
               }}
             >
@@ -459,10 +459,10 @@ export default function ReceiptGenerator({
                 style={{
                   fontSize: "18px",
                   fontWeight: "900",
-                  color: "#39FF14",
+                  color: "#147c60",
                   textTransform: "uppercase",
                   letterSpacing: "4px",
-                  textShadow: "0 0 10px rgba(57, 255, 20, 0.5)",
+                  textShadow: "0 0 10px rgba(20, 124, 96, 0.5)",
                   display: "inline-block",
                   transform: "skewX(-15deg)",
                 }}
@@ -477,7 +477,7 @@ export default function ReceiptGenerator({
             style={{
               textAlign: "center",
               paddingTop: "25px",
-              borderTop: "1px solid rgba(57, 255, 20, 0.15)",
+              borderTop: "1px solid rgba(20, 124, 96, 0.15)",
             }}
           >
             <p
@@ -515,7 +515,7 @@ export default function ReceiptGenerator({
             ${
               isGenerating
                 ? "bg-zinc-800 text-zinc-500 cursor-not-allowed border border-zinc-700"
-                : "bg-neon-green/10 text-neon-green border border-neon-green hover:bg-neon-green hover:text-black hover:shadow-[0_0_30px_rgba(57,255,20,0.4)]"
+                : "bg-neon-green/10 text-neon-green border border-neon-green hover:bg-neon-green hover:text-black hover:shadow-[0_0_30px_rgba(20,124,96,0.4)]"
             }
           `}
           style={{

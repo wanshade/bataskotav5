@@ -64,7 +64,7 @@ const Video: React.FC = () => {
           <h2 className="font-display font-bold text-4xl md:text-5xl uppercase mb-4">
             Experience <span className="text-neon-green">Batas Kota</span>
           </h2>
-          <div className="h-1 w-24 bg-neon-green mx-auto rounded-full shadow-[0_0_10px_#39FF14]" />
+          <div className="h-1 w-24 bg-neon-green mx-auto rounded-full shadow-[0_0_10px_#147c60]" />
           <p className="mt-6 text-gray-400 max-w-2xl mx-auto font-sans">
             Step into the arena where legends are made. Watch the action unfold on our world-class pitch.
           </p>
@@ -152,7 +152,7 @@ const Video: React.FC = () => {
             </p>
             <a
               href="#booking"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-dark-surface border border-neon-green text-neon-green font-display text-sm uppercase tracking-widest rounded-lg hover:bg-neon-green hover:text-dark-bg transition-all duration-300 shadow-[0_0_20px_rgba(57,255,20,0.3)] hover:shadow-[0_0_30px_rgba(57,255,20,0.5)]"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-dark-surface border border-neon-green text-neon-green font-display text-sm uppercase tracking-widest rounded-lg hover:bg-neon-green hover:text-dark-bg transition-all duration-300 shadow-[0_0_20px_rgba(20,124,96,0.3)] hover:shadow-[0_0_30px_rgba(20,124,96,0.5)]"
             >
               Book Your Match
               <Play className="w-4 h-4" />

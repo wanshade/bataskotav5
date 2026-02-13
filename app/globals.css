@@ -24,7 +24,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #39FF14;
+  background: #147c60;
 }
 
 /* Smooth scrolling */
@@ -34,11 +34,11 @@ html {
 
 /* Neon glow effects */
 .neon-glow {
-  box-shadow: 0 0 5px #39FF14, 0 0 20px #39FF14;
+  box-shadow: 0 0 5px #147c60, 0 0 20px #147c60;
 }
 
 .neon-glow-hover:hover {
-  box-shadow: 0 0 10px #39FF14, 0 0 40px #39FF14;
+  box-shadow: 0 0 10px #147c60, 0 0 40px #147c60;
 }
 
 /* Custom animations */

@@ -10,8 +10,8 @@ export default {
     extend: {
       colors: {
         neon: {
-          green: '#39FF14',
-          dark: '#2CB810',
+          green: '#147c60',
+          dark: '#0f5a47',
         },
         dark: {
           bg: '#050505',

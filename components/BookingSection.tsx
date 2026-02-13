@@ -384,7 +384,7 @@ _Batas Kota - The Town Space_`;
       <div className="container mx-auto px-4 lg:px-6 relative z-10">
         <div className="text-center mb-12">
           <h2 className="font-display font-bold text-3xl md:text-5xl text-white uppercase mb-4">
-            Pesan <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500 drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">Lapangan</span>
+            Pesan <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500 drop-shadow-[0_0_10px_rgba(20,124,96,0.5)]">Lapangan</span>
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto">
             Pilih tanggal dan waktu di bawah. Harga bervariasi berdasarkan hari dan waktu.
@@ -432,7 +432,7 @@ _Batas Kota - The Town Space_`;
                       className={`
                         relative p-4 rounded-xl border transition-all duration-300 flex flex-col items-center justify-center gap-1 group
                         ${isSelected
-                          ? 'bg-neon-green border-neon-green text-black shadow-[0_0_15px_rgba(57,255,20,0.4)] scale-105 z-10'
+                          ? 'bg-neon-green border-neon-green text-black shadow-[0_0_15px_rgba(20,124,96,0.4)] scale-105 z-10'
                           : 'bg-zinc-900/50 border-zinc-800 text-gray-400 hover:border-neon-green/50 hover:text-white'}
                       `}
                     >
@@ -487,7 +487,7 @@ _Batas Kota - The Town Space_`;
                           ${isBooked
                             ? 'bg-red-900/20 border-red-900/50 cursor-not-allowed opacity-80'
                             : isSelected
-                              ? 'bg-neon-green/10 border-neon-green shadow-[inset_0_0_20px_rgba(57,255,20,0.1)]'
+                              ? 'bg-neon-green/10 border-neon-green shadow-[inset_0_0_20px_rgba(20,124,96,0.1)]'
                               : 'bg-zinc-900/30 border-zinc-800 hover:border-neon-green/50 hover:bg-zinc-900'}
                         `}
                       >

@@ -9,7 +9,7 @@
 }
 
 .selection\:bg-neon-green {
-  background-color: #39FF14;
+  background-color: #147c60;
 }
 
 .selection\:text-black {
@@ -30,17 +30,17 @@
 }
 
 .text-neon-green {
-  color: #39FF14;
+  color: #147c60;
 }
 
 .border-neon-green {
-  border-color: #39FF14;
+  border-color: #147c60;
 }
 
 .hover\:text-neon-green:hover {
-  color: #39FF14;
+  color: #147c60;
 }
 
 .hover\:border-neon-green:hover {
-  border-color: #39FF14;
+  border-color: #147c60;
 }

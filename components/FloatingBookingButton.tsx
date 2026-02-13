@@ -34,8 +34,8 @@ const FloatingBookingButton: React.FC = () => {
         w-14 h-14 rounded-full
         bg-neon-green text-black
         flex items-center justify-center
-        shadow-[0_0_20px_rgba(57,255,20,0.5)]
-        hover:shadow-[0_0_30px_rgba(57,255,20,0.8)]
+        shadow-[0_0_20px_rgba(20,124,96,0.5)]
+        hover:shadow-[0_0_30px_rgba(20,124,96,0.8)]
         hover:scale-110
         active:scale-95
         transition-all duration-300

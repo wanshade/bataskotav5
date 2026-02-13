@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
         <div 
           className="absolute inset-0 z-0 opacity-20"
           style={{
-            backgroundImage: 'linear-gradient(rgba(57, 255, 20, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(57, 255, 20, 0.1) 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(rgba(20, 124, 96, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(20, 124, 96, 0.1) 1px, transparent 1px)',
             backgroundSize: '50px 50px',
             transform: 'perspective(500px) rotateX(60deg) translateY(100px) scale(2)'
           }}
@@ -41,13 +41,13 @@ const Hero: React.FC = () => {
         <img
           src="/logo1.png"
           alt="Batas Kota Logo"
-          className="md:hidden w-48 h-auto mb-6 drop-shadow-[0_0_20px_rgba(57,255,20,0.3)]"
+          className="md:hidden w-48 h-auto mb-6 drop-shadow-[0_0_20px_rgba(20,124,96,0.3)]"
         />
 
          {/* Heading for tablet/desktop version */}
         <h1 className="hidden md:block font-display font-black text-5xl md:text-6xl lg:text-7xl leading-tight uppercase mb-6 text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
           Batas Kota <br />
-          <span className="text-neon-green drop-shadow-[0_0_20px_rgba(57,255,20,0.4)]">The Town Space</span>
+          <span className="text-neon-green drop-shadow-[0_0_20px_rgba(20,124,96,0.4)]">The Town Space</span>
         </h1>
 
         <p className="font-sans text-gray-400 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">

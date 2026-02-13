@@ -30,7 +30,7 @@ const ClosingCTA: React.FC = () => {
 
       <div className="container mx-auto px-6 relative z-20 text-center">
         <h2 className="font-display font-bold text-3xl md:text-5xl text-white uppercase mb-6">
-          Setiap Permainan <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500 drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">Punya Cerita</span>.
+          Setiap Permainan <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500 drop-shadow-[0_0_10px_rgba(20,124,96,0.5)]">Punya Cerita</span>.
         </h2>
 
         <p className="font-sans text-gray-400 text-lg md:text-xl max-w-3xl mx-auto mb-4 leading-relaxed">
