@@ -46,10 +46,10 @@ function BookingSuccessContent() {
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-neon-green/10 border-2 border-neon-green mb-6 animate-pulse">
             <CheckCircle2 className="w-10 h-10 text-neon-green" />
           </div>
-          <h1 className="font-display font-bold text-4xl md:text-5xl uppercase mb-4">
+          <h1 className="font-sans font-bold text-4xl md:text-5xl uppercase mb-4">
             Pemesanan <span className="text-neon-green">Berhasil!</span>
           </h1>
-          <p className="text-gray-300 text-xl md:text-2xl">
+          <p className="text-gray-400 text-lg">
             Terima kasih telah memesan lapangan di Batas Kota
           </p>
         </div>
@@ -58,36 +58,36 @@ function BookingSuccessContent() {
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 mb-8 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-neon-green to-transparent" />
 
-          <h2 className="font-display font-bold text-xl mb-6 flex items-center gap-2 text-white">
+          <h2 className="font-sans font-bold text-xl mb-6 flex items-center gap-2 text-white">
             <Calendar className="text-neon-green w-5 h-5" /> Detail Pemesanan
           </h2>
 
           <div className="space-y-4">
             <div className="flex justify-between items-center border-b border-zinc-800 pb-3">
-              <span className="text-gray-300 text-base md:text-lg">Booking ID</span>
-              <span className="text-neon-green font-mono font-bold text-lg md:text-xl">
+              <span className="text-gray-400">Booking ID</span>
+              <span className="text-neon-green font-mono font-bold">
                 {bookingId}
               </span>
             </div>
             <div className="flex justify-between items-center border-b border-zinc-800 pb-3">
-              <span className="text-gray-300 text-base md:text-lg">Nama Tim</span>
-              <span className="text-white font-medium text-lg md:text-xl">{teamName}</span>
+              <span className="text-gray-400">Nama Tim</span>
+              <span className="text-white font-medium">{teamName}</span>
             </div>
             <div className="flex justify-between items-center border-b border-zinc-800 pb-3">
-              <span className="text-gray-300 text-base md:text-lg">Tanggal</span>
-              <span className="text-white font-medium text-lg md:text-xl">{date}</span>
+              <span className="text-gray-400">Tanggal</span>
+              <span className="text-white font-medium">{date}</span>
             </div>
             <div className="flex justify-between items-center border-b border-zinc-800 pb-3">
-              <span className="text-gray-300 text-base md:text-lg">Waktu</span>
-              <span className="text-white font-medium text-lg md:text-xl">{time}</span>
+              <span className="text-gray-400">Waktu</span>
+              <span className="text-white font-medium">{time}</span>
             </div>
             <div className="flex justify-between items-center border-b border-zinc-800 pb-3">
-              <span className="text-gray-300 text-base md:text-lg">Nomor WhatsApp</span>
-              <span className="text-white font-medium text-lg md:text-xl">{phone}</span>
+              <span className="text-gray-400">Nomor WhatsApp</span>
+              <span className="text-white font-medium">{phone}</span>
             </div>
             <div className="flex justify-between items-center pt-2">
-              <span className="text-gray-300 text-lg md:text-xl">Total Pembayaran</span>
-              <span className="text-neon-green font-display font-bold text-2xl md:text-3xl">
+              <span className="text-gray-400 text-lg">Total Pembayaran</span>
+              <span className="text-neon-green font-sans font-bold text-2xl">
                 {price}
               </span>
             </div>
@@ -98,41 +98,41 @@ function BookingSuccessContent() {
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 mb-8 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-neon-green to-transparent" />
 
-          <h2 className="font-display font-bold text-xl mb-6 flex items-center gap-2 text-white">
+          <h2 className="font-sans font-bold text-xl mb-6 flex items-center gap-2 text-white">
             <CreditCard className="text-neon-green w-5 h-5" /> Instruksi
             Pembayaran
           </h2>
 
           <div className="space-y-6">
             <div>
-              <p className="text-gray-300 text-base md:text-lg mb-4">
+              <p className="text-gray-400 text-sm mb-4">
                 Silakan transfer ke rekening berikut:
               </p>
 
-              <div className="bg-black/50 rounded-lg p-5 md:p-6 border border-zinc-700">
-                <div className="space-y-4">
+              <div className="bg-black/50 rounded-lg p-5 border border-zinc-700">
+                <div className="space-y-3">
                   <div>
-                    <p className="text-gray-400 text-sm uppercase tracking-wider mb-1">
+                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">
                       Nama Penerima
                     </p>
-                    <p className="text-white font-bold text-xl md:text-2xl">
+                    <p className="text-white font-bold text-lg">
                       {bankAccountName}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm uppercase tracking-wider mb-1">
+                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">
                       Bank
                     </p>
-                    <p className="text-white font-bold text-xl md:text-2xl">
+                    <p className="text-white font-bold text-lg">
                       {bankName.toUpperCase()}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm uppercase tracking-wider mb-1">
+                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">
                       Nomor Rekening
                     </p>
                     <div className="flex items-center gap-3">
-                      <p className="text-neon-green font-mono font-bold text-2xl md:text-3xl">
+                      <p className="text-neon-green font-mono font-bold text-2xl">
                         {bankAccount}
                       </p>
                       <button
@@ -141,9 +141,9 @@ function BookingSuccessContent() {
                         title="Salin nomor rekening"
                       >
                         {copied ? (
-                          <CheckCircle2 className="w-6 h-6 text-neon-green" />
+                          <CheckCircle2 className="w-5 h-5 text-neon-green" />
                         ) : (
-                          <Copy className="w-6 h-6 text-gray-400 group-hover:text-neon-green" />
+                          <Copy className="w-5 h-5 text-gray-400 group-hover:text-neon-green" />
                         )}
                       </button>
                     </div>
@@ -152,9 +152,9 @@ function BookingSuccessContent() {
               </div>
             </div>
 
-            <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 md:p-5">
-              <p className="text-yellow-400 text-base md:text-lg flex items-start gap-3">
-                <AlertTriangle className="w-6 h-6 flex-shrink-0 mt-0.5" />
+            <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+              <p className="text-yellow-500 text-sm flex items-start gap-2">
+                <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5" />
                 <span>
                   <strong>Penting:</strong> Setelah melakukan pembayaran, harap
                   konfirmasi melalui WhatsApp ke <strong>{phone}</strong> dengan
@@ -169,43 +169,43 @@ function BookingSuccessContent() {
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 mb-8 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-transparent" />
 
-          <h2 className="font-display font-bold text-2xl mb-6 flex items-center gap-2 text-white">
-            <AlertTriangle className="text-red-500 w-6 h-6" /> Peraturan Cancel
+          <h2 className="font-sans font-bold text-xl mb-6 flex items-center gap-2 text-white">
+            <AlertTriangle className="text-red-500 w-5 h-5" /> Peraturan Cancel
           </h2>
 
-          <div className="space-y-5">
+          <div className="space-y-4">
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/10 border border-red-500 flex items-center justify-center">
-                <span className="text-red-500 font-bold text-lg">1</span>
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-500/10 border border-red-500 flex items-center justify-center">
+                <span className="text-red-500 font-bold">1</span>
               </div>
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed pt-1">
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
                 Jika melakukan pembatalan pemesanan maka sejumlah uang yang telah masuk dianggap <strong className="text-red-400">HANGUS</strong> dan tidak bisa untuk merubah jadwal
               </p>
             </div>
 
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/10 border border-red-500 flex items-center justify-center">
-                <span className="text-red-500 font-bold text-lg">2</span>
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-500/10 border border-red-500 flex items-center justify-center">
+                <span className="text-red-500 font-bold">2</span>
               </div>
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed pt-1">
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
                 Jika melakukan pembatalan atau perubahan jadwal saat hari yang sudah ditentukan maka pembayaran yang telah dilakukan akan dianggap <strong className="text-red-400">HANGUS</strong>
               </p>
             </div>
 
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/10 border border-red-500 flex items-center justify-center">
-                <span className="text-red-500 font-bold text-lg">3</span>
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-500/10 border border-red-500 flex items-center justify-center">
+                <span className="text-red-500 font-bold">3</span>
               </div>
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed pt-1">
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
                 Jika pergantian jadwal dari jam premium ke jam reguler maka kelebihan uang <strong className="text-red-400">tidak bisa di refund</strong> untuk kelebihan biayanya
               </p>
             </div>
 
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/10 border border-red-500 flex items-center justify-center">
-                <span className="text-red-500 font-bold text-lg">4</span>
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-500/10 border border-red-500 flex items-center justify-center">
+                <span className="text-red-500 font-bold">4</span>
               </div>
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed pt-1">
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
                 Jika pergantian jadwal dari jam reguler ke jam premium maka customer dikenakan <strong className="text-yellow-400">biaya tambahan</strong>
               </p>
             </div>
@@ -216,52 +216,52 @@ function BookingSuccessContent() {
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 mb-8 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-neon-green to-transparent" />
 
-          <h2 className="font-display font-bold text-2xl mb-6 flex items-center gap-2 text-white">
-            <Calendar className="text-neon-green w-6 h-6" /> Booking Order
+          <h2 className="font-sans font-bold text-xl mb-6 flex items-center gap-2 text-white">
+            <Calendar className="text-neon-green w-5 h-5" /> Booking Order
           </h2>
 
-          <div className="space-y-5">
+          <div className="space-y-4">
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
-                <span className="text-neon-green font-bold text-lg">1</span>
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
+                <span className="text-neon-green font-bold">1</span>
               </div>
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed pt-1">
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
                 Booking bisa melalui <strong className="text-white">website</strong> atau via <strong className="text-white">WhatsApp admin</strong>
               </p>
             </div>
 
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
-                <span className="text-neon-green font-bold text-lg">2</span>
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
+                <span className="text-neon-green font-bold">2</span>
               </div>
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed pt-1">
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
                 Tanda <strong className="text-white">putih</strong> pada jadwal berarti <strong className="text-white">available</strong> (jam kosong)
               </p>
             </div>
 
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
-                <span className="text-neon-green font-bold text-lg">3</span>
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
+                <span className="text-neon-green font-bold">3</span>
               </div>
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed pt-1">
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
                 Jam kosong yang telah dibooking akan berubah menjadi <strong className="text-yellow-400">kuning</strong>, berarti sudah dibooking dan customer diberikan kesempatan <strong className="text-white">15 menit</strong> untuk melakukan pelunasan
               </p>
             </div>
 
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
-                <span className="text-neon-green font-bold text-lg">4</span>
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
+                <span className="text-neon-green font-bold">4</span>
               </div>
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed pt-1">
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
                 Jika dalam <strong className="text-white">15 menit</strong> belum melakukan pelunasan maka secara otomatis tanda booking order pada website kembali menjadi <strong className="text-white">putih</strong> (available) dan bisa kembali dibooking oleh siapa saja
               </p>
             </div>
 
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
-                <span className="text-neon-green font-bold text-lg">5</span>
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-neon-green/10 border border-neon-green flex items-center justify-center">
+                <span className="text-neon-green font-bold">5</span>
               </div>
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed pt-1">
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
                 Tanda <strong className="text-red-400">merah</strong> pada booking order berarti customer sudah melakukan pembayaran dan siap untuk bermain pada jadwal tersebut
               </p>
             </div>
@@ -272,34 +272,34 @@ function BookingSuccessContent() {
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 mb-8 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 to-transparent" />
 
-          <h2 className="font-display font-bold text-2xl mb-6 flex items-center gap-2 text-white">
-            <Clock className="text-yellow-500 w-6 h-6" /> Periode Booking Order
+          <h2 className="font-sans font-bold text-xl mb-6 flex items-center gap-2 text-white">
+            <Clock className="text-yellow-500 w-5 h-5" /> Periode Booking Order
           </h2>
 
-          <div className="space-y-5">
+          <div className="space-y-4">
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/10 border border-yellow-500 flex items-center justify-center">
-                <span className="text-yellow-500 font-bold text-lg">1</span>
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-yellow-500/10 border border-yellow-500 flex items-center justify-center">
+                <span className="text-yellow-500 font-bold">1</span>
               </div>
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed pt-1">
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
                 Minimum order <strong className="text-white">2 jam sebelumnya</strong>. 2 jam sebelum jam bermain pada jadwal booking hanya bisa dibooking via <strong className="text-white">WhatsApp</strong> melalui admin
               </p>
             </div>
 
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/10 border border-yellow-500 flex items-center justify-center">
-                <span className="text-yellow-500 font-bold text-lg">2</span>
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-yellow-500/10 border border-yellow-500 flex items-center justify-center">
+                <span className="text-yellow-500 font-bold">2</span>
               </div>
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed pt-1">
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
                 Silahkan menghubungi <strong className="text-white">admin</strong>
               </p>
             </div>
 
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/10 border border-yellow-500 flex items-center justify-center">
-                <span className="text-yellow-500 font-bold text-lg">3</span>
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-yellow-500/10 border border-yellow-500 flex items-center justify-center">
+                <span className="text-yellow-500 font-bold">3</span>
               </div>
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed pt-1">
+              <p className="text-gray-400 text-sm leading-relaxed pt-1">
                 Untuk booking <strong className="text-white">wajib melakukan pelunasan</strong>
               </p>
             </div>
@@ -310,7 +310,7 @@ function BookingSuccessContent() {
         <div className="flex flex-col sm:flex-row gap-4">
           <Link
             href="/#booking"
-            className="flex-1 text-center px-6 py-4 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl font-display font-bold uppercase transition-colors flex items-center justify-center gap-2"
+            className="flex-1 text-center px-6 py-4 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl font-sans font-bold uppercase transition-colors flex items-center justify-center gap-2"
           >
             <ArrowLeft className="w-5 h-5" />
             Kembali ke Beranda
@@ -323,7 +323,7 @@ function BookingSuccessContent() {
               )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 text-center px-6 py-4 bg-neon-green hover:bg-neon-green/90 text-black rounded-xl font-display font-bold uppercase transition-colors"
+            className="flex-1 text-center px-6 py-4 bg-neon-green hover:bg-neon-green/90 text-black rounded-xl font-sans font-bold uppercase transition-colors"
           >
             Konfirmasi via WhatsApp
           </a>
@@ -338,7 +338,7 @@ export default function BookingSuccessPage() {
     <Suspense
       fallback={
         <div className="min-h-screen bg-dark-bg flex items-center justify-center">
-          <div className="text-neon-green text-2xl font-display animate-pulse">
+          <div className="text-neon-green text-2xl font-sans animate-pulse">
             Loading...
           </div>
         </div>
