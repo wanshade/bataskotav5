@@ -108,3 +108,97 @@
 .animate-pulse-ball {
   animation: pulse-ball 2s ease-in-out infinite;
 }
+
+/* Geometric Art Animations */
+@keyframes geo-float-1 {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-25px) rotate(5deg);
+  }
+}
+
+@keyframes geo-float-2 {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) translateX(15px) rotate(-5deg);
+  }
+}
+
+@keyframes geo-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes geo-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.7;
+  }
+}
+
+@keyframes geo-slide {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.2;
+  }
+  90% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+}
+
+@keyframes geo-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.animate-geo-float-1 {
+  animation: geo-float-1 6s ease-in-out infinite;
+}
+
+.animate-geo-float-2 {
+  animation: geo-float-2 8s ease-in-out infinite;
+}
+
+.animate-geo-rotate {
+  animation: geo-rotate 20s linear infinite;
+}
+
+.animate-geo-pulse {
+  animation: geo-pulse 4s ease-in-out infinite;
+}
+
+.animate-geo-slide {
+  animation: geo-slide 15s linear infinite;
+}
+
+.animate-geo-bounce {
+  animation: geo-bounce 3s ease-in-out infinite;
+}
+
+.animate-geo-bounce-delayed {
+  animation: geo-bounce 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
