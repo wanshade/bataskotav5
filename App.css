@@ -44,3 +44,67 @@
 .hover\:border-neon-green:hover {
   border-color: #147c60;
 }
+
+/* Soccer Ball Animations */
+@keyframes bounce-ball {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-30px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(0) rotate(180deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(270deg);
+  }
+}
+
+@keyframes float-ball {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-20px) translateX(10px) rotate(120deg);
+  }
+  66% {
+    transform: translateY(-10px) translateX(-10px) rotate(240deg);
+  }
+}
+
+@keyframes roll-ball {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  100% {
+    transform: translateX(100px) rotate(360deg);
+  }
+}
+
+@keyframes pulse-ball {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+.animate-bounce-ball {
+  animation: bounce-ball 3s ease-in-out infinite;
+}
+
+.animate-float-ball {
+  animation: float-ball 5s ease-in-out infinite;
+}
+
+.animate-roll-ball {
+  animation: roll-ball 8s linear infinite;
+}
+
+.animate-pulse-ball {
+  animation: pulse-ball 2s ease-in-out infinite;
+}
