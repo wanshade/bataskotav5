@@ -39,7 +39,7 @@ function BookingSuccessContent() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-bg text-white pt-24 pb-16">
+    <div className="min-h-screen bg-dark-bg text-white pt-24 pb-16 font-sans">
       <div className="container mx-auto px-4 md:px-6 max-w-4xl">
         {/* Success Header */}
         <div className="text-center mb-12">
@@ -49,7 +49,7 @@ function BookingSuccessContent() {
           <h1 className="font-sans font-bold text-4xl md:text-5xl uppercase mb-4">
             Pemesanan <span className="text-neon-green">Berhasil!</span>
           </h1>
-          <p className="text-gray-400 text-lg">
+          <p className="text-gray-400 text-lg font-sans">
             Terima kasih telah memesan lapangan di Batas Kota
           </p>
         </div>
@@ -71,22 +71,22 @@ function BookingSuccessContent() {
             </div>
             <div className="flex justify-between items-center border-b border-zinc-800 pb-3">
               <span className="text-gray-400">Nama Tim</span>
-              <span className="text-white font-medium">{teamName}</span>
+              <span className="text-white font-medium font-sans">{teamName}</span>
             </div>
             <div className="flex justify-between items-center border-b border-zinc-800 pb-3">
               <span className="text-gray-400">Tanggal</span>
-              <span className="text-white font-medium">{date}</span>
+              <span className="text-white font-medium font-sans">{date}</span>
             </div>
             <div className="flex justify-between items-center border-b border-zinc-800 pb-3">
               <span className="text-gray-400">Waktu</span>
-              <span className="text-white font-medium">{time}</span>
+              <span className="text-white font-medium font-sans">{time}</span>
             </div>
             <div className="flex justify-between items-center border-b border-zinc-800 pb-3">
               <span className="text-gray-400">Nomor WhatsApp</span>
-              <span className="text-white font-medium">{phone}</span>
+              <span className="text-white font-medium font-sans">{phone}</span>
             </div>
             <div className="flex justify-between items-center pt-2">
-              <span className="text-gray-400 text-lg">Total Pembayaran</span>
+              <span className="text-gray-400 text-lg font-sans">Total Pembayaran</span>
               <span className="text-neon-green font-sans font-bold text-2xl">
                 {price}
               </span>
@@ -112,23 +112,23 @@ function BookingSuccessContent() {
               <div className="bg-black/50 rounded-lg p-5 border border-zinc-700">
                 <div className="space-y-3">
                   <div>
-                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">
+                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1 font-sans">
                       Nama Penerima
                     </p>
-                    <p className="text-white font-bold text-lg">
+                    <p className="text-white font-bold text-lg font-sans">
                       {bankAccountName}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">
+                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1 font-sans">
                       Bank
                     </p>
-                    <p className="text-white font-bold text-lg">
+                    <p className="text-white font-bold text-lg font-sans">
                       {bankName.toUpperCase()}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">
+                    <p className="text-gray-500 text-xs uppercase tracking-wider mb-1 font-sans">
                       Nomor Rekening
                     </p>
                     <div className="flex items-center gap-3">
