@@ -205,3 +205,17 @@
 .animate-geo-rotate-slow {
   animation: geo-rotate-slow 25s linear infinite;
 }
+
+/* Scan animation for map */
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+.animate-scan {
+  animation: scan 3s linear infinite;
+}
