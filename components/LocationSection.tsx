@@ -49,13 +49,10 @@ const LocationSection: React.FC = () => {
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-neon-green/50 to-transparent animate-scan" />
               </div>
 
-              {/* Coordinates overlay */}
-              <div className="absolute bottom-6 left-6 bg-black/90 backdrop-blur-md p-4 rounded-lg border border-neon-green/30">
-                 <p className="font-mono text-neon-green text-xs mb-1 flex items-center gap-2">
-                   <span className="w-2 h-2 bg-neon-green rounded-full animate-pulse" />
-                   COORDINATES
-                 </p>
-                 <p className="font-mono text-white text-sm tracking-wider">8°39'12.5"S 116°32'15.8"E</p>
+              {/* Location Pin overlay */}
+              <div className="absolute bottom-6 left-6 bg-black/90 backdrop-blur-md p-4 rounded-lg border border-neon-green/30 flex items-center gap-3">
+                 <div className="w-3 h-3 bg-neon-green rounded-full animate-pulse" />
+                 <span className="font-display text-white text-sm">Batas Kota Space</span>
               </div>
             </div>
 
