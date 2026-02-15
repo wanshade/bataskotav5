@@ -28,8 +28,8 @@ const Football = (props: any) => {
         <mesh castShadow receiveShadow>
           <icosahedronGeometry args={[2, 1]} />
           <meshStandardMaterial
-            color="#39ff14"
-            emissive="#1a0033"
+            color="#147c60"
+            emissive="#0a3d30"
             emissiveIntensity={0.5}
             roughness={0.2}
             metalness={0.8}
@@ -41,7 +41,7 @@ const Football = (props: any) => {
         <mesh>
           <icosahedronGeometry args={[2.05, 1]} />
           <meshBasicMaterial
-            color="#00f3ff"
+            color="#147c60"
             wireframe
             transparent
             opacity={0.6}
@@ -63,14 +63,14 @@ const Scene3D = () => {
 
         {/* Lighting - Cyberpunk/Neon Setup */}
         <ambientLight intensity={0.2} />
-        <pointLight position={[10, 10, 10]} intensity={2} color="#00f3ff" />
-        <pointLight position={[-10, -5, -10]} intensity={2} color="#ff00ff" />
+        <pointLight position={[10, 10, 10]} intensity={2} color="#147c60" />
+        <pointLight position={[-10, -5, -10]} intensity={2} color="#0f5a47" />
         <spotLight
           position={[0, 10, 0]}
           angle={0.3}
           penumbra={1}
           intensity={1}
-          color="#7000ff"
+          color="#147c60"
         />
 
         {/* Particles - Neon Energy */}
@@ -80,7 +80,7 @@ const Scene3D = () => {
           size={4}
           speed={0.4}
           opacity={0.8}
-          color="#00f3ff"
+          color="#147c60"
         />
 
         {/* The Football */}
