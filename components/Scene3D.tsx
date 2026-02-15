@@ -49,7 +49,7 @@ const Football = (props: any) => {
         </mesh>
 
         {/* Inner Glow Core */}
-        <pointLight distance={3} intensity={2} color="#00f3ff" />
+        <pointLight distance={3} intensity={2} color="#147c60" />
       </Float>
     </group>
   );
