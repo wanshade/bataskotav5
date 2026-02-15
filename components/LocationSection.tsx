@@ -52,7 +52,7 @@ const LocationSection: React.FC = () => {
               {/* Location Pin overlay */}
               <div className="absolute bottom-6 left-6 bg-black/90 backdrop-blur-md p-4 rounded-lg border border-neon-green/30 flex items-center gap-3">
                  <div className="w-3 h-3 bg-neon-green rounded-full animate-pulse" />
-                 <span className="font-display text-white text-sm">Batas Kota Space</span>
+                 <span className="font-display text-white text-sm">Batas Kota Arena</span>
               </div>
             </div>
 
@@ -77,7 +77,7 @@ const LocationSection: React.FC = () => {
                   <MapPin className="text-neon-green w-6 h-6" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-display font-bold text-lg text-white mb-2">Batas Kota Space</h4>
+                  <h4 className="font-display font-bold text-lg text-white mb-2">Batas Kota Arena</h4>
                   <p className="text-gray-400 text-sm leading-relaxed">
                     Jalan Gajah Mada No. 45<br/>
                     Selong, Lombok Timur, NTB<br/>
