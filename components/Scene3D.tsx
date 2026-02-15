@@ -24,12 +24,12 @@ const Football = (props: any) => {
   return (
     <group ref={meshRef} {...props}>
       <Float speed={4} rotationIntensity={1} floatIntensity={2}>
-        {/* Main Ball Body - Neon/Cyberpunk Style */}
+        {/* Main Ball Body - Batas Kota Green Style */}
         <mesh castShadow receiveShadow>
           <icosahedronGeometry args={[2, 1]} />
           <meshStandardMaterial
-            color="#39ff14"
-            emissive="#1a0033"
+            color="#147c60"
+            emissive="#0a3d30"
             emissiveIntensity={0.5}
             roughness={0.2}
             metalness={0.8}
@@ -37,11 +37,11 @@ const Football = (props: any) => {
           />
         </mesh>
 
-        {/* Neon Wireframe Glow */}
+        {/* Wireframe Glow - Matching Green */}
         <mesh>
           <icosahedronGeometry args={[2.05, 1]} />
           <meshBasicMaterial
-            color="#00f3ff"
+            color="#147c60"
             wireframe
             transparent
             opacity={0.6}
@@ -49,7 +49,7 @@ const Football = (props: any) => {
         </mesh>
 
         {/* Inner Glow Core */}
-        <pointLight distance={3} intensity={2} color="#00f3ff" />
+        <pointLight distance={3} intensity={2} color="#147c60" />
       </Float>
     </group>
   );
@@ -61,26 +61,26 @@ const Scene3D = () => {
       <Canvas gl={{ antialias: true, alpha: true }}>
         <PerspectiveCamera makeDefault position={[0, 0, 8]} />
 
-        {/* Lighting - Cyberpunk/Neon Setup */}
+        {/* Lighting - Batas Kota Green Setup */}
         <ambientLight intensity={0.2} />
-        <pointLight position={[10, 10, 10]} intensity={2} color="#00f3ff" />
-        <pointLight position={[-10, -5, -10]} intensity={2} color="#ff00ff" />
+        <pointLight position={[10, 10, 10]} intensity={2} color="#147c60" />
+        <pointLight position={[-10, -5, -10]} intensity={2} color="#0f5a47" />
         <spotLight
           position={[0, 10, 0]}
           angle={0.3}
           penumbra={1}
           intensity={1}
-          color="#7000ff"
+          color="#147c60"
         />
 
-        {/* Particles - Neon Energy */}
+        {/* Particles - Green Energy */}
         <Sparkles
           count={50}
           scale={10}
           size={4}
           speed={0.4}
           opacity={0.8}
-          color="#00f3ff"
+          color="#147c60"
         />
 
         {/* The Football */}
