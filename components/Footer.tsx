@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
               />
               <span className="font-display font-bold text-lg text-white">BATAS<span className="text-neon-green">KOTA</span></span>
             </div>
-            <p className="text-gray-600 text-sm">The Town Space.</p>
+            <p className="text-gray-600 text-sm">ARENA</p>
           </div>
 
           {/* Links */}
