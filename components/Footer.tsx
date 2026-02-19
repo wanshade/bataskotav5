@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
 
           {/* Links */}
           <div className="flex gap-8">
-            <a href="#" className="text-gray-500 hover:text-neon-green transition-colors"><Instagram className="w-5 h-5" /></a>
+            <a href="https://www.instagram.com/bataskota.point" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-neon-green transition-colors"><Instagram className="w-5 h-5" /></a>
             <a href="#" className="text-gray-500 hover:text-neon-green transition-colors"><Facebook className="w-5 h-5" /></a>
             <a href="#" className="text-gray-500 hover:text-neon-green transition-colors"><Twitter className="w-5 h-5" /></a>
           </div>
