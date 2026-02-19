@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-green/10 border border-neon-green/30 mb-8 backdrop-blur-sm animate-fade-in-up">
           <span className="w-2 h-2 rounded-full bg-neon-green animate-pulse" />
           <span className="text-neon-green font-sans text-xs font-bold uppercase tracking-widest">
-            Rumput Premium Baru Terpasang
+            MINI SOCCER TERBAIK DI LOMBOK
           </span>
         </div>
          {/* Logo for mobile version */}
