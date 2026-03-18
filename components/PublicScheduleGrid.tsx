@@ -12,6 +12,7 @@ import {
   User,
   Phone,
   ArrowRight,
+  X,
 } from "lucide-react";
 import type { Booking } from "@/lib/schema";
 
@@ -183,6 +184,8 @@ export default function PublicScheduleGrid() {
 
   const [addDokumentasi, setAddDokumentasi] = useState(false);
   const [addWasit, setAddWasit] = useState(false);
+  
+  const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -266,6 +269,24 @@ export default function PublicScheduleGrid() {
     if (startHour === currentHour && startMinute <= currentMinute) return true;
 
     return false;
+  };
+
+  const getBookingForSlot = (slotLabel: string): Booking | undefined => {
+    return bookings.find(
+      (b) =>
+        b.bookingDate === formattedDate &&
+        b.timeSlot.split(", ").includes(slotLabel) &&
+        (b.status === "confirmed" || b.status === "pending")
+    );
+  };
+
+  const handleSlotClick = (slot: { label: string; price: number }) => {
+    const booking = getBookingForSlot(slot.label);
+    if (booking) {
+      setSelectedBooking(booking);
+    } else if (!isSlotTimePassed(slot.label)) {
+      toggleSlot(slot.label);
+    }
   };
 
   const handleBooking = async (e: React.FormEvent) => {
@@ -507,8 +528,7 @@ Terima kasih! ⚽`;
                 return (
                   <button
                     key={idx}
-                    disabled={disabled}
-                    onClick={() => !disabled && toggleSlot(slot.label)}
+                    onClick={() => handleSlotClick(slot)}
                     className={`relative overflow-hidden p-4 rounded-xl border text-left transition-all duration-300 group ${slotStyle}`}
                   >
                     <div className="flex justify-between items-start mb-2">
@@ -735,6 +755,100 @@ Terima kasih! ⚽`;
           </div>
         </div>
       </div>
+
+      {/* Booking Details Modal */}
+      {selectedBooking && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={() => setSelectedBooking(null)}>
+          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 max-w-md w-full shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="flex justify-between items-start mb-6">
+              <h3 className="text-2xl font-display font-bold text-white uppercase tracking-wider">
+                Detail Booking
+              </h3>
+              <button
+                onClick={() => setSelectedBooking(null)}
+                className="p-2 hover:bg-zinc-800 rounded-lg transition-colors text-gray-400 hover:text-white"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div className="bg-zinc-800/50 rounded-xl p-4">
+                <label className="block text-xs font-sans uppercase tracking-widest text-gray-500 mb-1">
+                  Status
+                </label>
+                <span className={`inline-flex px-3 py-1 rounded-full text-sm font-bold ${
+                  selectedBooking.status === 'confirmed'
+                    ? 'bg-green-900/30 text-green-500 border border-green-700/50'
+                    : 'bg-yellow-900/30 text-yellow-500 border border-yellow-700/50'
+                }`}>
+                  {selectedBooking.status === 'confirmed' ? 'CONFIRMED' : 'PENDING'}
+                </span>
+              </div>
+
+              <div className="bg-zinc-800/50 rounded-xl p-4">
+                <label className="block text-xs font-sans uppercase tracking-widest text-gray-500 mb-1">
+                  Booking ID
+                </label>
+                <p className="text-white font-mono font-bold">{selectedBooking.bookingId}</p>
+              </div>
+
+              <div className="bg-zinc-800/50 rounded-xl p-4">
+                <label className="block text-xs font-sans uppercase tracking-widest text-gray-500 mb-1">
+                  Nama Tim
+                </label>
+                <p className="text-white font-bold">{selectedBooking.teamName}</p>
+              </div>
+
+              <div className="bg-zinc-800/50 rounded-xl p-4">
+                <label className="block text-xs font-sans uppercase tracking-widest text-gray-500 mb-1">
+                  Tanggal
+                </label>
+                <p className="text-white font-bold">{selectedBooking.bookingDate}</p>
+              </div>
+
+              <div className="bg-zinc-800/50 rounded-xl p-4">
+                <label className="block text-xs font-sans uppercase tracking-widest text-gray-500 mb-1">
+                  Waktu
+                </label>
+                <p className="text-white font-bold">{selectedBooking.timeSlot}</p>
+              </div>
+
+              <div className="bg-zinc-800/50 rounded-xl p-4">
+                <label className="block text-xs font-sans uppercase tracking-widest text-gray-500 mb-1">
+                  Total Harga
+                </label>
+                <p className="text-2xl font-display font-black text-neon-green">{selectedBooking.price}</p>
+              </div>
+
+              {selectedBooking.addDokumentasi && (
+                <div className="bg-neon-green/10 rounded-xl p-4 border border-neon-green/20">
+                  <label className="block text-xs font-sans uppercase tracking-widest text-neon-green mb-1">
+                    Layanan Tambahan
+                  </label>
+                  <p className="text-white font-bold">📸 Dokumentasi (Foto/Video)</p>
+                </div>
+              )}
+
+              {selectedBooking.addWasit && (
+                <div className="bg-neon-green/10 rounded-xl p-4 border border-neon-green/20">
+                  <label className="block text-xs font-sans uppercase tracking-widest text-neon-green mb-1">
+                    Layanan Tambahan
+                  </label>
+                  <p className="text-white font-bold">🏁 Wasit Pertandingan</p>
+                </div>
+              )}
+            </div>
+
+            <button
+              onClick={() => setSelectedBooking(null)}
+              className="w-full mt-6 py-3 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl font-display font-bold uppercase tracking-wider transition-colors"
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
