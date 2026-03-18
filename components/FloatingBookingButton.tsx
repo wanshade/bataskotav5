@@ -2,9 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { Calendar } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const FloatingBookingButton: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -19,16 +21,13 @@ const FloatingBookingButton: React.FC = () => {
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
-  const scrollToBooking = () => {
-    const bookingSection = document.getElementById('booking');
-    if (bookingSection) {
-      bookingSection.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleButtonClick = () => {
+    router.push('/schedule');
   };
 
   return (
     <button
-      onClick={scrollToBooking}
+      onClick={handleButtonClick}
       className={`
         fixed bottom-6 right-6 z-50
         w-14 h-14 rounded-full
