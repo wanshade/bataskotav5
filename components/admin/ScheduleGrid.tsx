@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { ChevronLeft, ChevronRight, Lock, CheckCircle2, Clock, XCircle, Phone, User, Calendar, CreditCard } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Lock, CheckCircle2, Clock, XCircle, Phone, User, Calendar, CreditCard, X } from 'lucide-react';
 import type { Booking } from '@/lib/schema';
 
 // Reuse types and constants from BookingSection but simplified
@@ -149,6 +149,7 @@ interface ScheduleGridProps {
 export default function ScheduleGrid({ bookings, loading }: ScheduleGridProps) {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [dateScrollIndex, setDateScrollIndex] = useState(0);
+  const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
 
   const dates = useMemo(() => {
     const result = [];
@@ -366,7 +367,8 @@ export default function ScheduleGrid({ bookings, loading }: ScheduleGridProps) {
             return (
               <div 
                 key={idx}
-                className={`relative p-4 rounded-lg border transition-all ${getSlotStyles()}`}
+                onClick={() => hasBooking && booking && setSelectedBooking(booking)}
+                className={`relative p-4 rounded-lg border transition-all ${getSlotStyles()} ${hasBooking ? 'cursor-pointer hover:shadow-lg' : 'cursor-default'}`}
               >
                 <div className="flex justify-between items-start mb-2">
                   <span className={`font-bold ${
@@ -492,6 +494,123 @@ export default function ScheduleGrid({ bookings, loading }: ScheduleGridProps) {
           })()}
         </div>
       </div>
+
+      {/* Booking Details Modal */}
+      {selectedBooking && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={() => setSelectedBooking(null)}>
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="flex justify-between items-start mb-6">
+              <h3 className="text-xl font-bold text-slate-800">Detail Booking</h3>
+              <button
+                onClick={() => setSelectedBooking(null)}
+                className="p-2 hover:bg-slate-100 rounded-lg transition-colors text-slate-400 hover:text-slate-600"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div className="bg-slate-50 rounded-xl p-4">
+                <label className="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Status</label>
+                <span className={`inline-flex px-3 py-1 rounded-full text-sm font-bold ${
+                  selectedBooking.status === 'confirmed'
+                    ? 'bg-green-100 text-green-700'
+                    : selectedBooking.status === 'pending'
+                    ? 'bg-yellow-100 text-yellow-700'
+                    : 'bg-red-100 text-red-700'
+                }`}>
+                  {selectedBooking.status.toUpperCase()}
+                </span>
+              </div>
+
+              <div className="bg-slate-50 rounded-xl p-4">
+                <label className="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Booking ID</label>
+                <p className="text-slate-900 font-mono font-bold">{selectedBooking.bookingId}</p>
+              </div>
+
+              <div className="bg-slate-50 rounded-xl p-4">
+                <label className="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Nama Tim</label>
+                <p className="text-slate-900 font-bold">{selectedBooking.teamName}</p>
+              </div>
+
+              <div className="bg-slate-50 rounded-xl p-4">
+                <label className="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Nomor WhatsApp</label>
+                <p className="text-slate-900 font-bold">{selectedBooking.phone}</p>
+              </div>
+
+              <div className="bg-slate-50 rounded-xl p-4">
+                <label className="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Tanggal</label>
+                <p className="text-slate-900 font-bold">{selectedBooking.bookingDate}</p>
+              </div>
+
+              <div className="bg-slate-50 rounded-xl p-4">
+                <label className="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Waktu</label>
+                <p className="text-slate-900 font-bold">{selectedBooking.timeSlot}</p>
+              </div>
+
+              <div className="bg-slate-50 rounded-xl p-4">
+                <label className="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Total Harga</label>
+                <p className="text-2xl font-bold text-[#147c60]">{formatPrice(Number(selectedBooking.totalPrice || selectedBooking.price))}</p>
+              </div>
+
+              <div className="bg-slate-50 rounded-xl p-4">
+                <label className="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Status Pembayaran</label>
+                <span className={`inline-flex px-3 py-1 rounded-full text-sm font-bold ${
+                  selectedBooking.paymentStatus === 'paid'
+                    ? 'bg-green-100 text-green-700'
+                    : selectedBooking.paymentStatus === 'dp'
+                    ? 'bg-blue-100 text-blue-700'
+                    : 'bg-orange-100 text-orange-700'
+                }`}>
+                  {selectedBooking.paymentStatus === 'paid'
+                    ? 'LUNAS'
+                    : selectedBooking.paymentStatus === 'dp'
+                    ? 'DP'
+                    : 'Belum Bayar'}
+                </span>
+                {selectedBooking.paymentStatus === 'dp' && selectedBooking.dpAmount && (
+                  <span className="ml-2 text-sm text-blue-600">
+                    (Rp {Number(selectedBooking.dpAmount).toLocaleString('id-ID')})
+                  </span>
+                )}
+              </div>
+
+              {(selectedBooking.addDokumentasi || selectedBooking.addWasit) && (
+                <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
+                  <label className="block text-xs font-medium text-emerald-600 uppercase tracking-wider mb-2">Layanan Tambahan</label>
+                  <div className="space-y-1">
+                    {selectedBooking.addDokumentasi && (
+                      <p className="text-slate-900 font-medium">📸 Dokumentasi (Foto/Video)</p>
+                    )}
+                    {selectedBooking.addWasit && (
+                      <p className="text-slate-900 font-medium">🏁 Wasit Pertandingan</p>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              <div className="bg-slate-50 rounded-xl p-4">
+                <label className="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Dibuat Pada</label>
+                <p className="text-slate-900">{new Date(selectedBooking.createdAt).toLocaleString('id-ID', {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}</p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setSelectedBooking(null)}
+              className="w-full mt-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold transition-colors"
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
