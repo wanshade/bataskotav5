@@ -528,7 +528,7 @@ const isBooked = bookings.some(b =>
                         className={`
                           relative overflow-hidden p-4 rounded-xl border text-left transition-all duration-300 group
                           ${timePassed
-                            ? 'bg-zinc-900/50 border-zinc-800 opacity-30 cursor-not-allowed'
+                            ? 'bg-zinc-900/50 border-zinc-700/50 opacity-60 cursor-not-allowed'
                             : isBooked
                               ? 'bg-red-900/20 border-red-900/50 cursor-not-allowed opacity-80'
                               : isPending
@@ -539,7 +539,7 @@ const isBooked = bookings.some(b =>
                         `}
                       >
                         <div className="flex justify-between items-start mb-2">
-                          <span className={`font-sans font-bold text-lg ${timePassed ? 'text-gray-600 line-through' : isBooked ? 'text-red-500' : isPending ? 'text-yellow-500' : isSelected ? 'text-neon-green' : 'text-white'
+                          <span className={`font-sans font-bold text-lg ${timePassed ? 'text-gray-400 line-through' : isBooked ? 'text-red-500' : isPending ? 'text-yellow-500' : isSelected ? 'text-neon-green' : 'text-white'
                             }`}>
                             {slot.label}
                           </span>
@@ -551,7 +551,7 @@ const isBooked = bookings.some(b =>
                             <CheckCircle2 className="w-5 h-5 text-neon-green" />
                           ) : null}
                         </div>
-                        <div className={`text-sm font-sans ${timePassed ? 'text-gray-600' : isBooked ? 'text-red-400 font-bold uppercase' : isPending ? 'text-yellow-400 font-bold uppercase' : isSelected ? 'text-white' : 'text-gray-500'
+                        <div className={`text-sm font-sans ${timePassed ? 'text-gray-400' : isBooked ? 'text-red-400 font-bold uppercase' : isPending ? 'text-yellow-400 font-bold uppercase' : isSelected ? 'text-white' : 'text-gray-500'
                           }`}>
                           {timePassed ? 'JAM LEWAT' : isBooked ? 'BOOKED' : isPending ? 'PENDING' : formatPrice(slot.price)}
                         </div>

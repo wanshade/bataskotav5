@@ -468,7 +468,7 @@ const isBooked = bookings.some(
                 let slotStyle = "bg-zinc-900/30 border-zinc-800 hover:border-neon-green/50 hover:bg-zinc-900 text-gray-400";
                 
                 if (timePassed) {
-                  slotStyle = "bg-zinc-900/50 border-zinc-800 opacity-30 cursor-not-allowed";
+                  slotStyle = "bg-zinc-900/50 border-zinc-700/50 opacity-60 cursor-not-allowed";
                 } else if (isBooked) {
                   slotStyle = "bg-red-900/20 border-red-900/50 cursor-not-allowed opacity-80 text-red-500";
                 } else if (isPending) {
@@ -487,7 +487,7 @@ const isBooked = bookings.some(
                       <span
                         className={`font-sans font-bold text-lg ${
                           timePassed
-                            ? "text-gray-600 line-through"
+                            ? "text-gray-400 line-through"
                             : isBooked
                             ? "text-red-500"
                             : isPending
@@ -516,9 +516,9 @@ const isBooked = bookings.some(
                           ? "text-yellow-400 font-bold uppercase"
                           : isSelected
                           ? "text-white"
-                          : timePassed
-                          ? "text-gray-600"
-                          : "text-gray-500"
+: timePassed
+                           ? "text-gray-400"
+                           : "text-gray-500"
                       }`}
                     >
                       {isBooked
