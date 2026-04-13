@@ -706,7 +706,7 @@ const isBooked = bookings.some(b =>
                         <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-2 mt-2">
                           <p className="text-yellow-400 text-xs flex items-start gap-2">
                             <span className="text-base flex-shrink-0">📋</span>
-                            <span>Harga add-on <strong>tidak termasuk</strong> dalam total di bawah. Konfirmasi harga via WhatsApp setelah booking.</span>
+                            <span>Harga add-on <strong>tidak termasuk</strong>. Konfirmasi harga via WhatsApp setelah booking.</span>
                           </p>
                         </div>
                       )}
